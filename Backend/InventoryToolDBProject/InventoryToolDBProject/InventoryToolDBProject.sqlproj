@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>InventoryToolDBProject</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{55be11c3-a716-487f-b3b4-76a42a8c5de6}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>InventoryToolDBProject</RootNamespace>
+    <AssemblyName>InventoryToolDBProject</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Lk_Category.sql" />
+    <Build Include="dbo\Tables\Lk_Color.sql" />
+    <Build Include="dbo\Tables\LK_Material.sql" />
+    <Build Include="dbo\Tables\LK_Unit.sql" />
+    <Build Include="dbo\Tables\M_Company.sql" />
+    <Build Include="dbo\Tables\M_Machine.sql" />
+    <Build Include="dbo\Tables\M_Process.sql" />
+    <Build Include="dbo\Tables\M_Product.sql" />
+    <Build Include="dbo\Tables\M_PURCHASES_ORDER.sql" />
+    <Build Include="dbo\Tables\M_PURCHASES_ORDER_DETAIL.sql" />
+    <Build Include="dbo\Tables\M_Role.sql" />
+    <Build Include="dbo\Tables\M_User.sql" />
+    <Build Include="dbo\Tables\M_Window.sql" />
+    <Build Include="dbo\Tables\Machine_Process.sql" />
+    <Build Include="dbo\Tables\Row_Material_Item.sql" />
+    <Build Include="dbo\Tables\User_Role.sql" />
+    <Build Include="dbo\Tables\Window_Role_Permission.sql" />
+    <Build Include="dbo\Tables\Item_Consumption.sql" />
+    <Build Include="dbo\Tables\M_Part_Type.sql" />
+    <Build Include="dbo\Tables\LK_Part_Type.sql" />
+    <Build Include="dbo\Tables\M_Part.sql" />
+    <Build Include="dbo\Tables\LK_Outsource_Type.sql" />
+    <Build Include="dbo\Tables\M_Branch.sql" />
+    <Build Include="dbo\Tables\Product_Part.sql" />
+    <Build Include="dbo\Tables\Part_Manufacturing_Step.sql" />
+  </ItemGroup>
+</Project>
