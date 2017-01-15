@@ -51,23 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InventoryToolModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryToolModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InventoryToolModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryToolModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="InventoryToolModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InventoryToolModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Item_Consumption.cs">
-      <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,18 +70,6 @@
       <DependentUpon>InventoryToolModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="InventoryToolModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryToolModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryToolModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="InventoryToolModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryToolModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryToolModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
