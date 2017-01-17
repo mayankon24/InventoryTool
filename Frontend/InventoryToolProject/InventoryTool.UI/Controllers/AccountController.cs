@@ -79,7 +79,7 @@ namespace InventoryTool.UI.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocalOTP(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -90,7 +90,10 @@ namespace InventoryTool.UI.Controllers
                     return View(model);
             }
         }
-
+        public async Task<ActionResult> OTP(string provider, string returnUrl)
+        {
+            return View();
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -450,6 +453,14 @@ namespace InventoryTool.UI.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+        private ActionResult RedirectToLocalOTP(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("OTP", "Account");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
