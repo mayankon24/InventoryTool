@@ -73,9 +73,7 @@
     <Build Include="dbo\Tables\M_Product.sql" />
     <Build Include="dbo\Tables\M_PURCHASES_ORDER.sql" />
     <Build Include="dbo\Tables\M_PURCHASES_ORDER_DETAIL.sql" />
-    <Build Include="dbo\Tables\M_Role.sql" />
     <Build Include="dbo\Tables\M_User.sql" />
-    <Build Include="dbo\Tables\M_Window.sql" />
     <Build Include="dbo\Tables\Machine_Process.sql" />
     <Build Include="dbo\Tables\Row_Material_Item.sql" />
     <Build Include="dbo\Tables\User_Role.sql" />
@@ -88,5 +86,7 @@
     <Build Include="dbo\Tables\M_Branch.sql" />
     <Build Include="dbo\Tables\Product_Part.sql" />
     <Build Include="dbo\Tables\Part_Manufacturing_Step.sql" />
+    <Build Include="dbo\Tables\LK_Window.sql" />
+    <Build Include="dbo\Tables\LK_Role.sql" />
   </ItemGroup>
 </Project>

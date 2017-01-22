@@ -8,7 +8,9 @@
     [LastModifiedUTCDate] DATETIME       NULL,
     [IsActive]            BIT            NOT NULL,
     CONSTRAINT [PK_User_Role] PRIMARY KEY CLUSTERED ([User_Role_Id] ASC),
-    CONSTRAINT [FK_User_Role_M_Role] FOREIGN KEY ([Role_Id]) REFERENCES [dbo].[M_Role] ([Role_Id]),
+    CONSTRAINT [FK_User_Role_M_Role] FOREIGN KEY ([Role_Id]) REFERENCES [dbo].[LK_Role] ([Role_Id]),
     CONSTRAINT [FK_User_Role_M_User] FOREIGN KEY ([User_Id]) REFERENCES [dbo].[M_User] ([User_Id])
 );
+
+
 
