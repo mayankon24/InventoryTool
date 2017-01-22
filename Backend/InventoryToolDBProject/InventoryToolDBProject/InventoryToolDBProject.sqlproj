@@ -61,6 +61,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Lk_Category.sql" />
@@ -88,5 +89,7 @@
     <Build Include="dbo\Tables\Part_Manufacturing_Step.sql" />
     <Build Include="dbo\Tables\LK_Window.sql" />
     <Build Include="dbo\Tables\LK_Role.sql" />
+    <Build Include="dbo\Tables\LK_Operation_Status.sql" />
+    <Build Include="dbo\Tables\ErrorLog.sql" />
   </ItemGroup>
 </Project>
