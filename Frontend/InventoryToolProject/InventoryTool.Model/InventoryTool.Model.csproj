@@ -62,6 +62,9 @@
     <Compile Include="Lk_Category.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="M_Product.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

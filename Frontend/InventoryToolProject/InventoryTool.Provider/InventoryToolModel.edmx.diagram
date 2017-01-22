@@ -7,6 +7,7 @@
       <Diagram DiagramId="a89b94055dcb48dbbe9f8a2f7798a8a8" Name="Diagram1">
         <EntityTypeShape EntityType="InventoryToolDBModel.Item_Consumption" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryToolDBModel.Lk_Category" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="InventoryToolDBModel.M_Product" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
