@@ -8,9 +8,9 @@ namespace InventoryTool.API.Controllers
 {
     public class ProductController : ApiController
     {
-        [Route("UpdateGroup")]
+        [Route("UpdateProduct")]
         [HttpPost]
-        public IHttpActionResult UpdateGroup(M_Product product)
+        public IHttpActionResult UpdateProduct(M_Product product)
         {
             var return_Status = new System.Data.Objects.ObjectParameter("return_Status", typeof(int));
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
@@ -19,6 +19,19 @@ namespace InventoryTool.API.Controllers
                 return Ok(return_Status.Value);
 
 
+            }
+        }
+
+
+        [Route("DeleteProduct/{Product_Id:int?}/{LastModifiedBy?}")]
+        [HttpPost]
+        public int DeleteProduct(int Product_Id, string LastModifiedBy)
+        {
+            var return_Status = new System.Data.Objects.ObjectParameter("return_Status", typeof(int));
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                entity.DeleteProduct(Product_Id, LastModifiedBy, return_Status);
+                return Convert.ToInt32(return_Status.Value);
             }
         }
     }

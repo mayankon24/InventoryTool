@@ -60,5 +60,18 @@ namespace InventoryTool.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateProduct", product_IdParameter, product_CodeParameter, product_NameParameter, manufacturing_DaysParameter, descriptionParameter, modifiedByParameter, return_Status);
         }
+    
+        public virtual int DeleteProduct(Nullable<int> product_Id, string lastModifiedBy, ObjectParameter return_Status)
+        {
+            var product_IdParameter = product_Id.HasValue ?
+                new ObjectParameter("Product_Id", product_Id) :
+                new ObjectParameter("Product_Id", typeof(int));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("LastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("LastModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteProduct", product_IdParameter, lastModifiedByParameter, return_Status);
+        }
     }
 }

@@ -40,6 +40,11 @@
           <Property Name="LastModifiedUTCDate" Type="datetime" />
           <Property Name="IsActive" Type="nchar" MaxLength="10" />
         </EntityType>
+        <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Product_Id" Type="int" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="return_Status" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="UpdateProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Product_Id" Type="int" Mode="In" />
           <Parameter Name="Product_Code" Type="nvarchar" Mode="In" />
@@ -83,6 +88,11 @@
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="M_Product" EntityType="InventoryToolDBModel.M_Product" />
+          <FunctionImport Name="DeleteProduct">
+            <Parameter Name="Product_Id" Mode="In" Type="Int32" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Lk_Category">
           <Key>
@@ -152,6 +162,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteProduct" FunctionName="InventoryToolDBModel.Store.DeleteProduct" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
