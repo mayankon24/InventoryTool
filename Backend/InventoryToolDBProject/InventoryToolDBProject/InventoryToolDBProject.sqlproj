@@ -91,5 +91,8 @@
     <Build Include="dbo\Tables\LK_Role.sql" />
     <Build Include="dbo\Tables\LK_Operation_Status.sql" />
     <Build Include="dbo\Tables\ErrorLog.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateProduct.sql" />
+    <Build Include="dbo\Stored Procedures\InsertErrorLog.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteProduct.sql" />
   </ItemGroup>
 </Project>
