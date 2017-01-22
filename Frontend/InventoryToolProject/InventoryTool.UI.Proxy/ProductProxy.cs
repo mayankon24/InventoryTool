@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using InventoryTool.Model;
 
 namespace InventoryTool.UI.Proxy
 {
@@ -34,9 +31,16 @@ namespace InventoryTool.UI.Proxy
         }
 
 
-        public void AddUpdateProducts(string apiUri, string requestUri)
+        public int UpdateProduct(string apiUri, string requestUri, M_Product product)
         {
-            
+            var result = ProxyHelper.PostRequestToApi(apiUri, requestUri, product);
+            return JsonConvert.DeserializeObject<int>(result);
+        }
+
+        public int DeleteProduct(string apiUri, string requestUri, M_Product product)
+        {
+            var result = ProxyHelper.PostRequestToApi(apiUri, requestUri, product);
+            return JsonConvert.DeserializeObject<int>(result);
         }
 
     }
