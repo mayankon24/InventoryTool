@@ -1,8 +1,45 @@
-﻿@{
+﻿@model InventoryTool.Model.M_Product
+@{
     ViewBag.Title = "Products";
 }
-<h2>Index</h2>
-hello 
-Create new product 
+<div style="margin-top:1%">
+    <label style="margin-left:30px">Product</label><br />  
+    <a href="javascript:void(0)" id="lnkAddNewProduct" style="color:#01A4EF;text-decoration:underline;margin-left:30px; ">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Add New Item
+    </a>
+    <div id="divDisplayProductMessages">
+    </div>
+    @* This row will use in clone*@
+    <table id="tblMasterProduct" style="display:none">
+        <tr data-Product_Id="-1" id="MasterRow_Product">
 
+            <td>
+                @Html.TextBox("Product_Name", "", new { @class = "clsClass form-control" })
+            </td>
+            <td>
+                <a href="javascript:void(0);" title="Save" class="clsAddUpdateProduct">  Save</a>
+                <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
+            </td>
+        </tr>
+        <tr data-Product_Id="" class="edit-mode" id="MasterRowEdit_Product">
+            <td>
+                @Html.TextBox("Class_Name", "", new { @class = "clsClass form-control" })
+            </td>
+
+            <td>
+                <a href="javascript:void(0);" title="Update" class="clsAddUpdateProduct">Update</a>
+                <a href="javascript:void(0);" title="Cancel" class="clsCancelProductUpdate">Cancel</a>
+            </td>
+        </tr>
+    </table>
+    <!--End of Master Row* -->
+
+    <div id="dvProductList">
+        @Html.Partial("_ProductList", Model)
+    </div>
+</div>
+<script>
+    $('.edit-mode').hide();
+</script>
 
