@@ -14,7 +14,9 @@ namespace InventoryTool.UI.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View();
+            List<GetAllProduct_Result> product = ProductProxy.Instance.GetAllProduct(ConfigExtension.GetWebApiUri,
+                "api/Product/AllClass");
+            return View("Index", product);
         }
         public ActionResult AddUpdateProduct(M_Product product)
         {
