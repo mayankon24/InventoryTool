@@ -73,5 +73,10 @@ namespace InventoryTool.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteProduct", product_IdParameter, lastModifiedByParameter, return_Status);
         }
+    
+        public virtual ObjectResult<GetAllProduct_Result> GetAllProduct()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllProduct_Result>("GetAllProduct");
+        }
     }
 }

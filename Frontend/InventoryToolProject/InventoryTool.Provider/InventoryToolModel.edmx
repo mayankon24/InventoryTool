@@ -45,6 +45,7 @@
           <Parameter Name="LastModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="GetAllProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="UpdateProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Product_Id" Type="int" Mode="In" />
           <Parameter Name="Product_Code" Type="nvarchar" Mode="In" />
@@ -93,6 +94,7 @@
             <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAllProduct" ReturnType="Collection(InventoryToolDBModel.GetAllProduct_Result)" />
         </EntityContainer>
         <EntityType Name="Lk_Category">
           <Key>
@@ -117,6 +119,13 @@
           <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
+        <ComplexType Name="GetAllProduct_Result">
+          <Property Type="Int32" Name="Product_Id" Nullable="false" />
+          <Property Type="String" Name="Product_Code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Product_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Manufacturing_Days" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -163,6 +172,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="DeleteProduct" FunctionName="InventoryToolDBModel.Store.DeleteProduct" />
+          <FunctionImportMapping FunctionImportName="GetAllProduct" FunctionName="InventoryToolDBModel.Store.GetAllProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllProduct_Result">
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

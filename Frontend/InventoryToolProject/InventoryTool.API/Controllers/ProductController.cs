@@ -3,9 +3,12 @@ using System.Data.Entity.Core.Objects;
 using System.Web.Http;
 using InventoryTool.Model;
 using System.Data.Objects;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InventoryTool.API.Controllers
 {
+    [RoutePrefix("api/Product")]
     public class ProductController : ApiController
     {
         [Route("UpdateProduct")]
@@ -33,6 +36,25 @@ namespace InventoryTool.API.Controllers
                 entity.DeleteProduct(Product_Id, LastModifiedBy, return_Status);
                 return Convert.ToInt32(return_Status.Value);
             }
+        }
+
+        [Route("AllClass")]
+        [HttpGet]
+        public List<GetAllProduct_Result> GetAllProduct()
+        {
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                var RetVal = entity.GetAllProduct().ToList().Select(s => new GetAllProduct_Result
+                {
+                    Description = s.Description,
+                    Manufacturing_Days = s.Manufacturing_Days,
+                    Product_Code = s.Product_Code,
+                    Product_Id = s.Product_Id,
+                    Product_Name = s.Product_Name
+                }).ToList();
+                return RetVal;
+            }
+
         }
     }
 }
