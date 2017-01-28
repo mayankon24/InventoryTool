@@ -4,27 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InventoryToolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Item_Consumption">
-          <Key>
-            <PropertyRef Name="Item_Consumption_Id" />
-          </Key>
-          <Property Name="Item_Consumption_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Row_Material_Item_Id" Type="int" />
-          <Property Name="Machine_Process_Id" Type="int" />
-          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Date" Type="datetime" />
-          <Property Name="User_Id" Type="int" />
-          <Property Name="IsActive" Type="bit" />
-        </EntityType>
-        <EntityType Name="Lk_Category">
-          <Key>
-            <PropertyRef Name="Category_Id" />
-          </Key>
-          <Property Name="Category_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Category_Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" />
-        </EntityType>
+      <Schema Namespace="InventoryToolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="M_Product">
           <Key>
             <PropertyRef Name="Product_Id" />
@@ -56,54 +36,13 @@
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
         <EntityContainer Name="InventoryToolDBModelStoreContainer">
-          <EntitySet Name="Item_Consumption" EntityType="Self.Item_Consumption" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lk_Category" EntityType="Self.Lk_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Product" EntityType="Self.M_Product" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InventoryToolDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Item_Consumption">
-          <Key>
-            <PropertyRef Name="Item_Consumption_Id" />
-          </Key>
-          <Property Name="Item_Consumption_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Row_Material_Item_Id" Type="Int32" />
-          <Property Name="Machine_Process_Id" Type="Int32" />
-          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="User_Id" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
-        <EntityContainer Name="InventoryToolDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Item_Consumption" EntityType="Self.Item_Consumption" />
-          <EntitySet Name="Lk_Category" EntityType="InventoryToolDBModel.Lk_Category" />
-          <FunctionImport Name="UpdateProduct">
-            <Parameter Name="Product_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Product_Code" Mode="In" Type="String" />
-            <Parameter Name="Product_Name" Mode="In" Type="String" />
-            <Parameter Name="Manufacturing_Days" Mode="In" Type="Int32" />
-            <Parameter Name="Description" Mode="In" Type="String" />
-            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
-            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <EntitySet Name="M_Product" EntityType="InventoryToolDBModel.M_Product" />
-          <FunctionImport Name="DeleteProduct">
-            <Parameter Name="Product_Id" Mode="In" Type="Int32" />
-            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
-            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetAllProduct" ReturnType="Collection(InventoryToolDBModel.GetAllProduct_Result)" />
-        </EntityContainer>
-        <EntityType Name="Lk_Category">
-          <Key>
-            <PropertyRef Name="Category_Id" />
-          </Key>
-          <Property Name="Category_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Category_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
         <EntityType Name="M_Product">
           <Key>
             <PropertyRef Name="Product_Id" />
@@ -119,6 +58,24 @@
           <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
+        <EntityContainer Name="InventoryToolDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="M_Product" EntityType="Self.M_Product" />
+          <FunctionImport Name="DeleteProduct">
+            <Parameter Name="Product_Id" Mode="In" Type="Int32" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllProduct" ReturnType="Collection(InventoryToolDBModel.GetAllProduct_Result)" />
+          <FunctionImport Name="UpdateProduct" ReturnType="Collection(Decimal)">
+            <Parameter Name="Product_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Product_Code" Mode="In" Type="String" />
+            <Parameter Name="Product_Name" Mode="In" Type="String" />
+            <Parameter Name="Manufacturing_Days" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
           <Property Type="String" Name="Product_Code" Nullable="true" MaxLength="100" />
@@ -132,42 +89,19 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="InventoryToolDBModelStoreContainer" CdmEntityContainer="InventoryToolDBEntities">
-          <EntitySetMapping Name="Item_Consumption">
-            <EntityTypeMapping TypeName="InventoryToolDBModel.Item_Consumption">
-              <MappingFragment StoreEntitySet="Item_Consumption">
-                <ScalarProperty Name="Item_Consumption_Id" ColumnName="Item_Consumption_Id" />
-                <ScalarProperty Name="Row_Material_Item_Id" ColumnName="Row_Material_Item_Id" />
-                <ScalarProperty Name="Machine_Process_Id" ColumnName="Machine_Process_Id" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Lk_Category">
-            <EntityTypeMapping TypeName="InventoryToolDBModel.Lk_Category">
-              <MappingFragment StoreEntitySet="Lk_Category">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
-                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UpdateProduct" FunctionName="InventoryToolDBModel.Store.UpdateProduct" />
           <EntitySetMapping Name="M_Product">
             <EntityTypeMapping TypeName="InventoryToolDBModel.M_Product">
               <MappingFragment StoreEntitySet="M_Product">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
-                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
-                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -183,6 +117,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateProduct" FunctionName="InventoryToolDBModel.Store.UpdateProduct" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

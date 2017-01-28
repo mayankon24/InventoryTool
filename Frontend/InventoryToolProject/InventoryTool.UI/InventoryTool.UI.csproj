@@ -292,7 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InventoryTool.Model\InventoryTool.Model.csproj">
-      <Project>{5210ef03-c08e-4d29-a014-3b87498d039a}</Project>
+      <Project>{e7fa3257-98fa-4675-b904-6bc56f10eb84}</Project>
       <Name>InventoryTool.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\InventoryTool.UI.Proxy\InventoryTool.UI.Proxy.csproj">
