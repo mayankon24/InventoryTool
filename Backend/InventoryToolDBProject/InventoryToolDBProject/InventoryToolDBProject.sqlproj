@@ -94,5 +94,6 @@
     <Build Include="dbo\Stored Procedures\UpdateProduct.sql" />
     <Build Include="dbo\Stored Procedures\InsertErrorLog.sql" />
     <Build Include="dbo\Stored Procedures\DeleteProduct.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllProduct.sql" />
   </ItemGroup>
 </Project>
