@@ -95,5 +95,11 @@
     <Build Include="dbo\Stored Procedures\InsertErrorLog.sql" />
     <Build Include="dbo\Stored Procedures\DeleteProduct.sql" />
     <Build Include="dbo\Stored Procedures\GetAllProduct.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePart.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllPart.sql" />
+    <Build Include="dbo\Stored Procedures\DeletePart.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaCompare1.scmp" />
   </ItemGroup>
 </Project>

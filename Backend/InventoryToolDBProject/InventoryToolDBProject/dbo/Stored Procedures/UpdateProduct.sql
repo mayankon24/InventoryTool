@@ -1,6 +1,6 @@
 ﻿
 
-create PROCEDURE [dbo].[UpdateProduct] (
+CREATE PROCEDURE [dbo].[UpdateProduct] (
 					@Product_Id INT
 					,@Product_Code nvarchar(100)
 					,@Product_Name nvarchar(100)
@@ -87,6 +87,6 @@ BEGIN CATCH
                                 'ERROR_PROCEDURE=' +isnull(ERROR_PROCEDURE(), '')+ ' || '+
                                 'ERROR_LINE=' +cast(isnull(ERROR_LINE(), '')as nvarchar(10))+ ' || '+
                                 'ERROR_MESSAGE=' +isnull(ERROR_MESSAGE(), '')+ ' || '                                
-                exec InsertErrorLog null, 'Database', 'UpdateClass', @error_message
+                exec InsertErrorLog null, 'Database', 'UpdateProduct', @error_message
 
 END CATCH
