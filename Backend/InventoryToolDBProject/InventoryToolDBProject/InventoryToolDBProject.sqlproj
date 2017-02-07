@@ -107,4 +107,7 @@
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
 </Project>
