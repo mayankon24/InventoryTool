@@ -1,0 +1,4 @@
+Server Name     mayankazure.database.windows.net
+Database Name   InventoryToolDB
+User Name       mayank_on24
+Password        India@123 
