@@ -41,7 +41,7 @@ BEGIN TRANSACTION
 						,[Outsource_Type_Id]
 						,[Part_Code]
 						,[Part_Name]
-						,[Unit_Id]
+						,[Unit_Id]						
 						,[Category_Id]
 						,[Color_Id]
 						,[Material_Id]
@@ -51,11 +51,11 @@ BEGIN TRANSACTION
 						,[LastModifiedUTCDate]
 						,[IsActive])
 					VALUES
-						(@Part_Id
+						(@Part_Type_Id
 						,@Outsource_Type_Id
 						,@Part_Code
 						,@Part_Name
-						,@Unit_Id
+						,@Unit_Id						
 						,@Category_Id
 						,@Color_Id
 						,@Material_Id
@@ -102,6 +102,6 @@ BEGIN CATCH
                         'ERROR_PROCEDURE=' +isnull(ERROR_PROCEDURE(), '')+ ' || '+
                         'ERROR_LINE=' +cast(isnull(ERROR_LINE(), '')as nvarchar(10))+ ' || '+
                         'ERROR_MESSAGE=' +isnull(ERROR_MESSAGE(), '')+ ' || '                                
-        exec InsertErrorLog null, 'Database', 'UpdateProduct', @error_message
+        exec InsertErrorLog null, 'Database', 'UpdatePart', @error_message
 
 END CATCH
