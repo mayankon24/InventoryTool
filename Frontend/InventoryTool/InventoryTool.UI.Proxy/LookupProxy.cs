@@ -66,7 +66,7 @@ namespace InventoryTool.UI.Proxy
             return JsonConvert.DeserializeObject<List<GetAllPartType_Result>>(result);
         }
 
-        public List<GetAllUnit_Result> GetAllunit(string apiUri, string requestUri)
+        public List<GetAllUnit_Result> GetAllUnit(string apiUri, string requestUri)
         {
             var result = ProxyHelper.GetResponseFromApi(apiUri, requestUri);
             return JsonConvert.DeserializeObject<List<GetAllUnit_Result>>(result);

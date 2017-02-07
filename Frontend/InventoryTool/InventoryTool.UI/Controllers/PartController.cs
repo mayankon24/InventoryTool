@@ -15,9 +15,16 @@ namespace InventoryTool.UI.Controllers
         
         public ActionResult PartIndex()
         {
-            List<GetAllPart_Result> part = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri,
-                "api/Part/AllPart");
-            return View("PartIndex", part);
+            VMPart _VMPart = new VMPart();
+
+            _VMPart.PartList = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri, "api/Part/AllPart");
+            _VMPart.MaterialList = LookupProxy.Instance.GetAllMaterial(ConfigExtension.GetWebApiUri, "api/Lookup/Material");
+            _VMPart.OutsourceTypeList = LookupProxy.Instance.GetAllOutsourceType(ConfigExtension.GetWebApiUri, "api/Lookup/OutsourceType");
+            _VMPart.PartTypeList = LookupProxy.Instance.GetAllPartType(ConfigExtension.GetWebApiUri, "api/Lookup/PartType");
+            _VMPart.ColorList = LookupProxy.Instance.GetAllColor(ConfigExtension.GetWebApiUri, "api/Lookup/Color");
+            _VMPart.CategoryList = LookupProxy.Instance.GetAllCategory(ConfigExtension.GetWebApiUri, "api/Lookup/Category");
+            _VMPart.UnitList = LookupProxy.Instance.GetAllUnit(ConfigExtension.GetWebApiUri, "api/Lookup/Unit");
+            return View("PartIndex", _VMPart);
         }
         public ActionResult AddUpdatePart(M_Part Part)
         {

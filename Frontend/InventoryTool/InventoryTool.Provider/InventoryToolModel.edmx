@@ -14,6 +14,7 @@
           <Property Name="Outsource_Type_Id" Type="int" />
           <Property Name="Part_Code" Type="nvarchar" MaxLength="100" />
           <Property Name="Part_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Unit_Id" Type="int" />
           <Property Name="Category_Id" Type="int" />
           <Property Name="Color_Id" Type="int" />
           <Property Name="Material_Id" Type="int" />
@@ -68,6 +69,7 @@
           <Parameter Name="Outsource_Type_Id" Type="int" Mode="In" />
           <Parameter Name="Part_Code" Type="nvarchar" Mode="In" />
           <Parameter Name="Part_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Unit_Id" Type="int" Mode="In" />
           <Parameter Name="Category_Id" Type="int" Mode="In" />
           <Parameter Name="Color_Id" Type="int" Mode="In" />
           <Parameter Name="Material_Id" Type="int" Mode="In" />
@@ -126,6 +128,7 @@
             <Parameter Name="Outsource_Type_Id" Mode="In" Type="Int32" />
             <Parameter Name="Part_Code" Mode="In" Type="String" />
             <Parameter Name="Part_Name" Mode="In" Type="String" />
+            <Parameter Name="Unit_Id" Mode="In" Type="Int32" />
             <Parameter Name="Category_Id" Mode="In" Type="Int32" />
             <Parameter Name="Color_Id" Mode="In" Type="Int32" />
             <Parameter Name="Material_Id" Mode="In" Type="Int32" />
@@ -164,20 +167,24 @@
           <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Unit_Id" Type="Int32" />
         </EntityType>
         <ComplexType Name="GetAllPart_Result">
           <Property Type="Int32" Name="Part_Id" Nullable="false" />
-          <Property Type="Int32" Name="Part_Type_Id" Nullable="true" />
+          <Property Type="Int32" Name="Part_Type_Id" Nullable="false" />
           <Property Type="Int32" Name="Outsource_Type_Id" Nullable="false" />
           <Property Type="String" Name="Part_Code" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Part_Name" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Category_Id" Nullable="false" />
           <Property Type="Int32" Name="Color_Id" Nullable="false" />
           <Property Type="Int32" Name="Material_Id" Nullable="false" />
-          <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Color_Name" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Material_Name" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Unit_Id" Nullable="false" />
+          <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Part_Type" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
           </ComplexType>
         <EntityType Name="M_Product">
           <Key>
@@ -201,7 +208,6 @@
         <ComplexType Name="GetAllColor_Result">
           <Property Type="Int32" Name="Color_Id" Nullable="false" />
           <Property Type="String" Name="Color_Name" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="IsActive" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetAllMaterial_Result">
           <Property Type="Int32" Name="Material_Id" Nullable="false" />
@@ -242,6 +248,7 @@
           <EntitySetMapping Name="M_Part">
             <EntityTypeMapping TypeName="InventoryToolDBModel.M_Part">
               <MappingFragment StoreEntitySet="M_Part">
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
@@ -270,10 +277,13 @@
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Color_Id" ColumnName="Color_Id" />
                 <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
-                <ScalarProperty Name="Outsource_Type" ColumnName="Outsource_Type" />
                 <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
                 <ScalarProperty Name="Color_Name" ColumnName="Color_Name" />
                 <ScalarProperty Name="Material_Name" ColumnName="Material_Name" />
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+                <ScalarProperty Name="Part_Type" ColumnName="Part_Type" />
+                <ScalarProperty Name="Outsource_Type" ColumnName="Outsource_Type" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -307,7 +317,6 @@
               <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllColor_Result">
                 <ScalarProperty Name="Color_Id" ColumnName="Color_Id" />
                 <ScalarProperty Name="Color_Name" ColumnName="Color_Name" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

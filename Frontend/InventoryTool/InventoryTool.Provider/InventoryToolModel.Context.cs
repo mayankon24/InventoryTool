@@ -117,7 +117,7 @@ namespace InventoryTool.Provider
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllPart_Result>("GetAllPart");
         }
     
-        public virtual int UpdatePart(Nullable<int> part_Id, Nullable<int> part_Type_Id, Nullable<int> outsource_Type_Id, string part_Code, string part_Name, Nullable<int> category_Id, Nullable<int> color_Id, Nullable<int> material_Id, string modifiedBy, ObjectParameter return_Status)
+        public virtual int UpdatePart(Nullable<int> part_Id, Nullable<int> part_Type_Id, Nullable<int> outsource_Type_Id, string part_Code, string part_Name, Nullable<int> unit_Id, Nullable<int> category_Id, Nullable<int> color_Id, Nullable<int> material_Id, string modifiedBy, ObjectParameter return_Status)
         {
             var part_IdParameter = part_Id.HasValue ?
                 new ObjectParameter("Part_Id", part_Id) :
@@ -139,6 +139,10 @@ namespace InventoryTool.Provider
                 new ObjectParameter("Part_Name", part_Name) :
                 new ObjectParameter("Part_Name", typeof(string));
     
+            var unit_IdParameter = unit_Id.HasValue ?
+                new ObjectParameter("Unit_Id", unit_Id) :
+                new ObjectParameter("Unit_Id", typeof(int));
+    
             var category_IdParameter = category_Id.HasValue ?
                 new ObjectParameter("Category_Id", category_Id) :
                 new ObjectParameter("Category_Id", typeof(int));
@@ -155,7 +159,7 @@ namespace InventoryTool.Provider
                 new ObjectParameter("ModifiedBy", modifiedBy) :
                 new ObjectParameter("ModifiedBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePart", part_IdParameter, part_Type_IdParameter, outsource_Type_IdParameter, part_CodeParameter, part_NameParameter, category_IdParameter, color_IdParameter, material_IdParameter, modifiedByParameter, return_Status);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePart", part_IdParameter, part_Type_IdParameter, outsource_Type_IdParameter, part_CodeParameter, part_NameParameter, unit_IdParameter, category_IdParameter, color_IdParameter, material_IdParameter, modifiedByParameter, return_Status);
         }
     
         public virtual ObjectResult<GetAllCategory_Result> GetAllCategory()

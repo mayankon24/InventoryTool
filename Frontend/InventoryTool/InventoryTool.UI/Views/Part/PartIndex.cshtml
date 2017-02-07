@@ -1,4 +1,4 @@
-﻿@model IEnumerable<InventoryTool.Model.GetAllPart_Result>
+﻿@model InventoryTool.Model.VMPart
 @{
     ViewBag.Title = "Parts";
 }
@@ -28,19 +28,22 @@
                                 @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Part_Type_Id", "", new { @class = "clsPart_Type_Id form-control" })
+                                @Html.DropDownList("ddlPart_Type", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "Select Part Type", new { @class = "clsPart_Type_Id form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Outsource_Type_Id", "", new { @class = "clsOutsource_Type_Id form-control" })
+                                @Html.DropDownList("ddlOutsource_Type", (new SelectList(Model.OutsourceTypeList, "Outsource_Type_Id", "Outsource_Type")), "Select Outsource Type", new { @class = "clsOutsource_Type_Id form-control" })                               
                             </td> 
                             <td>
-                                @Html.TextBox("Category_Id", "", new { @class = "clsCategory_Id form-control" })
+                                @Html.DropDownList("ddlCategory", (new SelectList(Model.CategoryList, "Category_Id", "Category_Name")), "Select Category", new { @class = "clsCategory_Id form-control" })                                
                             </td> 
                             <td>
-                                @Html.TextBox("Color_Id", "", new { @class = "clsColor_Id form-control" })
+                                @Html.DropDownList("ddlColor", (new SelectList(Model.ColorList, "Color_Id", "Color_Name")), "Select Color", new { @class = "clsColor_Id form-control" })                                
                             </td>  
                             <td>
-                                @Html.TextBox("Material_Id", "", new { @class = "clsMaterial_Id form-control" })
+                                @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })                                
+                            </td> 
+                            <td>
+                                @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
                             </td>                            
                             <td>
                                 <a href="javascript:void(0);" title="Save" class="clsAddUpdatePart">  Save</a>
@@ -55,20 +58,23 @@
                                 @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Part_Type_Id", "", new { @class = "clsPart_Type_Id form-control" })
+                                @Html.DropDownList("ddlPart_Type", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "Select Part Type", new { @class = "clsPart_Type_Id form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Outsource_Type_Id", "", new { @class = "clsOutsource_Type_Id form-control" })
+                                @Html.DropDownList("ddlOutsource_Type", (new SelectList(Model.OutsourceTypeList, "Outsource_Type_Id", "Outsource_Type")), "Select Outsource Type", new { @class = "clsOutsource_Type_Id form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Category_Id", "", new { @class = "clsCategory_Id form-control" })
+                                @Html.DropDownList("ddlCategory", (new SelectList(Model.CategoryList, "Category_Id", "Category_Name")), "Select Category", new { @class = "clsCategory_Id form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Color_Id", "", new { @class = "clsColor_Id form-control" })
+                                @Html.DropDownList("ddlColor", (new SelectList(Model.ColorList, "Color_Id", "Color_Name")), "Select Color", new { @class = "clsColor_Id form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Material_Id", "", new { @class = "clsMaterial_Id form-control" })
-                            </td>     
+                                @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })
+                            </td>
+                            <td>
+                                @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
+                            </td>          
                             <td>
                                 <a href="javascript:void(0);" title="Update" class="clsAddUpdatePart">Update</a>
                                 <a href="javascript:void(0);" title="Cancel" class="clsCancelPartUpdate">Cancel</a>
@@ -78,7 +84,7 @@
                     <!--End of Master Row* -->
 
                     <div id="dvPartList">
-                        @Html.Partial("_PartList", Model)
+                        @Html.Partial("_PartList", Model.PartList)
                     </div>
                 </div>
             </div>

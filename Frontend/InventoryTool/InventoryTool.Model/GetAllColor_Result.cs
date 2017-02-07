@@ -15,6 +15,5 @@ namespace InventoryTool.Model
     {
         public int Color_Id { get; set; }
         public string Color_Name { get; set; }
-        public Nullable<bool> IsActive { get; set; }
     }
 }

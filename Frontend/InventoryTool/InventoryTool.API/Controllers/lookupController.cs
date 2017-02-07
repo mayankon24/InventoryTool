@@ -11,8 +11,8 @@ namespace InventoryTool.API.Controllers
     /// <summary>
     /// This controller is handle all the operation related to Landing page.
     /// </summary>
-    [RoutePrefix("api/Common")]
-    public class lookupController : ApiController
+    [RoutePrefix("api/Lookup")]
+    public class LookupController : ApiController
     {
 
         [Route("Category")]

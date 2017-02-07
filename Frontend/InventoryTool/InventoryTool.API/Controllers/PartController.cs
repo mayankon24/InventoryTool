@@ -19,12 +19,11 @@ namespace InventoryTool.API.Controllers
             var return_Status = new ObjectParameter("return_Status", typeof(int));
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
             {
-                entity.UpdatePart(Part.Part_Id, Part.Part_Type_Id, Part.Outsource_Type_Id, Part.Part_Code, Part.Part_Name, Part.Category_Id, Part.Color_Id, Part.Material_Id, Part.LastModifiedBy, return_Status);
+                entity.UpdatePart(Part.Part_Id, Part.Part_Type_Id, Part.Outsource_Type_Id, Part.Part_Code, Part.Part_Name, Part.Unit_Id, Part.Category_Id, Part.Color_Id, Part.Material_Id, Part.LastModifiedBy, return_Status);
                 return Ok(return_Status.Value);
             }
         }
-
-
+        
         [Route("DeletePart/{Part_Id:int?}/{LastModifiedBy?}")]
         [HttpPost]
         public int DeletePart(int Part_Id, string LastModifiedBy)
@@ -56,9 +55,11 @@ namespace InventoryTool.API.Controllers
                     Category_Name = s.Category_Name,
                     Color_Name = s.Color_Name,
                     Material_Name = s.Material_Name,
-                    Outsource_Type = s.Outsource_Type
-                  
-                    
+                    Unit_Id = s.Outsource_Type_Id,
+                    Outsource_Type = s.Outsource_Type,
+                    Part_Type = s.Part_Type,
+                    Unit_Name = s.Unit_Name
+
                 }).ToList();
                 return RetVal;
             }

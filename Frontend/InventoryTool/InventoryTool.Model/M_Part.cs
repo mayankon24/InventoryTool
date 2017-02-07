@@ -27,5 +27,6 @@ namespace InventoryTool.Model
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedUTCDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> Unit_Id { get; set; }
     }
 }

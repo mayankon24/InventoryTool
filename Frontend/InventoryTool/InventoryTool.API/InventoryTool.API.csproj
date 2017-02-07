@@ -192,7 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\lookupController.cs" />
+    <Compile Include="Controllers\LookupController.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Filters\ProcessException.cs" />
