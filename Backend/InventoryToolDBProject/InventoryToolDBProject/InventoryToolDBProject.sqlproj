@@ -80,7 +80,6 @@
     <Build Include="dbo\Tables\User_Role.sql" />
     <Build Include="dbo\Tables\Window_Role_Permission.sql" />
     <Build Include="dbo\Tables\Item_Consumption.sql" />
-    <Build Include="dbo\Tables\M_Part_Type.sql" />
     <Build Include="dbo\Tables\LK_Part_Type.sql" />
     <Build Include="dbo\Tables\M_Part.sql" />
     <Build Include="dbo\Tables\LK_Outsource_Type.sql" />
@@ -102,6 +101,8 @@
     <Build Include="dbo\Stored Procedures\GetAllMaterial.sql" />
     <Build Include="dbo\Stored Procedures\GetAllColor.sql" />
     <Build Include="dbo\Stored Procedures\GetAllCategory.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllUnit.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllPartType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />

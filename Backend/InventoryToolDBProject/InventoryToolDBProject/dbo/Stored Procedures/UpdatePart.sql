@@ -6,6 +6,7 @@ CREATE PROCEDURE [dbo].[UpdatePart] (
 	,@Outsource_Type_Id int
 	,@Part_Code nvarchar(100)
 	,@Part_Name nvarchar(100)
+	,@Unit_Id int
 	,@Category_Id int
 	,@Color_Id int
 	,@Material_Id int					
@@ -40,6 +41,7 @@ BEGIN TRANSACTION
 						,[Outsource_Type_Id]
 						,[Part_Code]
 						,[Part_Name]
+						,[Unit_Id]
 						,[Category_Id]
 						,[Color_Id]
 						,[Material_Id]
@@ -53,6 +55,7 @@ BEGIN TRANSACTION
 						,@Outsource_Type_Id
 						,@Part_Code
 						,@Part_Name
+						,@Unit_Id
 						,@Category_Id
 						,@Color_Id
 						,@Material_Id
@@ -73,6 +76,7 @@ BEGIN TRANSACTION
 								,[Outsource_Type_Id] = @Outsource_Type_Id
 								,[Part_Code] = @Part_Code
 								,[Part_Name] = @Part_Name
+								,[Unit_Id] = @Unit_Id
 								,[Category_Id] = @Category_Id
 								,[Color_Id] = @Color_Id
 								,[Material_Id] = @Material_Id
