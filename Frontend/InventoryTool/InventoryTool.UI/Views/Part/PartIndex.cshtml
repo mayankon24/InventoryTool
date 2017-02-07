@@ -1,0 +1,326 @@
+﻿@model IEnumerable<InventoryTool.Model.GetAllPart_Result>
+@{
+    ViewBag.Title = "Parts";
+}
+<script src="~/Scripts/Part/Part.js"></script>
+<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="Stylesheet" type="text/css">
+<link href="~/Content/custom-css/custome.css" rel="stylesheet" />
+<link href="~/Content/custom-css/shared.css" rel="stylesheet" />
+<div role="tabpanel" class="tab-pane active" id="Part">
+    <div class="container">
+        <div style="margin-top:23px">
+            <div class="panel panel-default" style="margin-bottom:25px">
+                <div style="margin-top:1%">
+                    <label style="margin-left:30px">Part</label><br />
+                    <a href="javascript:void(0)" id="lnkAddNewPart" style="color:#01A4EF;text-decoration:underline;margin-left:30px; ">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        Add New Item
+                    </a>
+                    <div id="divDisplayPartMessages">
+                    </div>
+                    @* This row will use in clone*@
+                    <table id="tblMasterPart" style="display:none">
+                        <tr data-Part_Id="-1" id="MasterRow_Part">
+                            <td>
+                                @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Part_Type_Id", "", new { @class = "clsPart_Type_Id form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Outsource_Type_Id", "", new { @class = "clsOutsource_Type_Id form-control" })
+                            </td> 
+                            <td>
+                                @Html.TextBox("Category_Id", "", new { @class = "clsCategory_Id form-control" })
+                            </td> 
+                            <td>
+                                @Html.TextBox("Color_Id", "", new { @class = "clsColor_Id form-control" })
+                            </td>  
+                            <td>
+                                @Html.TextBox("Material_Id", "", new { @class = "clsMaterial_Id form-control" })
+                            </td>                            
+                            <td>
+                                <a href="javascript:void(0);" title="Save" class="clsAddUpdatePart">  Save</a>
+                                <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
+                            </td>
+                        </tr>
+                        <tr data-Part_Id="" class="edit-mode" id="MasterRowEdit_Part">
+                            <td>
+                                @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Part_Type_Id", "", new { @class = "clsPart_Type_Id form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Outsource_Type_Id", "", new { @class = "clsOutsource_Type_Id form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Category_Id", "", new { @class = "clsCategory_Id form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Color_Id", "", new { @class = "clsColor_Id form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Material_Id", "", new { @class = "clsMaterial_Id form-control" })
+                            </td>     
+                            <td>
+                                <a href="javascript:void(0);" title="Update" class="clsAddUpdatePart">Update</a>
+                                <a href="javascript:void(0);" title="Cancel" class="clsCancelPartUpdate">Cancel</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--End of Master Row* -->
+
+                    <div id="dvPartList">
+                        @Html.Partial("_PartList", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+   
+    $(document).ready(function () {
+        var Partjs = {
+            init: function () {
+                var obj = Partjs;                
+                obj.LoadPart();
+                Common.setAttributeList(obj);
+            },
+            LoadPart: function () {              
+                //  var obj = Partjs;
+                //initial load the Datatable setting.
+                Partjs.ReinitiateDataTable('tblPartList');
+
+                $("#Part").find("#dvPartList").on("click", ".clsDeletePart", function () {
+                    debugger;
+                    var data, Part_Id, urlPath;
+                    var promptdelete = confirm('Are you sure you want to delete this record? There could be dependent budget requests which may get impacted based on this action');
+                    if (promptdelete) {
+                        data = $(this).parents('tr');
+                        Part_Id = $(data).attr('data-Part_id');
+                        urlPath = "/Part/DeletePart";
+                        if (Part_Id != '') {
+                            $.ajax({
+                                type: "Get",
+                                cache: false,
+                                url: urlPath,
+                                data: {
+                                    Part_Id: Part_Id
+                                },
+                                beforeSend: function () {
+                                    Common.showDialog.show('Please wait....', {
+                                        dialogSize: 'sm',
+                                        progressType: 'warning'
+                                    });
+                                },
+                                complete: function () {
+                                    Common.showDialog.hide();
+                                },
+                                success: function (result) {
+                                    if (result.operationstatuscode == 3) {
+                                        fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-success');
+                                        Partjs.fn_ReloadPartGrid();
+                                    }
+                                    else {
+                                        fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-danger');
+                                    }
+                                },
+                                error: function (ex) {
+                                    alert(ex.responseText);
+                                }
+                            });
+                        }
+
+                    }
+
+
+                });
+                ///Get Row Data in Edit Mode
+                $("#Part").find("#dvPartList").on("click", ".clsEditPart", function () {
+
+                    var Part_Id, data, urlPath;
+                    data = $(this).parents('tr');
+                    Part_Id = $(data).attr('data-Part_id');
+                    urlPath = "/Part/GetPartByPartId";
+                    if (Part_Id != '') {
+                        $('.clsEditPart ,.clsDeletePart').css('display', 'none');
+                        $.ajax({
+                            type: "Get",
+                            cache: false,
+                            url: urlPath,
+                            data: {
+                                Part_Id: Part_Id
+                            },
+                            beforeSend: function () {
+                                Common.showDialog.show('Please wait....', {
+                                    dialogSize: 'sm',
+                                    progressType: 'warning'
+                                });
+                            },
+                            complete: function () {
+                                Common.showDialog.hide();
+                            },
+                            success: function (result) {
+                                $(data).hide();
+                                var row = $("#MasterRowEdit_Part").clone();
+                                $(row).find('.clsPart').val(result.Part_Name);
+                                $(row).removeAttr("style");
+                                $(row).attr("data-Part_Id", Part_Id);
+                                $(data).after(row);
+                            },
+                            error: function (ex) {
+                                alert(ex.responseText);
+                            }
+                        });
+                    }
+
+                });
+                $("#lnkAddNewPart").on('click', function () {
+                    var oTable = $('#tblPartList').dataTable();
+                    oTable.fnPageChange('first');
+                    //get the clone row.
+                    var row = $("#MasterRow_Part").clone();
+                    $(row).removeAttr("style");
+                    $(row).find('.clsPart_Code').val('');
+                    $(row).find('.clsPart_Name').val('');
+                    $(row).find('.clsManufacturing_Days').val('');
+                    $(row).find('.clsDescription').val('');
+                    $("#tblPartList >tbody").prepend(row);// now will append the clone row to table.
+                });
+                ///Handle the Cancel update functionality
+                $("#Part").find("#dvPartList").on("click", ".clsCancelPartUpdate", function () {
+
+                    var data;
+                    data = $(this).parents('tr');
+                    $(data).closest('tr.edit-mode').hide();
+                    $(data).closest('tr').prev('tr.display-mode').show();
+                    $('.clsEditPart,.clsDeletePart').removeAttr('style');
+                });
+                ///Handle the Add/update functionality
+                $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {
+                    debugger;
+                    var Part_Id, Part_Name, data, urlPath;
+                    var strValidationMsglists = "";
+
+                    data = $(this).parents('tr');
+                    Part_Id = $(data).attr('data-Part_Id');
+                    
+                    Part_Name = $(data).find(".clsPart_Name").val();
+                    Part_Code = $(data).find(".clsPart_Code").val();
+                    Manufacturing_Days = $(data).find(".clsManufacturing_Days").val();
+                    Description = $(data).find(".clsDescription").val();
+                    //put validation here
+
+                    if ((Part_Name == "") || ((fn_textvalidation(Part_Name)))) {
+                        strValidationMsglists = strValidationMsglists + "<li>Part Name is required and it shouldn’t be numeric.</li>";
+                    }
+                    if ((Part_Code == "") || ((fn_textvalidation(Part_Code)))) {
+                        strValidationMsglists = strValidationMsglists + "<li>Part Code is required and it shouldn’t be numeric.</li>";
+                    }
+                    if ((Manufacturing_Days == "") || ((fn_numbervalidation(Manufacturing_Days)))) {
+                        strValidationMsglists = strValidationMsglists + "<li>Manufacturing Days is required and it shouldn’t be numeric.</li>";
+                    }
+                    if (strValidationMsglists != "") {
+                        strValidationMsglists = "<ol>" + strValidationMsglists + "</ol>"
+                        fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', strValidationMsglists, true, 'alert alert-danger'); //common function to display error message.
+                        return false;
+                    }
+                    urlPath = "/Part/AddUpdatePart";
+                    if (true) {
+                        $.ajax({
+                            type: "Get",
+                            cache: false,
+                            url: urlPath,
+                            data: {
+                                Part_Id: Part_Id,
+                                Part_Code: Part_Code, 
+                                Part_Name: Part_Name,
+                                Manufacturing_Days: Manufacturing_Days,
+                                Description: Description
+                            },
+                            beforeSend: function () {
+                                Common.showDialog.show('Please wait....', {
+                                    dialogSize: 'sm',
+                                    progressType: 'warning'
+                                });
+                            },
+                            complete: function () {
+                                Common.showDialog.hide();
+                            },
+                            success: function (result) {
+                                if (result.operationstatuscode == 1 || result.operationstatuscode == 2) {
+                                    fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-success');
+                                    Partjs.fn_ReloadPartGrid();
+                                }
+                                else {
+                                    fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-danger');
+                                }
+                            },
+                            error: function (ex) {
+                                alert(ex.responseText);
+                            }
+                        });
+                    }
+                });
+            },
+
+            ///This function refresh the grid data.
+            fn_ReloadPartGrid: function () {
+
+                var urlPath = "/Part/GetPartPartial";
+                if (true) {
+                    $.ajax({
+                        type: "Get",
+                        cache: false,
+                        url: urlPath,
+                        beforeSend: function () {
+                            //Common.showDialog.show('Please wait....', {
+                            //    dialogSize: 'sm',
+                            //    progressType: 'warning'
+                            //});
+                        },
+                        complete: function () {
+                            Partjs.ReinitiateDataTable('tblPartList');
+                            Common.showDialog.hide();
+
+                        },
+                        success: function (result) {
+                            $("#dvPartList").html(result);
+                            Common.showDialog.hide();
+                        },
+                        error: function (ex) {
+                            alert(ex.responseText);
+                        }
+                    });
+                }
+
+
+            },
+            ReinitiateDataTable: function (tableId) {
+
+
+                $("#" + tableId).DataTable(
+                {
+                    bFilter: false, bInfo: false, bLengthChange: false, "order": [0, 'asc'],
+                    "aoColumnDefs": [
+                     {
+                         'bSortable': false,
+                         'aTargets': ['action-col', 'text-holder']
+                     }]
+                }
+                  );
+            }
+
+        }
+        Partjs.init();
+    });
+</script>

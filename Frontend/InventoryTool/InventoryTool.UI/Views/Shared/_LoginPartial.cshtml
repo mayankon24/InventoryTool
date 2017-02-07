@@ -1,0 +1,22 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <text>
+        @{
+
+            var fullname = InventoryTool.UI.Helper.UserExtended.GetFullName(User);
+
+        }
+        <input type="hidden" id="hdnUserName" value="@User.Identity.Name" />
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="glyphicon glyphicon-user" id="image" style="float: right;"></span>
+            <span class="Userspan" title="@fullname">@fullname</span>  
+        </a>
+       
+    </text>
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    @*<li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+                </ul>
+            }

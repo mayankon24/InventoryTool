@@ -1,0 +1,15 @@
+﻿@model HandleErrorInfo
+
+@{
+    ViewBag.Title = "Budget Exception Handler";
+    ViewBag.url = "Budget Exception Handler";
+}
+<link href="~/Content/custom-css/custome.css" rel="stylesheet" />
+<h2 style="padding-left:31%;margin-top:32px">Something Went Wrong</h2>
+<h3 style="color:#01A4EF;margin-left:173px;margin-top:41px;font-size:21px">Refresh the website and try again. If you continue to get this message, let us<br/> know what went wrong,including repro steps and screenshots</h3>
+
+<label style="margin-left: 173px;margin-top:16px;margin-bottom:80px">Send email to engineering team:</label>
+<button onclick="window.location.href = 'mailto: COTDR@microsoft.com ?cc=  & subject=Budget Tool Exception Log & body=Message'" type="button"  class="btn btn-primary btn-sm find_btn accordion-toggle"
+        style="margin-right:63.5%;margin-top:9px">
+    Email COTDR
+</button>

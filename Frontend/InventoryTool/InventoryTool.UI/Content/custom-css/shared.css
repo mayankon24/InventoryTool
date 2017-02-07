@@ -1,0 +1,346 @@
+﻿/***************************************
+Dark blue: rgb(0, 161, 241) #00A1F1
+Mid blue: rgb(26, 187, 255) #1ABBFF
+Light blue: rgb(51, 212, 255) #33D4FF
+
+Dark orange: rgb(246, 83, 20) #f65314
+Mid orange: rgb(244, 122, 78) #F47A4E
+Light orange: rgb(242, 155, 125) #F29B7D
+
+Grey: rgb(112, 112, 112) #707070
+****************************************/
+
+/***************************************************************************************************
+                                             Page
+***************************************************************************************************/
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    position: relative;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    box-sizing: border-box;
+
+    background-color: rgb(250, 250, 250);
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+}
+
+.dl-horizontal dt {
+    white-space: normal; /* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column */
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+/***************************************************************************************************
+                                             Main Navbar
+***************************************************************************************************/
+.wdginv-navbar {
+    padding: 0;
+
+    color: black;
+    border: 1px rgb(112, 112, 112) solid;
+    background-color: rgb(0, 161, 241);
+    background: linear-gradient(to bottom, rgb(0,161,241) 0%,rgb(168,237,255) 100%);
+    background: -o-linear-gradient(to bottom, rgb(0,161,241) 0%,rgb(168,237,255) 100%);
+    background: -moz-linear-gradient(to bottom, rgb(0,161,241) 0%,rgb(168,237,255) 100%);
+    background: -webkit-linear-gradient(to bottom, rgb(0,161,241) 0%,rgb(168,237,255) 100%);
+}
+
+.wdginv-navbar > .container-fluid,
+.wdginv-navbar > .container-fluid > .navbar-header,
+.wdginv-navbar > .container-fluid > .navbar-collapse {
+    padding: 0;
+    margin: 0;
+}
+
+.wdginv-navbar .container-fluid .navbar-brand {
+    margin-left: 15px;
+    padding: 0;
+
+    font-style: italic;
+    font-size: xx-large;
+    color: black;
+}
+
+@media (min-width: 768px) {
+    .wdginv-navbar .container-fluid .navbar-brand {
+        margin-left: 15px;
+    }
+}
+
+.wdginv-navbar .logo {
+    display: inline;
+    width: 50px;
+    height: 50px;
+}
+
+.wdginv-navbar .navbar-brand > span {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+}
+
+.wdginv-navbar .user-name {
+    display: none;
+    position: absolute;
+    top: 1.3rem;
+    right: 10px;
+}
+
+@media (min-width: 768px) {
+    .wdginv-navbar .user-name {
+        display: inline;
+    }
+}
+
+.wdginv-navbar .navbar-toggle {
+    padding: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.wdginv-navbar .navbar-collapse.in {
+    overflow-y:visible;
+}
+
+@media (min-width: 400px) {
+    .wdginv-navbar .nav-pills > li:first-child {
+        margin-left: 20px;
+    }
+}
+
+.wdginv-navbar .nav-pills li > *, .wdginv-navbar .nav-pills li > *:hover,
+.wdginv-navbar .nav-pills li > *:active, .wdginv-navbar .nav-pills li > *:focus,
+.wdginv-navbar .nav-pills li.active > *, .wdginv-navbar .nav-pills li.active > *:hover,
+.wdginv-navbar .nav-pills li.active > *:active, .wdginv-navbar .nav-pills li.active > *:focus {
+    background-color: transparent;
+    color: black;
+}
+
+.wdginv-navbar .nav-pills > li > *:first-child {
+    display: block;
+    padding: 13px 15px;
+
+    border-radius: 0;
+}
+
+@media (max-width: 400px) {
+    .wdginv-navbar .nav-pills > li > *:first-child {
+        width: auto;
+        padding-right: 7px;
+        padding-left: 7px;
+    }
+}
+
+.wdginv-navbar .nav-pills li:not(.active) > a:hover {
+    text-decoration: overline;
+}
+
+.wdginv-navbar .nav-pills li.active > * {
+    cursor: default;
+    font-weight: bold;
+}
+
+.wdginv-navbar .nav-pills .dropdown.open .dropdown-toggle {
+    font-weight: normal;
+}
+
+.wdginv-navbar .dropdown-menu {
+    padding: 0;
+    margin: 0;
+    min-width: unset;
+
+    background-color: rgb(250, 250, 250);
+    background: linear-gradient(to bottom, rgb(168,237,255) 0%,rgb(250, 250, 250) 100%);
+    background: -o-linear-gradient(to bottom, rgb(168,237,255) 0%,rgb(250, 250, 250) 100%);
+    background: -moz-linear-gradient(to bottom, rgb(168,237,255) 0%,rgb(250, 250, 250) 100%);
+    background: -webkit-linear-gradient(to bottom, rgb(168,237,255) 0%,rgb(250, 250, 250) 100%);
+    border-radius: 0;
+    border-top: none;
+    border-right: 1px rgb(112, 112, 112) solid;
+    border-bottom: 1px rgb(112, 112, 112) solid;
+    border-left: 1px rgb(112, 112, 112) solid;
+}
+
+.wdginv-navbar .nav-pills .dropdown-menu li {
+    width: 100%;
+}
+
+.wdginv-navbar .nav-pills .dropdown-menu a {
+    padding: 8px;
+    margin: 0;
+}
+
+.wdginv-navbar .dropdown-menu > li > a, .wdginv-navbar .dropdown-menu {
+    font-size: unset;
+    line-height: unset;
+}
+
+/***************************************************************************************************
+                                             Body Content
+***************************************************************************************************/
+.body-content {
+    min-height: calc(100% - 6.5rem);
+    max-width: 1100px;
+    padding: 5.1rem 1.5rem 2rem 1.5rem;
+}
+
+.wdginv-content-header {
+    padding: 0;
+
+    background: linear-gradient(to top, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    background: -o-linear-gradient(to top, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    background: -moz-linear-gradient(to top, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    background: -webkit-linear-gradient(to top, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    border-top: 1px rgb(112, 112, 112) solid;
+    border-right: 1px rgb(112, 112, 112) solid;
+    border-bottom: 1px rgb(112, 112, 112) solid;
+    border-left: none;
+    border-radius: 6px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.wdginv-content-header .nav-pills a, .wdginv-content-header .nav-pills a:hover,
+.wdginv-content-header .nav-pills a:active, .wdginv-content-header .nav-pills a:focus,
+.wdginv-content-header .nav-pills li.active > a, .wdginv-content-header .nav-pills li.active > a:hover,
+.wdginv-content-header .nav-pills li.active > a:active, .wdginv-content-header .nav-pills li.active > a:focus {
+    background: linear-gradient(to right, rgb(212,212,212) 0%,rgba(247,247,247, 0) 100%);
+    background: -o-linear-gradient(to right, rgb(212,212,212) 0%,rgba(247,247,247, 0) 100%);
+    background: -moz-linear-gradient(to right, rgb(212,212,212) 0%,rgba(247,247,247, 0) 100%);
+    background: -webkit-linear-gradient(to right, rgb(212,212,212) 0%,rgba(247,247,247, 0) 100%);
+    color: black;
+}
+
+.wdginv-content-header .nav-pills a {
+    display: block;
+    width: 120px;
+    text-align: center;
+    padding: 13px 15px;
+
+    border-radius: 6px;
+    border-left: 1px rgb(112, 112, 112) solid;
+}
+
+@media (max-width: 600px) {
+    .body-content {
+        padding-top: 12rem;
+    }
+
+    .wdginv-content-header {
+        position: absolute;
+        width: 100%;
+        top: 5rem;
+        left: 0;
+    }
+
+    .wdginv-content-header .nav-pills a {
+        width: auto;
+        padding-right: 7px;
+        padding-left: 7px;
+    }
+}
+
+.wdginv-content-header .nav-pills li:not(.active) > a:hover {
+    text-decoration: overline;
+}
+
+.wdginv-content-header .nav-pills li.active > a {
+    cursor: default;
+    font-weight: bold;
+}
+
+/***************************************************************************************************
+                                                 Footer
+***************************************************************************************************/
+.footer {
+    padding: 20px;
+    position: relative;
+    width: 100%;
+
+    border-top: 1px rgb(112, 112, 112) solid;
+    background: linear-gradient(to bottom, rgb(255,255,255) 0%,rgba(0,161,241, 0.2) 100%);
+    background: -webkit-linear-gradient(to bottom, rgb(255,255,255) 0%,rgba(0,161,241, 0.2) 100%);
+    background: -moz-linear-gradient(to bottom, rgb(255,255,255) 0%,rgba(0,161,241, 0.2) 100%);
+    background: -o-linear-gradient(to bottom, rgb(255,255,255) 0%,rgba(0,161,241, 0.2) 100%);
+}
+
+/***************************************************************************************************
+                                             Components
+***************************************************************************************************/
+/* Buttons */
+.body-content .btn {
+    cursor: pointer;
+
+    color: black;
+    border-radius: 0;
+    background: linear-gradient(to bottom, rgb(206,206,206) 0%,rgb(247,247,247) 50%,rgb(206,206,206) 100%);
+    background: -webkit-linear-gradient(to bottom, rgb(206,206,206) 0%,rgb(247,247,247) 50%,rgb(206,206,206) 100%);
+    background: -moz-linear-gradient(to bottom, rgb(206,206,206) 0%,rgb(247,247,247) 50%,rgb(206,206,206) 100%);
+    background: -o-linear-gradient(to bottom, rgb(206,206,206) 0%,rgb(247,247,247) 50%,rgb(206,206,206) 100%);
+    border: 1px rgb(112, 112, 112) solid;
+}
+
+.body-content .btn.pop {
+    background: linear-gradient(to bottom, rgba(244,122,78,1) 0%,rgba(239,183,165,1) 50%,rgba(244,122,78,1) 100%);
+    background: -o-linear-gradient(to bottom, rgba(244,122,78,1) 0%,rgba(239,183,165,1) 50%,rgba(244,122,78,1) 100%);
+    background: -moz-linear-gradient(to bottom, rgba(244,122,78,1) 0%,rgba(239,183,165,1) 50%,rgba(244,122,78,1) 100%);
+    background: -webkit-linear-gradient(to bottom, rgba(244,122,78,1) 0%,rgba(239,183,165,1) 50%,rgba(244,122,78,1) 100%);
+}
+
+.body-content .btn:hover, .body-content select:hover {
+    border: 1px black solid;
+    box-shadow: inset 0 0 2px black;
+    -webkit-box-shadow: inset 0 0 2px black;
+    -moz-box-shadow: inset 0 0 2px black;
+}
+
+.body-content .btn:active, .body-content select:active {
+    box-shadow: inset 0 0 6px black;
+    -webkit-box-shadow: inset 0 0 2px black;
+    -moz-box-shadow: inset 0 0 2px black;
+}
+
+/* Dropdowns */
+.body-content select {
+    max-width: 200px;
+    padding: 1px 8px;
+    cursor: pointer;
+
+    border-radius: 0;
+    background: linear-gradient(to bottom, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    background: -webkit-linear-gradient(to bottom, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    background: -moz-linear-gradient(to bottom, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    background: -o-linear-gradient(to bottom, rgb(232,232,232) 0%,rgb(247,247,247) 100%);
+    border: 1px rgb(112, 112, 112) solid;
+}
+
+.body-content select[disabled] {
+    background: linear-gradient(to bottom, rgb(191,191,191) 0%,rgb(216,216,216) 100%);
+    background: -webkit-linear-gradient(to bottom, rgb(191,191,191) 0%,rgb(216,216,216) 100%);
+    background: -moz-linear-gradient(to bottom, rgb(191,191,191) 0%,rgb(216,216,216) 100%);
+    background: -o-linear-gradient(to bottom, rgb(191,191,191) 0%,rgb(216,216,216) 100%);
+}
+
+

@@ -1,0 +1,47 @@
+﻿<table style="width:100%;" cellspacing="0" class="table table-bordred" id="tblProductList">
+    <thead>
+        <tr>
+            <th style="text-align:left">Product Code</th>
+            <th style="text-align:left">Product Name</th>
+            <th style="text-align:left">Manufacturing Days</th>
+            <th style="text-align:left">Description</th>
+            <th class="action-col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var data in Model)
+            {
+                //Display mode row start here
+                <tr data-Product_Id="@data.Product_Id" class="display-mode">
+                    <td title="@data.Product_Code" style="width:90%">
+                        @data.Product_Code
+                    </td>
+                    <td title="@data.Product_Name" style="width:90%">
+                        @data.Product_Name
+                    </td>
+                    <td title="@data.Manufacturing_Days" style="width:90%">
+                        @data.Manufacturing_Days
+                    </td>
+                    <td title="@data.Description" style="width:90%">
+                        @data.Description
+                    </td>                    
+                    <td class="clsAction" style="width:10%">
+                        <a href="javascript:void(0);" title="Edit" class="clsEditProduct">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="javascript:void(0);" title="Delete" class="clsDeleteProduct" @*name="deleteProduct"*@>
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+
+
+

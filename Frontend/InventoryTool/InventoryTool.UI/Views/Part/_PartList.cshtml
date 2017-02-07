@@ -1,0 +1,59 @@
+﻿<table style="width:100%;" cellspacing="0" class="table table-bordred" id="tblPartList">
+    <thead>
+        <tr>
+            <th style="text-align:left">Part Code</th>
+            <th style="text-align:left">Part Name</th>
+            <th style="text-align:left">Part Type</th>
+            <th style="text-align:left">Outsource Type</th>
+            <th style="text-align:left">Category Type</th>
+            <th style="text-align:left">Color Type</th>
+            <th style="text-align:left">Material Type</th>
+            <th class="action-col"></th>  
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var data in Model)
+            {
+                //Display mode row start here
+                <tr data-Part_Id="@data.Part_Id" class="display-mode">
+                    <td title="@data.Part_Code" style="width:90%">
+                        @data.Part_Code
+                    </td>
+                    <td title="@data.Part_Name" style="width:90%">
+                        @data.Part_Name
+                    </td>
+                    <td title="@data.Part_Type_Id" style="width:90%">
+                        @data.Part_Type_Id
+                    </td>
+                    <td title="@data.Outsource_Type_Id" style="width:90%">
+                        @data.Outsource_Type_Id
+                    </td>
+                    <td title="@data.Category_Id" style="width:90%">
+                        @data.Category_Id
+                    </td> 
+                    <td title="@data.Color_Id" style="width:90%">
+                        @data.Color_Id
+                    </td>
+                    <td title="@data.Material_Id" style="width:90%">
+                        @data.Material_Id
+                    </td>                    
+                    <td class="clsAction" style="width:10%">
+                        <a href="javascript:void(0);" title="Edit" class="clsEditPart">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="javascript:void(0);" title="Delete" class="clsDeletePart" >
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+
+
+
