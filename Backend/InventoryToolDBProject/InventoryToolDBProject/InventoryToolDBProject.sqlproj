@@ -76,7 +76,6 @@
     <Build Include="dbo\Tables\M_PURCHASES_ORDER_DETAIL.sql" />
     <Build Include="dbo\Tables\M_User.sql" />
     <Build Include="dbo\Tables\Machine_Process.sql" />
-    <Build Include="dbo\Tables\Row_Material_Item.sql" />
     <Build Include="dbo\Tables\User_Role.sql" />
     <Build Include="dbo\Tables\Window_Role_Permission.sql" />
     <Build Include="dbo\Tables\Item_Consumption.sql" />
