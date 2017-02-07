@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="InventortCompare_Azure.scmp" />
+    <None Include="InventortCompare_Local.scmp" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
