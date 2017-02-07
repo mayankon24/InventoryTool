@@ -178,7 +178,14 @@
                             success: function (result) {
                                 $(data).hide();
                                 var row = $("#MasterRowEdit_Part").clone();
-                                $(row).find('.clsPart').val(result.Part_Name);
+                                $(row).find('.clsPart_Code').val(result.Part_Code);
+                                $(row).find('.clsPart_Name').val(result.Part_Name);
+                                $(row).find('.clsPart_Type_Id').val(result.Part_Type_Id);
+                                $(row).find('.clsOutsource_Type_Id').val(result.Outsource_Type_Id);
+                                $(row).find('.clsCategory_Id').val(result.Category_Id);
+                                $(row).find('.clsColor_Id').val(result.Color_Id);
+                                $(row).find('.clsMaterial_Id').val(result.Material_Id);
+                                $(row).find('.clsUnit_Id').val(result.Unit_Id);
                                 $(row).removeAttr("style");
                                 $(row).attr("data-Part_Id", Part_Id);
                                 $(data).after(row);
@@ -197,9 +204,7 @@
                     var row = $("#MasterRow_Part").clone();
                     $(row).removeAttr("style");
                     $(row).find('.clsPart_Code').val('');
-                    $(row).find('.clsPart_Name').val('');
-                    $(row).find('.clsManufacturing_Days').val('');
-                    $(row).find('.clsDescription').val('');
+                    $(row).find('.clsPart_Name').val('');                  
                     $("#tblPartList >tbody").prepend(row);// now will append the clone row to table.
                 });
                 ///Handle the Cancel update functionality
@@ -222,8 +227,12 @@
                     
                     Part_Name = $(data).find(".clsPart_Name").val();
                     Part_Code = $(data).find(".clsPart_Code").val();
-                    Manufacturing_Days = $(data).find(".clsManufacturing_Days").val();
-                    Description = $(data).find(".clsDescription").val();
+                    Part_Type_Id = $(data).find('.clsPart_Type_Id').val();
+                    Outsource_Type_Id = $(data).find('.clsOutsource_Type_Id').val();
+                    Category_Id = $(data).find('.clsCategory_Id').val();
+                    Color_Id = $(data).find('.clsColor_Id').val();
+                    Material_Id = $(data).find('.clsMaterial_Id').val();
+                    Unit_Id = $(data).find('.clsUnit_Id').val();
                     //put validation here
 
                     if ((Part_Name == "") || ((fn_textvalidation(Part_Name)))) {
@@ -232,8 +241,14 @@
                     if ((Part_Code == "") || ((fn_textvalidation(Part_Code)))) {
                         strValidationMsglists = strValidationMsglists + "<li>Part Code is required and it shouldn’t be numeric.</li>";
                     }
-                    if ((Manufacturing_Days == "") || ((fn_numbervalidation(Manufacturing_Days)))) {
-                        strValidationMsglists = strValidationMsglists + "<li>Manufacturing Days is required and it shouldn’t be numeric.</li>";
+                    if (Part_Type_Id < 1) {
+                        strValidationMsglists = strValidationMsglists + "<li>Select a valid Part Type.</li>";
+                    }
+                    if (Outsource_Type_Id < 1) {
+                        strValidationMsglists = strValidationMsglists + "<li>Select a valid Outsource Type.</li>";
+                    }
+                    if (Unit_Id < 1) {
+                        strValidationMsglists = strValidationMsglists + "<li>Select a valid Unit.</li>";
                     }
                     if (strValidationMsglists != "") {
                         strValidationMsglists = "<ol>" + strValidationMsglists + "</ol>"
