@@ -219,7 +219,8 @@
                 ///Handle the Add/update functionality
                 $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {
                     debugger;
-                    var Part_Id, Part_Name, data, urlPath;
+                    var Part_Id, Part_Name, Part_Type_Id, Outsource_Type_Id
+                     ,Category_Id, Color_Id, Material_Id, Unit_Id, data, urlPath;
                     var strValidationMsglists = "";
 
                     data = $(this).parents('tr');
@@ -265,8 +266,12 @@
                                 Part_Id: Part_Id,
                                 Part_Code: Part_Code, 
                                 Part_Name: Part_Name,
-                                Manufacturing_Days: Manufacturing_Days,
-                                Description: Description
+                                Part_Type_Id: Part_Type_Id,
+                                Outsource_Type_Id: Outsource_Type_Id,
+                                Category_Id:Category_Id,
+                                Color_Id:Color_Id,
+                                Material_Id:Material_Id,
+                                Unit_Id: Unit_Id
                             },
                             beforeSend: function () {
                                 Common.showDialog.show('Please wait....', {

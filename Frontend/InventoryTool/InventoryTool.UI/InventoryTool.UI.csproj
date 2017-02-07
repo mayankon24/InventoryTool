@@ -682,7 +682,7 @@
     <Content Include="Views\Product\ProductIndex.cshtml" />
     <Content Include="Views\Product\_ProductList.cshtml" />
     <Content Include="Views\Part\PartIndex.cshtml" />
-    <Content Include="Views\Common\_PartList.cshtml" />
+    <Content Include="Views\Part\_PartList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
