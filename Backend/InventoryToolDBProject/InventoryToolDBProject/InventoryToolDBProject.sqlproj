@@ -98,6 +98,10 @@
     <Build Include="dbo\Stored Procedures\UpdatePart.sql" />
     <Build Include="dbo\Stored Procedures\GetAllPart.sql" />
     <Build Include="dbo\Stored Procedures\DeletePart.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllOutsourceType.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllMaterial.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllColor.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllCategory.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
