@@ -53,7 +53,9 @@
         <Function Name="GetAllMaterial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllOutsourceType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllPart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllPartType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllUnit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="InsertErrorLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Window_Id" Type="int" Mode="In" />
           <Parameter Name="Source" Type="nvarchar" Mode="In" />
@@ -135,6 +137,8 @@
           <FunctionImport Name="GetAllColor" ReturnType="Collection(InventoryToolDBModel.GetAllColor_Result)" />
           <FunctionImport Name="GetAllMaterial" ReturnType="Collection(InventoryToolDBModel.GetAllMaterial_Result)" />
           <FunctionImport Name="GetAllOutsourceType" ReturnType="Collection(InventoryToolDBModel.GetAllOutsourceType_Result)" />
+          <FunctionImport Name="GetAllPartType" ReturnType="Collection(InventoryToolDBModel.GetAllPartType_Result)" />
+          <FunctionImport Name="GetAllUnit" ReturnType="Collection(InventoryToolDBModel.GetAllUnit_Result)" />
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
@@ -206,6 +210,14 @@
         <ComplexType Name="GetAllOutsourceType_Result">
           <Property Type="Int32" Name="Outsource_Type_Id" Nullable="false" />
           <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetAllPartType_Result">
+          <Property Type="Int32" Name="Part_Type_Id" Nullable="false" />
+          <Property Type="String" Name="Part_Type" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetAllUnit_Result">
+          <Property Type="Int32" Name="Unit_Id" Nullable="false" />
+          <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -312,6 +324,22 @@
               <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllOutsourceType_Result">
                 <ScalarProperty Name="Outsource_Type_Id" ColumnName="Outsource_Type_Id" />
                 <ScalarProperty Name="Outsource_Type" ColumnName="Outsource_Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllPartType" FunctionName="InventoryToolDBModel.Store.GetAllPartType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllPartType_Result">
+                <ScalarProperty Name="Part_Type_Id" ColumnName="Part_Type_Id" />
+                <ScalarProperty Name="Part_Type" ColumnName="Part_Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUnit" FunctionName="InventoryToolDBModel.Store.GetAllUnit">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllUnit_Result">
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

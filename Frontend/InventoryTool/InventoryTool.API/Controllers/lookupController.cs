@@ -12,7 +12,7 @@ namespace InventoryTool.API.Controllers
     /// This controller is handle all the operation related to Landing page.
     /// </summary>
     [RoutePrefix("api/Common")]
-    public class CommonController : ApiController
+    public class lookupController : ApiController
     {
 
         [Route("Category")]
@@ -73,6 +73,37 @@ namespace InventoryTool.API.Controllers
                 {
                    Outsource_Type = s.Outsource_Type,
                    Outsource_Type_Id = s.Outsource_Type_Id
+                }).ToList();
+                return RetVal;
+            }
+        }
+
+
+        [Route("PartType")]
+        [HttpGet]
+        public List<GetAllPartType_Result> GetAllPartType()
+        {
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                var RetVal = entity.GetAllPartType().ToList().Select(s => new GetAllPartType_Result
+                {
+                    Part_Type = s.Part_Type,
+                    Part_Type_Id = s.Part_Type_Id
+                }).ToList();
+                return RetVal;
+            }
+        }
+
+        [Route("Unit")]
+        [HttpGet]
+        public List<GetAllUnit_Result> GetAllUnit()
+        {
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                var RetVal = entity.GetAllUnit().ToList().Select(s => new GetAllUnit_Result
+                {
+                    Unit_Id = s.Unit_Id,
+                    Unit_Name = s.Unit_Name                    
                 }).ToList();
                 return RetVal;
             }

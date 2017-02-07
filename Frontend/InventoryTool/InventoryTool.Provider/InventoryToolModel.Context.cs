@@ -177,5 +177,15 @@ namespace InventoryTool.Provider
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllOutsourceType_Result>("GetAllOutsourceType");
         }
+    
+        public virtual ObjectResult<GetAllPartType_Result> GetAllPartType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllPartType_Result>("GetAllPartType");
+        }
+    
+        public virtual ObjectResult<GetAllUnit_Result> GetAllUnit()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllUnit_Result>("GetAllUnit");
+        }
     }
 }

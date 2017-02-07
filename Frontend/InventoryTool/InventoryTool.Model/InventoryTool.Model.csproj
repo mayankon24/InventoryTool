@@ -57,6 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetAllPartType_Result.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllUnit_Result.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LokkupModel.cs" />
     <Compile Include="GetAllCategory_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>

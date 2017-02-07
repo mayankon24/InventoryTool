@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LookupProxy.cs" />
     <Compile Include="PartProxy.cs" />
     <Compile Include="ProductProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
