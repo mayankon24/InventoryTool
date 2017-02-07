@@ -104,7 +104,7 @@
     <Build Include="dbo\Stored Procedures\GetAllPartType.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlSchemaCompare1.scmp" />
+    <None Include="InventortCompare_Azure.scmp" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

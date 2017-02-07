@@ -2,15 +2,15 @@
 <SchemaComparison>
   <Version>10</Version>
   <SourceModelProvider>
-    <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=.;Initial Catalog=InventoryToolDB;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
-    </ConnectionBasedModelProvider>
-  </SourceModelProvider>
-  <TargetModelProvider>
     <ProjectBasedModelProvider>
       <ProjectGuid>{55be11c3-a716-487f-b3b4-76a42a8c5de6}</ProjectGuid>
       <Name>InventoryToolDBProject</Name>
     </ProjectBasedModelProvider>
+  </SourceModelProvider>
+  <TargetModelProvider>
+    <ConnectionBasedModelProvider>
+      <ConnectionString>Data Source=mayankazure.database.windows.net;Initial Catalog=InventoryToolDB;Persist Security Info=True;User ID=mayank_on24;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False</ConnectionString>
+    </ConnectionBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>
     <SchemaCompareSettingsService>
