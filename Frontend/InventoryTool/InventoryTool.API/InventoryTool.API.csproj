@@ -204,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\inventorytoolapi - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\inventorytoolapi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WDGBudgetToolAPIDev - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\WDGBudgetToolAPIDev - Web Deploy.pubxml" />
