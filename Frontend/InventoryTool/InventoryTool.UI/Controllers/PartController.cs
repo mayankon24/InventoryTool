@@ -108,9 +108,16 @@ namespace InventoryTool.UI.Controllers
 
         public ActionResult GetPartPartial()
         {
-            List<GetAllPart_Result> Part = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri,
-                "api/Part/AllClass");
-            return PartialView("_PartList", Part);
+            List<GetAllPart_Result> Part = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri, "api/Part/AllPart");
+            return PartialView("_ProductList", Part);
+        }
+
+        public ActionResult GetPartByPartId(int Part_Id)
+        {
+            List<GetAllPart_Result> Part = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri, "api/Part/AllPart");           
+
+            var result = Part.FirstOrDefault(s => s.Part_Id == Part_Id);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
