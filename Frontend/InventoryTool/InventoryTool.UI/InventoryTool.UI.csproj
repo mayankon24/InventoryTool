@@ -539,6 +539,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\BudgetUI.pubxml" />
+    <None Include="Properties\PublishProfiles\inventorytoolui - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WDGBudgetToolDev - Web Deploy %2812%29.pubxml" />
     <None Include="Properties\PublishProfiles\WDGBudgetToolDev - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\WDGBudgetToolDev - Web Deploy %283%29.pubxml" />
