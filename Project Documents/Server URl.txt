@@ -1,4 +1,4 @@
 API URL   
 http://inventorytoolapi.azurewebsites.net
 Web URL
-http://inventorytoolui.azurewebsites.net/
+http://inventorytoolui.azurewebsites.net
