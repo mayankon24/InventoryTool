@@ -76,9 +76,9 @@ INSERT [dbo].[LK_Unit] ([Unit_Id], [Unit_Name], [IsActive]) VALUES (1, N'Kg', 1)
 GO
 INSERT [dbo].[LK_Unit] ([Unit_Id], [Unit_Name], [IsActive]) VALUES (2, N'Pics', 1)
 GO
-INSERT [dbo].[LK_Unit] ([Unit_Id], [Unit_Name], [IsActive]) VALUES (2, N'Meter', 1)
+INSERT [dbo].[LK_Unit] ([Unit_Id], [Unit_Name], [IsActive]) VALUES (3, N'Meter', 1)
 GO
-INSERT [dbo].[LK_Unit] ([Unit_Id], [Unit_Name], [IsActive]) VALUES (2, N'Gram', 1)
+INSERT [dbo].[LK_Unit] ([Unit_Id], [Unit_Name], [IsActive]) VALUES (4, N'Gram', 1)
 GO
 SET IDENTITY_INSERT [dbo].[LK_Unit] OFF
 GO
