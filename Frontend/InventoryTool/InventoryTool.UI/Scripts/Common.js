@@ -518,13 +518,6 @@ function fn_closeMe(obj)
 
 // common name validation
 
-function fn_namevalidation(name) {
-    var value
-    var condition = /^[0-9]+$/;
-    value = condition.test(name);
-    return value;
-}
-
 function fn_textvalidation(name) {
     var value
     var condition = /^[0-9]+$/;

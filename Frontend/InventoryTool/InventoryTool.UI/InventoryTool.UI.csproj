@@ -506,24 +506,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\AdminPortal\Category.js" />
-    <Content Include="Scripts\AdminPortal\Class.js" />
-    <Content Include="Scripts\AdminPortal\Device.js" />
-    <Content Include="Scripts\AdminPortal\Groups.js" />
-    <Content Include="Scripts\AdminPortal\Index.js" />
-    <Content Include="Scripts\AdminPortal\InvestmentType.js" />
-    <Content Include="Scripts\AdminPortal\LabCompany.js" />
-    <Content Include="Scripts\AdminPortal\Manage.js" />
-    <Content Include="Scripts\AdminPortal\Position.js" />
-    <Content Include="Scripts\AdminPortal\Priority.js" />
-    <Content Include="Scripts\AdminPortal\Projects.js" />
-    <Content Include="Scripts\AdminPortal\Release.js" />
-    <Content Include="Scripts\AdminPortal\Resources.js" />
-    <Content Include="Scripts\AdminPortal\RoleMapping.js" />
-    <Content Include="Scripts\AdminPortal\Seasonality.js" />
-    <Content Include="Scripts\AdminPortal\SubProjects.js" />
-    <Content Include="Scripts\AdminPortal\SubStatus.js" />
-    <Content Include="Scripts\AdminPortal\Teams.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
@@ -540,14 +522,10 @@
     </Content>
     <None Include="Properties\PublishProfiles\BudgetUI.pubxml" />
     <None Include="Properties\PublishProfiles\inventorytoolui - Web Deploy.pubxml" />
-    <Content Include="Scripts\AdminPortal\Trio.js" />
     <Content Include="Scripts\ajaxfileupload.css" />
     <Content Include="Scripts\ajaxfileupload.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\BudgetRequest\BudgetApprover.js" />
-    <Content Include="Scripts\BudgetRequest\BudgetRequest.js" />
-    <Content Include="Scripts\BudgetSummary\BudgetSummary.js" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -677,7 +655,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\BudgetApprover\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -206,11 +206,11 @@
                     Description = $(data).find(".clsDescription").val();
                     //put validation here
 
-                    if ((Product_Name == "") || ((fn_textvalidation(Product_Name)))) {
-                        strValidationMsglists = strValidationMsglists + "<li>Product Name is required and it shouldn’t be numeric.</li>";
+                    if (Product_Name == "")  {
+                        strValidationMsglists = strValidationMsglists + "<li>Product Name is required.</li>";
                     }
-                    if ((Product_Code == "") || ((fn_textvalidation(Product_Code)))) {
-                        strValidationMsglists = strValidationMsglists + "<li>Product Code is required and it shouldn’t be numeric.</li>";
+                    if (Product_Code == "")  {
+                        strValidationMsglists = strValidationMsglists + "<li>Product Code is required.</li>";
                     }
                     if ((Manufacturing_Days == "") || ((fn_numbervalidation(Manufacturing_Days)))) {
                         strValidationMsglists = strValidationMsglists + "<li>Manufacturing Days is required and it shouldn’t be numeric.</li>";

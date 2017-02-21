@@ -236,11 +236,11 @@
                     Unit_Id = $(data).find('.clsUnit_Id').val();
                     //put validation here
 
-                    if ((Part_Name == "") || ((fn_textvalidation(Part_Name)))) {
-                        strValidationMsglists = strValidationMsglists + "<li>Part Name is required and it shouldn’t be numeric.</li>";
+                    if (Part_Name == "")  {
+                        strValidationMsglists = strValidationMsglists + "<li>Part Name is required.</li>";
                     }
-                    if ((Part_Code == "") || ((fn_textvalidation(Part_Code)))) {
-                        strValidationMsglists = strValidationMsglists + "<li>Part Code is required and it shouldn’t be numeric.</li>";
+                    if (Part_Code == "") {
+                        strValidationMsglists = strValidationMsglists + "<li>Part Code is required.</li>";
                     }
                     if (Part_Type_Id < 1) {
                         strValidationMsglists = strValidationMsglists + "<li>Select a valid Part Type.</li>";
