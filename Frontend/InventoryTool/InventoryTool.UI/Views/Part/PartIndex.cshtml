@@ -112,8 +112,7 @@
                 //initial load the Datatable setting.
                 Partjs.ReinitiateDataTable('tblPartList');
 
-                $("#Part").find("#dvPartList").on("click", ".clsDeletePart", function () {
-                    debugger;
+                $("#Part").find("#dvPartList").on("click", ".clsDeletePart", function () {                   
                     var data, Part_Id, urlPath;
                     var promptdelete = confirm('Are you sure you want to delete this record? There could be dependent budget requests which may get impacted based on this action');
                     if (promptdelete) {
@@ -183,6 +182,7 @@
                             },
                             success: function (result) {
                                 $(data).hide();
+                                debugger;
                                 var row = $("#MasterRowEdit_Part").clone();
                                 $(row).find('.clsPart_Code').val(result.Part_Code);
                                 $(row).find('.clsPart_Name').val(result.Part_Name);
@@ -224,8 +224,7 @@
                     $('.clsEditPart,.clsDeletePart').removeAttr('style');
                 });
                 ///Handle the Add/update functionality
-                $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {
-                    debugger;
+                $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {                  
                     var Part_Id, Part_Name, Part_Type_Id, Outsource_Type_Id
                      ,Category_Id, Color_Id, Material_Id, Criticality_Id, Unit_Id, data, urlPath;
                     var strValidationMsglists = "";

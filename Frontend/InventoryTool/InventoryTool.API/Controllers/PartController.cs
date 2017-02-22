@@ -55,7 +55,7 @@ namespace InventoryTool.API.Controllers
                     Category_Name = s.Category_Name,
                     Color_Name = s.Color_Name,
                     Material_Name = s.Material_Name,
-                    Unit_Id = s.Outsource_Type_Id,
+                    Unit_Id = s.Unit_Id,
                     Outsource_Type = s.Outsource_Type,
                     Part_Type = s.Part_Type,
                     Unit_Name = s.Unit_Name,
