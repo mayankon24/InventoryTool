@@ -9,7 +9,8 @@ CREATE PROCEDURE [dbo].[UpdatePart] (
 	,@Unit_Id int
 	,@Category_Id int
 	,@Color_Id int
-	,@Material_Id int					
+	,@Material_Id int
+	,@Criticality_Id int					
 	,@ModifiedBy NVARCHAR(100)
 	,@return_Status INT OUTPUT
 )
@@ -45,6 +46,7 @@ BEGIN TRANSACTION
 						,[Category_Id]
 						,[Color_Id]
 						,[Material_Id]
+						,Criticality_Id
 						,[CreatedBy]
 						,[CreatedUTCDate]
 						,[LastModifiedBy]
@@ -59,6 +61,7 @@ BEGIN TRANSACTION
 						,@Category_Id
 						,@Color_Id
 						,@Material_Id
+						,@Criticality_Id
 						,@ModifiedBy
 						,getutcdate()
 						,null
@@ -80,6 +83,7 @@ BEGIN TRANSACTION
 								,[Category_Id] = @Category_Id
 								,[Color_Id] = @Color_Id
 								,[Material_Id] = @Material_Id
+								,Criticality_Id= @Criticality_Id
 									 
 							WHERE Part_Id = @Part_Id
 
@@ -102,6 +106,6 @@ BEGIN CATCH
                         'ERROR_PROCEDURE=' +isnull(ERROR_PROCEDURE(), '')+ ' || '+
                         'ERROR_LINE=' +cast(isnull(ERROR_LINE(), '')as nvarchar(10))+ ' || '+
                         'ERROR_MESSAGE=' +isnull(ERROR_MESSAGE(), '')+ ' || '                                
-        exec InsertErrorLog null, 'Database', 'UpdateProduct', @error_message
+        exec InsertErrorLog null, 'Database', 'UpdatePart', @error_message
 
 END CATCH
