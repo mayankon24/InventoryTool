@@ -19,6 +19,7 @@ namespace InventoryTool.UI.Controllers
 
             _VMPart.PartList = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri, "api/Part/AllPart");
             _VMPart.MaterialList = LookupProxy.Instance.GetAllMaterial(ConfigExtension.GetWebApiUri, "api/Lookup/Material");
+            _VMPart.CriticalityList = LookupProxy.Instance.GetAllCriticality(ConfigExtension.GetWebApiUri, "api/Lookup/Criticality");
             _VMPart.OutsourceTypeList = LookupProxy.Instance.GetAllOutsourceType(ConfigExtension.GetWebApiUri, "api/Lookup/OutsourceType");
             _VMPart.PartTypeList = LookupProxy.Instance.GetAllPartType(ConfigExtension.GetWebApiUri, "api/Lookup/PartType");
             _VMPart.ColorList = LookupProxy.Instance.GetAllColor(ConfigExtension.GetWebApiUri, "api/Lookup/Color");
@@ -72,7 +73,7 @@ namespace InventoryTool.UI.Controllers
             {
                 resultdata.operationstatuscode = (int)operation_status.Error;//message when duplicate record.
                 resultdata.messagedata = UserMessage.ResourceManager.GetString("msgError");
-                resultdata.message = string.Format(ex.Message);
+                resultdata.message = ex.Message;
 
             }
             return Json(resultdata, JsonRequestBehavior.AllowGet);

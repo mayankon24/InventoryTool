@@ -1,5 +1,6 @@
 ﻿
-
+--declare @returnStatus INT
+--exec UpdatePart -1,4,2,'256','259',1,1,2,5,2,'', @return_Status = @returnStatus output
 CREATE PROCEDURE [dbo].[UpdatePart] (
 	@Part_Id INT
 	,@Part_Type_Id int
@@ -53,7 +54,7 @@ BEGIN TRANSACTION
 						,[LastModifiedUTCDate]
 						,[IsActive])
 					VALUES
-						(@Part_Id
+						(@Part_Type_Id
 						,@Outsource_Type_Id
 						,@Part_Code
 						,@Part_Name

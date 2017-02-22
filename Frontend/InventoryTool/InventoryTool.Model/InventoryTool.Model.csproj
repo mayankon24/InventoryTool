@@ -57,7 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetAllCriticality_Result.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllPartType_Result.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllStore_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllUnit_Result.cs">

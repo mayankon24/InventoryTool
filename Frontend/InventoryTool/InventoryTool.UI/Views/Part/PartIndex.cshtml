@@ -41,6 +41,9 @@
                             </td>  
                             <td>
                                 @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })                                
+                            </td>
+                            <td>
+                                @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
                             </td> 
                             <td>
                                 @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
@@ -72,6 +75,9 @@
                             <td>
                                 @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })
                             </td>
+                            <td>
+                                @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
+                            </td> 
                             <td>
                                 @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
                             </td>          
@@ -185,6 +191,7 @@
                                 $(row).find('.clsCategory_Id').val(result.Category_Id);
                                 $(row).find('.clsColor_Id').val(result.Color_Id);
                                 $(row).find('.clsMaterial_Id').val(result.Material_Id);
+                                $(row).find('.clsCriticality_Id').val(result.Criticality_Id);
                                 $(row).find('.clsUnit_Id').val(result.Unit_Id);
                                 $(row).removeAttr("style");
                                 $(row).attr("data-Part_Id", Part_Id);
@@ -220,7 +227,7 @@
                 $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {
                     debugger;
                     var Part_Id, Part_Name, Part_Type_Id, Outsource_Type_Id
-                     ,Category_Id, Color_Id, Material_Id, Unit_Id, data, urlPath;
+                     ,Category_Id, Color_Id, Material_Id, Criticality_Id, Unit_Id, data, urlPath;
                     var strValidationMsglists = "";
 
                     data = $(this).parents('tr');
@@ -233,6 +240,7 @@
                     Category_Id = $(data).find('.clsCategory_Id').val();
                     Color_Id = $(data).find('.clsColor_Id').val();
                     Material_Id = $(data).find('.clsMaterial_Id').val();
+                    Criticality_Id = $(data).find('.clsCriticality_Id').val();
                     Unit_Id = $(data).find('.clsUnit_Id').val();
                     //put validation here
 
@@ -270,7 +278,8 @@
                                 Outsource_Type_Id: Outsource_Type_Id,
                                 Category_Id:Category_Id,
                                 Color_Id:Color_Id,
-                                Material_Id:Material_Id,
+                                Material_Id: Material_Id,
+                                Criticality_Id: Criticality_Id,
                                 Unit_Id: Unit_Id
                             },
                             beforeSend: function () {

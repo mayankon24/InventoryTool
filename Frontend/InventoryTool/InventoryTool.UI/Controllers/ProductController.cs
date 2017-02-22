@@ -64,7 +64,7 @@ namespace InventoryTool.UI.Controllers
             {
                 resultdata.operationstatuscode = (int)operation_status.Error;//message when duplicate record.
                 resultdata.messagedata = UserMessage.ResourceManager.GetString("msgError");
-                resultdata.message = string.Format(ex.Message);
+                resultdata.message = ex.Message;
 
             }
             return Json(resultdata, JsonRequestBehavior.AllowGet);

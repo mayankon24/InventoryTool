@@ -53,6 +53,11 @@ namespace InventoryTool.UI.Proxy
             var result = ProxyHelper.GetResponseFromApi(apiUri, requestUri);
             return JsonConvert.DeserializeObject<List<GetAllMaterial_Result>>(result);
         }
+        public List<GetAllCriticality_Result> GetAllCriticality(string apiUri, string requestUri)
+        {
+            var result = ProxyHelper.GetResponseFromApi(apiUri, requestUri);
+            return JsonConvert.DeserializeObject<List<GetAllCriticality_Result>>(result);
+        }
 
         public List<GetAllOutsourceType_Result> GetAllOutsourceType(string apiUri, string requestUri)
         {

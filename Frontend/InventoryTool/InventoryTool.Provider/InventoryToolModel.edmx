@@ -18,11 +18,12 @@
           <Property Name="Category_Id" Type="int" />
           <Property Name="Color_Id" Type="int" />
           <Property Name="Material_Id" Type="int" />
+          <Property Name="Criticality_Id" Type="int" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedUTCDate" Type="datetime" />
           <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="LastModifiedUTCDate" Type="datetime" />
-          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="M_Product">
           <Key>
@@ -37,7 +38,7 @@
           <Property Name="CreatedUTCDate" Type="datetime" />
           <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="LastModifiedUTCDate" Type="datetime" />
-          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <Function Name="DeletePart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Part_Id" Type="int" Mode="In" />
@@ -51,11 +52,13 @@
         </Function>
         <Function Name="GetAllCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllColor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllCriticality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllMaterial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllOutsourceType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllPart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllPartType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllUnit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="InsertErrorLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Window_Id" Type="int" Mode="In" />
@@ -73,6 +76,7 @@
           <Parameter Name="Category_Id" Type="int" Mode="In" />
           <Parameter Name="Color_Id" Type="int" Mode="In" />
           <Parameter Name="Material_Id" Type="int" Mode="In" />
+          <Parameter Name="Criticality_Id" Type="int" Mode="In" />
           <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
@@ -132,6 +136,7 @@
             <Parameter Name="Category_Id" Mode="In" Type="Int32" />
             <Parameter Name="Color_Id" Mode="In" Type="Int32" />
             <Parameter Name="Material_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Criticality_Id" Mode="In" Type="Int32" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -142,6 +147,8 @@
           <FunctionImport Name="GetAllOutsourceType" ReturnType="Collection(InventoryToolDBModel.GetAllOutsourceType_Result)" />
           <FunctionImport Name="GetAllPartType" ReturnType="Collection(InventoryToolDBModel.GetAllPartType_Result)" />
           <FunctionImport Name="GetAllUnit" ReturnType="Collection(InventoryToolDBModel.GetAllUnit_Result)" />
+          <FunctionImport Name="GetAllCriticality" ReturnType="Collection(InventoryToolDBModel.GetAllCriticality_Result)" />
+          <FunctionImport Name="GetAllStore" ReturnType="Collection(InventoryToolDBModel.GetAllStore_Result)" />
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
@@ -166,8 +173,9 @@
           <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Unit_Id" Type="Int32" />
+          <Property Name="Criticality_Id" Type="Int32" />
         </EntityType>
         <ComplexType Name="GetAllPart_Result">
           <Property Type="Int32" Name="Part_Id" Nullable="false" />
@@ -185,6 +193,8 @@
           <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Part_Type" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Criticality_Id" Nullable="false" />
+          <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
           </ComplexType>
         <EntityType Name="M_Product">
           <Key>
@@ -199,7 +209,7 @@
           <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <ComplexType Name="GetAllCategory_Result">
           <Property Type="Int32" Name="Category_Id" Nullable="false" />
@@ -225,6 +235,14 @@
           <Property Type="Int32" Name="Unit_Id" Nullable="false" />
           <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="GetAllCriticality_Result">
+          <Property Type="Int32" Name="Criticality_Id" Nullable="false" />
+          <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetAllStore_Result">
+          <Property Type="Int32" Name="Store_Id" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -248,6 +266,7 @@
           <EntitySetMapping Name="M_Part">
             <EntityTypeMapping TypeName="InventoryToolDBModel.M_Part">
               <MappingFragment StoreEntitySet="M_Part">
+                <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
                 <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
@@ -284,6 +303,8 @@
                 <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
                 <ScalarProperty Name="Part_Type" ColumnName="Part_Type" />
                 <ScalarProperty Name="Outsource_Type" ColumnName="Outsource_Type" />
+                <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
+                <ScalarProperty Name="Criticality_Name" ColumnName="Criticality_Name" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -349,6 +370,22 @@
               <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllUnit_Result">
                 <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
                 <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllCriticality" FunctionName="InventoryToolDBModel.Store.GetAllCriticality">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllCriticality_Result">
+                <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
+                <ScalarProperty Name="Criticality_Name" ColumnName="Criticality_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllStore" FunctionName="InventoryToolDBModel.Store.GetAllStore">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllStore_Result">
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

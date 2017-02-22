@@ -62,6 +62,21 @@ namespace InventoryTool.API.Controllers
             }
         }
 
+        [Route("Criticality")]
+        [HttpGet]
+        public List<GetAllCriticality_Result> GetAllCriticality()
+        {
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                var RetVal = entity.GetAllCriticality().ToList().Select(s => new GetAllCriticality_Result
+                {
+                    Criticality_Id = s.Criticality_Id,
+                    Criticality_Name = s.Criticality_Name
+                }).ToList();
+                return RetVal;
+            }
+        }
+
 
         [Route("OutsourceType")]
         [HttpGet]

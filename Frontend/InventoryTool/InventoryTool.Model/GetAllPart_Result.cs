@@ -28,5 +28,7 @@ namespace InventoryTool.Model
         public string Unit_Name { get; set; }
         public string Part_Type { get; set; }
         public string Outsource_Type { get; set; }
+        public int Criticality_Id { get; set; }
+        public string Criticality_Name { get; set; }
     }
 }
