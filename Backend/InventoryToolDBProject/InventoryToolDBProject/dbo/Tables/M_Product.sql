@@ -8,9 +8,11 @@
     [CreatedUTCDate]      DATETIME        NULL,
     [LastModifiedBy]      NVARCHAR (100)  NULL,
     [LastModifiedUTCDate] DATETIME        NULL,
-    [IsActive]            BIT             NULL,
+    [IsActive]            BIT             NOT NULL,
     CONSTRAINT [PK_M_Product] PRIMARY KEY CLUSTERED ([Product_Id] ASC)
 );
+
+
 
 
 

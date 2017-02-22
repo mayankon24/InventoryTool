@@ -82,4 +82,29 @@ INSERT [dbo].[LK_Unit] ([Unit_Id], [Unit_Name], [IsActive]) VALUES (4, N'Gram', 
 GO
 SET IDENTITY_INSERT [dbo].[LK_Unit] OFF
 GO
+SET IDENTITY_INSERT [dbo].[LK_Criticality] ON 
+
+GO
+INSERT [dbo].[LK_Criticality] ([Criticality_Id], [Criticality_Name], [IsActive]) VALUES (1, N'High', 1)
+GO
+INSERT [dbo].[LK_Criticality] ([Criticality_Id], [Criticality_Name], [IsActive]) VALUES (2, N'Medium', 1)
+GO
+INSERT [dbo].[LK_Criticality] ([Criticality_Id], [Criticality_Name], [IsActive]) VALUES (3, N'Low', 1)
+GO
+SET IDENTITY_INSERT [dbo].[LK_Criticality] OFF
+GO
+SET IDENTITY_INSERT [dbo].[LK_Store] ON 
+
+GO
+INSERT [dbo].[LK_Store] ([Store_Id], [Store_Name], [IsActive]) VALUES (2, N'Floor1 Open', 1)
+GO
+INSERT [dbo].[LK_Store] ([Store_Id], [Store_Name], [IsActive]) VALUES (3, N'Floor2 Open', 1)
+GO
+INSERT [dbo].[LK_Store] ([Store_Id], [Store_Name], [IsActive]) VALUES (4, N'Floor3 Open', 1)
+GO
+INSERT [dbo].[LK_Store] ([Store_Id], [Store_Name], [IsActive]) VALUES (5, N'Store5', 1)
+GO
+SET IDENTITY_INSERT [dbo].[LK_Store] OFF
+GO
+
 
