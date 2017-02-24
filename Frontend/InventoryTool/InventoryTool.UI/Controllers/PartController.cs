@@ -120,5 +120,13 @@ namespace InventoryTool.UI.Controllers
             var result = Part.FirstOrDefault(s => s.Part_Id == Part_Id);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetPartByPartType(int Part_Type_Id)
+        {
+            List<GetAllPart_Result> Part = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri, "api/Part/AllPart");
+
+            var result = Part.FirstOrDefault(s => s.Part_Type_Id == Part_Type_Id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

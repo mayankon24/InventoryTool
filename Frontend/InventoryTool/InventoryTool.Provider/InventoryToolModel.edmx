@@ -40,6 +40,23 @@
           <Property Name="LastModifiedUTCDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="TX_Part_Stock">
+          <Key>
+            <PropertyRef Name="Part_Stock_Id" />
+          </Key>
+          <Property Name="Part_Stock_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Part_Id" Type="int" />
+          <Property Name="Store_Id" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="In_Quantity" Type="int" />
+          <Property Name="Out_Quantity" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedUTCDate" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastModifiedUTCDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <Function Name="DeletePart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Part_Id" Type="int" Mode="In" />
           <Parameter Name="LastModifiedBy" Type="nvarchar" Mode="In" />
@@ -80,6 +97,16 @@
           <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="UpdatePartStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Part_Id" Type="int" Mode="In" />
+          <Parameter Name="Store_Id" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="In_Quantity" Type="int" Mode="In" />
+          <Parameter Name="Out_Quantity" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="return_Status" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="UpdateProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Product_Id" Type="int" Mode="In" />
           <Parameter Name="Product_Code" Type="nvarchar" Mode="In" />
@@ -92,6 +119,7 @@
         <EntityContainer Name="InventoryToolDBModelStoreContainer">
           <EntitySet Name="M_Part" EntityType="Self.M_Part" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Product" EntityType="Self.M_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TX_Part_Stock" EntityType="Self.TX_Part_Stock" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -149,6 +177,17 @@
           <FunctionImport Name="GetAllUnit" ReturnType="Collection(InventoryToolDBModel.GetAllUnit_Result)" />
           <FunctionImport Name="GetAllCriticality" ReturnType="Collection(InventoryToolDBModel.GetAllCriticality_Result)" />
           <FunctionImport Name="GetAllStore" ReturnType="Collection(InventoryToolDBModel.GetAllStore_Result)" />
+          <EntitySet Name="TX_Part_Stock" EntityType="InventoryToolDBModel.TX_Part_Stock" />
+          <FunctionImport Name="UpdatePartStock">
+            <Parameter Name="Part_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Store_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="In_Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="Out_Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
@@ -243,6 +282,23 @@
           <Property Type="Int32" Name="Store_Id" Nullable="false" />
           <Property Type="String" Name="Store_Name" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="TX_Part_Stock">
+          <Key>
+            <PropertyRef Name="Part_Stock_Id" />
+          </Key>
+          <Property Name="Part_Stock_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Part_Id" Type="Int32" />
+          <Property Name="Store_Id" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="In_Quantity" Type="Int32" />
+          <Property Name="Out_Quantity" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -389,6 +445,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="TX_Part_Stock">
+            <EntityTypeMapping TypeName="InventoryToolDBModel.TX_Part_Stock">
+              <MappingFragment StoreEntitySet="TX_Part_Stock">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Out_Quantity" ColumnName="Out_Quantity" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Part_Id" ColumnName="Part_Id" />
+                <ScalarProperty Name="Part_Stock_Id" ColumnName="Part_Stock_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdatePartStock" FunctionName="InventoryToolDBModel.Store.UpdatePartStock" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

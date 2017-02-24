@@ -1,0 +1,106 @@
+﻿@model InventoryTool.Model.VMPartStock
+@{
+    ViewBag.Title = "Part Stock Management";
+}
+<script src="~/Scripts/Part/Part.js"></script>
+<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="Stylesheet" type="text/css">
+<link href="~/Content/custom-css/custome.css" rel="stylesheet" />
+<link href="~/Content/custom-css/shared.css" rel="stylesheet" />
+<div style="width:100%;background-color:#ccc;">
+    <div class="container">
+        <div class="panel-group" id="accordion" style="margin-top:70px">
+            <div class="panel panel-default">
+                
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="row1">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="form-horizontal">
+                                            <div class="form-group has-success">
+                                                <label class="col-xs-4 control-label">Status</label>
+                                                <div class="col-xs-8">
+                                                    @*<form role="form">*@
+                                                    <div class="form-group">
+                                                        @Html.DropDownList("ddlPartType", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "--Select Part Type--", new { @class = "clsPartType form-control" })
+                                                    </div>
+                                                    @*</form>*@
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <form class="form-horizontal">
+                                            <div class="form-group has-success">
+                                                <label class="col-xs-4 control-label">Part</label>
+                                                <div class="col-xs-8">                                                  
+                                                    <div class="form-group">
+                                                        @*<select class="form-control" id="ddlCategory"></select>*@
+                                                        @Html.DropDownList("ddlPart", (new SelectList(Model.PartList, "Part_Id", "part_Name")), "Select Part", new { @class = "clsPart form-control" })
+                                                    </div>                                                  
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+            
+        </div>
+      
+
+    </div>
+</div>
+
+<script type="text/javascript">
+   
+    $(document).ready(function () {
+        var PartStockjs = {
+            init: function () {
+                var obj = PartStockjs;
+                obj.LoadPartStock();
+                Common.setAttributeList(obj);
+            },
+            LoadPartStock: function () {
+              
+                $('#ddlPartType').on('change', function () {
+                    var selected, params = [];
+                    selected = $(this).find("option:selected").val();
+                    params.Part_Type_Id = selected;
+                    params.beforeSend = budgetsummaryjs.PartBeforeSend;
+                    params.complete = budgetsummaryjs.PartComplete;
+                    params.success = budgetsummaryjs.PartSuccess;
+                    commonjs.fn_GetPart(params);
+
+                });
+            },
+
+            PartBeforeSend: function () {
+                var procemessage = "<option value='-1'> Please wait...</option>";
+                $("#ddlPart").html(procemessage).show();
+            },
+            PartSuccess: function (result) {
+                var listItems = "<option value='0'>--Select Part--</option>";
+                for (var i = 0; i < result.length; i++) {
+                    listItems += "<option value='" +
+                        result[i].Part_Id + "'>" +
+                        result[i].Part_Code +
+                        result[i].Part_Name + "</option>";
+                }
+                $('#ddlPart').removeAttr('disabled');
+                $("#ddlPart").html(listItems);
+
+            },
+            PartComplete: function () {
+                //  budgetsummaryjs.Fn_GettingProject(-1);
+            },
+        }
+        PartStockjs.init();
+    });
+</script>
