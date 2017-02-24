@@ -10,10 +10,24 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
+
+--M_Part
+--Lk_Category
+--Lk_Color
+--LK_Material
+--LK_Outsource_Type
+--LK_Part_Type
+--LK_Unit
+--LK_Criticality
+--LK_Store
+
+
+
 SET IDENTITY_INSERT [dbo].[Lk_Category] ON 
 
 GO
 INSERT [dbo].[Lk_Category] ([Category_Id], [Category_Name], [IsActive]) VALUES (1, N'N/A', 1)
+GO
 INSERT [dbo].[Lk_Category] ([Category_Id], [Category_Name], [IsActive]) VALUES (2, N'Final', 1)
 GO
 SET IDENTITY_INSERT [dbo].[Lk_Category] OFF
