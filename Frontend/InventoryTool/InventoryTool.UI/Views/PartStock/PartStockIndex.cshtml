@@ -13,7 +13,8 @@
     </div>
 </div>
 
-<div id="grdFilterList" style="min-height :100px; max-height: 550px; overflow-y: scroll;">
+<div id="grdFilterList" >
+    @*@Html.Partial("_FilterList", Model.PartList)*@
     @*Bind _LineItemList using ajax call*@
 </div>
 
@@ -119,13 +120,8 @@
                     },
                     success: function (result) {
                         debugger;
-                        if (result.operationstatuscode == 3) {
-                            fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-success');
-                            Partjs.fn_ReloadPartGrid();
-                        }
-                        else {
-                            fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-danger');
-                        }
+                        $("#grdFilterList").html('');
+                        $("#grdFilterList").html(result);
                     },
                     error: function (ex) {
                         alert(ex.responseText);

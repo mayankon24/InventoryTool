@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th style="text-align:left">Part Code</th>
-            <th style="text-align:left">Part Name</th>
-            <th style="text-align:left">Part Type</th>
+            <th style="text-align:left">Name</th>
+            <th style="text-align:left">Type</th>
             <th style="text-align:left">Outsource</th>
             <th style="text-align:left">Category</th>
             <th style="text-align:left">Color</th>
@@ -12,7 +12,7 @@
             <th style="text-align:left">Unit</th>
             <th class="action-col"></th>
         </tr>
-    </thead>
+    </thead>    
     <tbody>
         @if (Model != null)
         {
@@ -46,15 +46,7 @@
                     </td>
                     <td title="@data.Unit_Name" style="width:90%">
                         @data.Unit_Name
-                    </td>
-                    <td class="clsAction" style="width:10%">
-                        <a href="javascript:void(0);" title="Edit" class="clsEditPart">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </a>
-                        <a href="javascript:void(0);" title="Delete" class="clsDeletePart">
-                            <span class="glyphicon glyphicon-remove-sign"></span>
-                        </a>
-                    </td>
+                    </td>                   
                 </tr>
             }
         }
