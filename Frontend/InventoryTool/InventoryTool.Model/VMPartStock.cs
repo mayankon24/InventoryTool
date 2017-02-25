@@ -9,8 +9,14 @@ namespace InventoryTool.Model
     public class VMPartStock
     {
         public VMPartStock()
-        {           
-            PartTypeList = new List<GetAllPartType_Result>();           
+        {
+            CategoryList = new List<GetAllCategory_Result>();
+            ColorList = new List<GetAllColor_Result>();
+            MaterialList = new List<GetAllMaterial_Result>();
+            CriticalityList = new List<GetAllCriticality_Result>();
+            OutsourceTypeList = new List<GetAllOutsourceType_Result>();
+            PartTypeList = new List<GetAllPartType_Result>();
+            UnitList = new List<GetAllUnit_Result>();
             PartList = new List<GetAllPart_Result>();
         }
         public List<GetAllCategory_Result> CategoryList { get; set; }

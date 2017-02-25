@@ -1,0 +1,43 @@
+﻿@model InventoryTool.Model.VMPartStock
+
+<div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Code</label>
+        <input type="text" class="form-control" id="Part_Code" placeholder="Part Code" style="width:300px;" >
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Name</label>
+        <input type="text" class="form-control" id="Part_Name" placeholder="Part Name" style="width:300px;">
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Type</label>
+        @Html.DropDownList("ddlPart_Type", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "Select Part Type", new { @class = "clsPart_Type_Id form-control" })
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Outsource</label>
+        @Html.DropDownList("ddlOutsource_Type", (new SelectList(Model.OutsourceTypeList, "Outsource_Type_Id", "Outsource_Type")), "Select Outsource Type", new { @class = "clsOutsource_Type_Id form-control" })
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Category</label>
+        @Html.DropDownList("ddlCategory", (new SelectList(Model.CategoryList, "Category_Id", "Category_Name")), "Select Category", new { @class = "clsCategory_Id form-control" })
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Color</label>
+        @Html.DropDownList("ddlColor", (new SelectList(Model.ColorList, "Color_Id", "Color_Name")), "Select Color", new { @class = "clsColor_Id form-control" })
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Material</label>
+        @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Criticality</label>
+        @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Unit</label>
+        @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
+    </div>
+    <div style="float: left;  margin: 30px 8px;">
+        <button type="button" id="btnFind">Find</button>
+    </div>
+</div>
