@@ -11,7 +11,11 @@
             @Html.RadioButtonFor(m => m.item, "Yes") @:Yes
             @Html.RadioButtonFor(m => m.item, "No") @:No
             }*@
-    </div>  
+    </div> 
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Date</label>       
+        <input type="date" data-val="true" id="Date" data-val-required="Date is required" class="form-control" value=@DateTime.Now placeholder="Date" style="width:150px;">
+    </div> 
     <div style="float: left;  margin: 0px 8px;">
         <label>Quantity</label>
         <input type="text" id="Quantity" class="form-control" placeholder="Quantity" style="width:150px;">
