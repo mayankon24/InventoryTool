@@ -28,7 +28,7 @@ namespace InventoryTool.UI.Controllers
             return View("PartStockIndex", _VMPartStock);           
         }
 
-        public ActionResult GetPartByFilter(int Part_Type_Id
+        public ActionResult GetPartByFilter(int? Part_Type_Id
                                              , int? Outsource_Type_Id, string Part_Code, string Part_Name, int? Unit_Id, int? Category_Id,
                                              int? Color_Id, int? Material_Id, int? Criticality_Id
                                              )
@@ -42,7 +42,7 @@ namespace InventoryTool.UI.Controllers
                 "&Color_Id=" + Color_Id +
                 "&Material_Id=" + Material_Id +
                 "&Criticality_Id=" + Criticality_Id
-                )                ;
+                );
             return PartialView("_FilterList", partFilterList);            
         }
 

@@ -32,16 +32,13 @@
 
                 //Handle the Find Filter click event.
                 $('#btnFind').on('click', function () {
-                    debugger;
                     PartStockjs.GetFilterresult();
                 });
             },
 
             GetFilterresult: function () {
-                debugger;
-                var urlPath
-
-                var Part_Type_Id, Outsource_Type_Id, Part_Code, Part_Name, Unit_Id 
+               
+                var urlPath, Part_Type_Id, Outsource_Type_Id, Part_Code, Part_Name, Unit_Id 
 	                ,Category_Id, Color_Id, Material_Id, Criticality_Id 
 
                 Part_Type_Id = $("#ddlPart_Type").find("option:selected").val();
@@ -94,10 +91,8 @@
                         Criticality_Id = '';
                     }
                 }
-
-              
+                
                 urlPath = "/PartStock/GetPartByFilter";
-
                 $.ajax({
                     type: "Get",
                     cache: false,
@@ -120,12 +115,19 @@
                         });
                     },
                     complete: function () {
-                       
+                        Common.showDialog.hide();
                     },
                     success: function (result) {
-
+                        debugger;
+                        if (result.operationstatuscode == 3) {
+                            fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-success');
+                            Partjs.fn_ReloadPartGrid();
+                        }
+                        else {
+                            fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-danger');
+                        }
                     },
-                    error: function () {
+                    error: function (ex) {
                         alert(ex.responseText);
                     }
                 });
