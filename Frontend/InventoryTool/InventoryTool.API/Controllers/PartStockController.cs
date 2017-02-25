@@ -26,7 +26,7 @@ namespace InventoryTool.API.Controllers
             }
         }
 
-        [Route("PartByFilter/{part_Type_Id:int?}/{outsource_Type_Id:int?}/{part_Code}/{part_Name}/{unit_Id:int?}/{category_Id:int?}/{color_Id:int?}/{material_Id:int?}/{criticality_Id:int?}")]
+        [Route("PartByFilter/{part_Type_Id:int?}/{outsource_Type_Id:int?}/{part_Code?}/{part_Name?}/{unit_Id:int?}/{category_Id:int?}/{color_Id:int?}/{material_Id:int?}/{criticality_Id:int?}")]
         [HttpGet]
         public List<GetPartByFilter_Result> GetPartByFilter(int? part_Type_Id, int? outsource_Type_Id, string part_Code, string part_Name, int? unit_Id, int? category_Id, int? color_Id, int? material_Id, int? criticality_Id)
         {

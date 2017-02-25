@@ -36,6 +36,7 @@ namespace InventoryTool.UI.Controllers
                 List<GetPartByFilter_Result> partFilterList = PartStockProxy.Instance.GetPartByFilter(ConfigExtension.GetWebApiUri,
                 "api/PartStock/PartByFilter" + "?part_Type_Id=" + Part_Type_Id
                 + "&Outsource_Type_Id=" + Outsource_Type_Id +
+                "&Part_Code=" + Part_Code +
                 "&Part_Name=" + Part_Name +
                 "&Unit_Id=" + Unit_Id +
                 "&Category_Id=" + Category_Id +
