@@ -30,6 +30,7 @@ SELECT [Part_Id]
 	  ,M.Material_Name
 	  ,Cl.Criticality_Id
 	  ,Cl.Criticality_Name
+	  Into #Part
   FROM M_Part PA 
        inner join LK_Material M on M.Material_Id = PA.Material_Id and M.IsActive = 1
 	   inner join LK_Unit U on U.Unit_Id = PA.Unit_Id and U.IsActive = 1
@@ -74,6 +75,18 @@ SELECT [Part_Id]
 		AND (
               @part_Name IS NULL
               OR part_Name LIKE '%' + @part_Name + '%'                     
-              )
-                       
+              )                       
   order by Part_Name
+
+
+  select P.*
+  --,temp.Balance_Quantity 
+  from #Part P
+  left join 
+  (
+	  select Part_Id
+	  ,(sum(In_Quantity) - sum(Out_Quantity)) as Balance_Quantity  
+	  from TX_Part_Stock
+	  group by Part_Id
+  ) temp 
+  on P.Part_Id = temp.Part_Id
