@@ -239,5 +239,46 @@ namespace InventoryTool.Provider
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePartStock", part_IdParameter, store_IdParameter, dateParameter, in_QuantityParameter, out_QuantityParameter, descriptionParameter, modifiedByParameter, return_Status);
         }
+    
+        public virtual ObjectResult<GetPartByFilter_Result> GetPartByFilter(Nullable<int> part_Type_Id, Nullable<int> outsource_Type_Id, string part_Code, string part_Name, Nullable<int> unit_Id, Nullable<int> category_Id, Nullable<int> color_Id, Nullable<int> material_Id, Nullable<int> criticality_Id)
+        {
+            var part_Type_IdParameter = part_Type_Id.HasValue ?
+                new ObjectParameter("Part_Type_Id", part_Type_Id) :
+                new ObjectParameter("Part_Type_Id", typeof(int));
+    
+            var outsource_Type_IdParameter = outsource_Type_Id.HasValue ?
+                new ObjectParameter("Outsource_Type_Id", outsource_Type_Id) :
+                new ObjectParameter("Outsource_Type_Id", typeof(int));
+    
+            var part_CodeParameter = part_Code != null ?
+                new ObjectParameter("Part_Code", part_Code) :
+                new ObjectParameter("Part_Code", typeof(string));
+    
+            var part_NameParameter = part_Name != null ?
+                new ObjectParameter("Part_Name", part_Name) :
+                new ObjectParameter("Part_Name", typeof(string));
+    
+            var unit_IdParameter = unit_Id.HasValue ?
+                new ObjectParameter("Unit_Id", unit_Id) :
+                new ObjectParameter("Unit_Id", typeof(int));
+    
+            var category_IdParameter = category_Id.HasValue ?
+                new ObjectParameter("Category_Id", category_Id) :
+                new ObjectParameter("Category_Id", typeof(int));
+    
+            var color_IdParameter = color_Id.HasValue ?
+                new ObjectParameter("Color_Id", color_Id) :
+                new ObjectParameter("Color_Id", typeof(int));
+    
+            var material_IdParameter = material_Id.HasValue ?
+                new ObjectParameter("Material_Id", material_Id) :
+                new ObjectParameter("Material_Id", typeof(int));
+    
+            var criticality_IdParameter = criticality_Id.HasValue ?
+                new ObjectParameter("Criticality_Id", criticality_Id) :
+                new ObjectParameter("Criticality_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPartByFilter_Result>("GetPartByFilter", part_Type_IdParameter, outsource_Type_IdParameter, part_CodeParameter, part_NameParameter, unit_IdParameter, category_IdParameter, color_IdParameter, material_IdParameter, criticality_IdParameter);
+        }
     }
 }

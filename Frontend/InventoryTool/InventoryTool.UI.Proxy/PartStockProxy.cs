@@ -41,5 +41,11 @@ namespace InventoryTool.UI.Proxy
             var result = ProxyHelper.PostRequestToApi(apiUri, requestUri, PartStock);
             return JsonConvert.DeserializeObject<int>(result);
         }
+
+        public List<GetPartByFilter_Result> GetPartByFilter(string apiUri, string requestUri)
+        {
+            var result = ProxyHelper.GetResponseFromApi(apiUri, requestUri);
+            return JsonConvert.DeserializeObject<List<GetPartByFilter_Result>>(result);
+        }
     }
 }

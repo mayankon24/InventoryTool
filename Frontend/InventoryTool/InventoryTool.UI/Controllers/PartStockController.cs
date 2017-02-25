@@ -27,5 +27,24 @@ namespace InventoryTool.UI.Controllers
            
             return View("PartStockIndex", _VMPartStock);           
         }
+
+        public ActionResult GetPartByFilter(int Part_Type_Id
+                                             , int? Outsource_Type_Id, string Part_Code, string Part_Name, int? Unit_Id, int? Category_Id,
+                                             int? Color_Id, int? Material_Id, int? Criticality_Id
+                                             )
+        {
+                List<GetPartByFilter_Result> partFilterList = PartStockProxy.Instance.GetPartByFilter(ConfigExtension.GetWebApiUri,
+                "api/PartStock/PartByFilter" + "?part_Type_Id=" + Part_Type_Id
+                + "&Outsource_Type_Id=" + Outsource_Type_Id +
+                "&Part_Name=" + Part_Name +
+                "&Unit_Id=" + Unit_Id +
+                "&Category_Id=" + Category_Id +
+                "&Color_Id=" + Color_Id +
+                "&Material_Id=" + Material_Id +
+                "&Criticality_Id=" + Criticality_Id
+                )                ;
+            return PartialView("_FilterList", partFilterList);            
+        }
+
     }
 }

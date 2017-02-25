@@ -13,6 +13,10 @@
     </div>
 </div>
 
+<div id="grdFilterList" style="min-height :100px; max-height: 550px; overflow-y: scroll;">
+    @*Bind _LineItemList using ajax call*@
+</div>
+
 
 
 <script type="text/javascript">
@@ -26,10 +30,109 @@
             },
             LoadPartStock: function () {
 
-                
+                //Handle the Find Filter click event.
+                $('#btnFind').on('click', function () {
+                    debugger;
+                    PartStockjs.GetFilterresult();
+                });
             },
 
-            
+            GetFilterresult: function () {
+                debugger;
+                var urlPath
+
+                var Part_Type_Id, Outsource_Type_Id, Part_Code, Part_Name, Unit_Id 
+	                ,Category_Id, Color_Id, Material_Id, Criticality_Id 
+
+                Part_Type_Id = $("#ddlPart_Type").find("option:selected").val();
+                Outsource_Type_Id = $("#ddlOutsource_Type").find("option:selected").val();
+                Part_Code = $("#Part_Code").val();
+                Part_Name = $("#Part_Name").val();
+                Unit_Id = $("#ddlUnit").find("option:selected").val();
+                Category_Id = $("#ddlCategory").find("option:selected").val();
+                Color_Id = $("#ddlColor").find("option:selected").val();
+                Material_Id = $("#ddlMaterial").find("option:selected").val();
+                Criticality_Id = $("#ddlCriticality").find("option:selected").val();
+                
+                if (Part_Code != "") {
+                    Part_Type_Id = '';
+                    Outsource_Type_Id = '';
+                    Part_Name = '';
+                    Unit_Id = '';
+                    Category_Id = '';
+                    Color_Id = '';
+                    Material_Id = '';
+                    Criticality_Id = '';
+                }
+                else {
+                    if ($("#ddlPart_Type").find("option:selected").val() <= 0) {
+                        Part_Type_Id = '';
+                    }
+                    if ($("#ddlOutsource_Type").find("option:selected").val() <= 0) {
+                        Outsource_Type_Id = '';
+                    }
+                    if ($("#ddlUnit").find("option:selected").val() <= 0) {
+                        Unit_Id = '';
+                    }
+                    if ($("#ddlCategory").find("option:selected").val() <= 0) {
+                        Team_Id = '';
+                    }                 
+
+                    if (Part_Code == '') {
+                        Part_Code = '';
+                    }
+                    if (Part_Name == '') {
+                        Part_Name = '';
+                    }
+                    if ($("#ddlColor").find("option:selected").val() <= 0) {
+                        Color_Id = '';
+                    }
+                    if ($("#ddlMaterial").find("option:selected").val() <= 0) {
+                        Material_Id = '';
+                    }
+                    if ($("#ddlCriticality_Id").find("option:selected").val() <= 0) {
+                        Criticality_Id = '';
+                    }
+                }
+
+              
+                urlPath = "/PartStock/GetPartByFilter";
+
+                ajaxRequest = $.ajax({
+                    type: "Get",
+                    cache: false,
+                    url: urlPath,
+                    data: {
+                        Part_Type_Id: Part_Type_Id,
+                        Outsource_Type_Id: Outsource_Type_Id,
+                        Part_Code: Part_Code,
+                        Part_Name: Part_Name,
+                        Unit_Id: Unit_Id,
+                        Category_Id: Category_Id,
+                        Color_Id: Color_Id,
+                        Material_Id: Priority_Id,
+                        Criticality_Id: Criticality_Id
+                    },
+                    beforeSend: function () {
+                        Common.showDialog.show('Please wait....', {
+                            dialogSize: 'sm',
+                            progressType: 'warning'
+                        });
+                    },
+                    complete: function () {
+                        budgetsummaryjs.ReinitiateDataTable('tblbudgetList');
+                        Common.showDialog.hide();
+                    },
+                    success: function (result) {
+
+                       
+
+                    },
+                    error: function () {
+                        
+                    }
+                });
+            },
         }
         PartStockjs.init();
     });

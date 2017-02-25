@@ -77,6 +77,17 @@
         <Function Name="GetAllProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllUnit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPartByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Part_Type_Id" Type="int" Mode="In" />
+          <Parameter Name="Outsource_Type_Id" Type="int" Mode="In" />
+          <Parameter Name="Part_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="Part_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Unit_Id" Type="int" Mode="In" />
+          <Parameter Name="Category_Id" Type="int" Mode="In" />
+          <Parameter Name="Color_Id" Type="int" Mode="In" />
+          <Parameter Name="Material_Id" Type="int" Mode="In" />
+          <Parameter Name="Criticality_Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertErrorLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Window_Id" Type="int" Mode="In" />
           <Parameter Name="Source" Type="nvarchar" Mode="In" />
@@ -187,6 +198,17 @@
             <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPartByFilter" ReturnType="Collection(InventoryToolDBModel.GetPartByFilter_Result)">
+            <Parameter Name="Part_Type_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Outsource_Type_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Part_Code" Mode="In" Type="String" />
+            <Parameter Name="Part_Name" Mode="In" Type="String" />
+            <Parameter Name="Unit_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Category_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Color_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Material_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Criticality_Id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
@@ -299,6 +321,25 @@
           <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
+        <ComplexType Name="GetPartByFilter_Result">
+          <Property Type="Int32" Name="Part_Id" Nullable="false" />
+          <Property Type="Int32" Name="Part_Type_Id" Nullable="false" />
+          <Property Type="String" Name="Part_Type" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Outsource_Type_Id" Nullable="false" />
+          <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Part_Code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Part_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Unit_Id" Nullable="false" />
+          <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Category_Id" Nullable="false" />
+          <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Color_Id" Nullable="false" />
+          <Property Type="String" Name="Color_Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Material_Id" Nullable="false" />
+          <Property Type="String" Name="Material_Name" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Criticality_Id" Nullable="false" />
+          <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -464,6 +505,29 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdatePartStock" FunctionName="InventoryToolDBModel.Store.UpdatePartStock" />
+          <FunctionImportMapping FunctionImportName="GetPartByFilter" FunctionName="InventoryToolDBModel.Store.GetPartByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetPartByFilter_Result">
+                <ScalarProperty Name="Part_Id" ColumnName="Part_Id" />
+                <ScalarProperty Name="Part_Type_Id" ColumnName="Part_Type_Id" />
+                <ScalarProperty Name="Part_Type" ColumnName="Part_Type" />
+                <ScalarProperty Name="Outsource_Type_Id" ColumnName="Outsource_Type_Id" />
+                <ScalarProperty Name="Outsource_Type" ColumnName="Outsource_Type" />
+                <ScalarProperty Name="Part_Code" ColumnName="Part_Code" />
+                <ScalarProperty Name="Part_Name" ColumnName="Part_Name" />
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Color_Id" ColumnName="Color_Id" />
+                <ScalarProperty Name="Color_Name" ColumnName="Color_Name" />
+                <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
+                <ScalarProperty Name="Material_Name" ColumnName="Material_Name" />
+                <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
+                <ScalarProperty Name="Criticality_Name" ColumnName="Criticality_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
