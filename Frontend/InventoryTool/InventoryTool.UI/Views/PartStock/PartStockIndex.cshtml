@@ -13,9 +13,12 @@
     </div>
 </div>
 
-<div id="grdFilterList" style="min-height :500px; max-height: 550px; overflow-y: scroll;">
+<div id="grdFilterList" style="min-height :400px; max-height: 550px; overflow-y: scroll;">
     @*@Html.Partial("_FilterList", Model.PartList)*@
     @*Bind _LineItemList using ajax call*@
+</div>
+<div class="container" style="width:100%;">
+    @Html.Partial("_StockEntry", Model)  
 </div>
 
 
@@ -34,6 +37,9 @@
                 //Handle the Find Filter click event.
                 $('#btnFind').on('click', function () {
                     PartStockjs.GetFilterresult();
+                });
+                $('#btnUpdateStock').on('click', function () {
+                    PartStockjs.UpdateStock();
                 });
             },
 
@@ -92,6 +98,47 @@
                         Criticality_Id = '';
                     }
                 }
+                
+                urlPath = "/PartStock/GetPartByFilter";
+                $.ajax({
+                    type: "Get",
+                    cache: false,
+                    url: urlPath,
+                    data: {
+                        Part_Type_Id: Part_Type_Id,
+                        Outsource_Type_Id: Outsource_Type_Id,
+                        Part_Code: Part_Code,
+                        Part_Name: Part_Name,
+                        Unit_Id: Unit_Id,
+                        Category_Id: Category_Id,
+                        Color_Id: Color_Id,
+                        Material_Id: Material_Id,
+                        Criticality_Id: Criticality_Id
+                    },
+                    beforeSend: function () {
+                        Common.showDialog.show('Please wait....', {
+                            dialogSize: 'sm',
+                            progressType: 'warning'
+                        });
+                    },
+                    complete: function () {
+                        Common.showDialog.hide();
+                    },
+                    success: function (result) {
+                        debugger;
+                        $("#grdFilterList").html('');
+                        $("#grdFilterList").html(result);
+                    },
+                    error: function (ex) {
+                        alert(ex.responseText);
+                    }
+                });
+            },
+            UpdateStock: function () {
+
+                var urlPath, Part_Id, Store_Id, Quantity, Decription
+
+                Part_Type_Id = $("#ddlPart_Type").find("option:selected").val();
                 
                 urlPath = "/PartStock/GetPartByFilter";
                 $.ajax({

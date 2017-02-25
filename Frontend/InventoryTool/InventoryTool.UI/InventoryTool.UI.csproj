@@ -657,6 +657,7 @@
     <Content Include="Views\PartStock\PartStockIndex.cshtml" />
     <Content Include="Views\PartStock\_FilterPanel.cshtml" />
     <Content Include="Views\PartStock\_FilterList.cshtml" />
+    <Content Include="Views\PartStock\_StockEntry.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

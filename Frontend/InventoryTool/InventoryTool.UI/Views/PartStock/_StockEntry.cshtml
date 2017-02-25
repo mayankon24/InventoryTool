@@ -1,0 +1,27 @@
+﻿@model InventoryTool.Model.VMPartStock
+
+<div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Store</label>
+        @Html.DropDownList("ddlStore", (new SelectList(Model.StoreList, "Store_Id", "Store_Name")), "Select Store", new { @class = " form-control" })
+    </div> 
+    <div>
+        @*@foreach (var item in Model)
+            {
+            @Html.RadioButtonFor(m => m.item, "Yes") @:Yes
+            @Html.RadioButtonFor(m => m.item, "No") @:No
+            }*@
+    </div>  
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Quantity</label>
+        <input type="text" id="Quantity" class="form-control" placeholder="Quantity" style="width:150px;">
+    </div>
+    <div style="float: left;  margin: 0px 8px;">
+        <label>Description</label>
+        <input type="text" id="Description" class="form-control" placeholder="Description" style="width:300px;">
+    </div>
+   
+    <div style="float: left;  margin: 30px 8px;">
+        <button type="button" id="btnUpdateStock">Add</button>
+    </div>
+</div>

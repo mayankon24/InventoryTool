@@ -30,6 +30,21 @@ namespace InventoryTool.API.Controllers
             }
         }
 
+        [Route("Store")]
+        [HttpGet]
+        public List<GetAllStore_Result> GetAllStore()
+        {
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                var RetVal = entity.GetAllStore().ToList().Select(s => new GetAllStore_Result
+                {
+                    Store_Id = s.Store_Id,
+                    Store_Name = s.Store_Name
+                }).ToList();
+                return RetVal;
+            }
+        }
+
 
         [Route("Color")]
         [HttpGet]

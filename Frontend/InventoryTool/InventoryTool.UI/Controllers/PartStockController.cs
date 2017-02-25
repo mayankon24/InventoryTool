@@ -15,8 +15,8 @@ namespace InventoryTool.UI.Controllers
         public ActionResult PartStockIndex()
         {
             VMPartStock _VMPartStock = new VMPartStock();
-
             _VMPartStock.PartList = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri, "api/Part/AllPart");
+            _VMPartStock.StoreList = LookupProxy.Instance.GetAllStore(ConfigExtension.GetWebApiUri, "api/Lookup/Store");            
             _VMPartStock.MaterialList = LookupProxy.Instance.GetAllMaterial(ConfigExtension.GetWebApiUri, "api/Lookup/Material");
             _VMPartStock.CriticalityList = LookupProxy.Instance.GetAllCriticality(ConfigExtension.GetWebApiUri, "api/Lookup/Criticality");
             _VMPartStock.OutsourceTypeList = LookupProxy.Instance.GetAllOutsourceType(ConfigExtension.GetWebApiUri, "api/Lookup/OutsourceType");
@@ -46,6 +46,5 @@ namespace InventoryTool.UI.Controllers
                 );
             return PartialView("_FilterList", partFilterList);            
         }
-
     }
 }
