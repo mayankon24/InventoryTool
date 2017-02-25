@@ -98,7 +98,7 @@
               
                 urlPath = "/PartStock/GetPartByFilter";
 
-                ajaxRequest = $.ajax({
+                $.ajax({
                     type: "Get",
                     cache: false,
                     url: urlPath,
@@ -110,7 +110,7 @@
                         Unit_Id: Unit_Id,
                         Category_Id: Category_Id,
                         Color_Id: Color_Id,
-                        Material_Id: Priority_Id,
+                        Material_Id: Material_Id,
                         Criticality_Id: Criticality_Id
                     },
                     beforeSend: function () {
@@ -120,16 +120,13 @@
                         });
                     },
                     complete: function () {
-                        budgetsummaryjs.ReinitiateDataTable('tblbudgetList');
-                        Common.showDialog.hide();
+                       
                     },
                     success: function (result) {
 
-                       
-
                     },
                     error: function () {
-                        
+                        alert(ex.responseText);
                     }
                 });
             },
