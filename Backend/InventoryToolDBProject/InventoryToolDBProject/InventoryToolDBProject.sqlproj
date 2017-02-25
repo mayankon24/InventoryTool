@@ -107,6 +107,7 @@
     <Build Include="dbo\Stored Procedures\GetAllCriticality.sql" />
     <Build Include="dbo\Tables\TX_Part_Stock.sql" />
     <Build Include="dbo\Stored Procedures\UpdatePartStock.sql" />
+    <Build Include="dbo\Stored Procedures\GetPartByFilter.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InventortCompare_Azure.scmp" />
