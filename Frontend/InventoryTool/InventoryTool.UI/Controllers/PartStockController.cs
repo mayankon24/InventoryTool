@@ -46,5 +46,54 @@ namespace InventoryTool.UI.Controllers
                 );
             return PartialView("_FilterList", partFilterList);            
         }
+
+        public ActionResult UpdatePartStock(TX_Part_Stock PartStock)
+        {
+            UserResultModel resultdata = new UserResultModel();
+            if (PartStock != null)
+            {
+                PartStock.LastModifiedBy = UserExtended.GetCurrentUserAlias();
+            }
+
+            try
+            {
+                int OperationStatus = PartStockProxy.Instance.UpdatePartStock(ConfigExtension.GetWebApiUri,
+                    "api/PartStock/UpdatePartStock", PartStock);
+
+                if (OperationStatus == (int)operation_status.Insert)
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Insert;//message when inserted.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgInsert");
+
+                }
+                else if (OperationStatus == (int)operation_status.Update)
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Update;//message when Update.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgUpdate");
+                }
+                else if (OperationStatus == (int)operation_status.Duplicate_Record)
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Duplicate_Record;//message when duplicate record.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgDuplicate");
+                }
+                else if (OperationStatus == (int)operation_status.Update_Prevent)
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Duplicate_Record;//message when duplicate record.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgUpdatePrevent");
+                }
+                else
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Error;//message when duplicate record.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgError");
+                }
+            }
+            catch (Exception ex)
+            {
+                resultdata.operationstatuscode = (int)operation_status.Error;//message when duplicate record.
+                resultdata.messagedata = UserMessage.ResourceManager.GetString("msgError");
+                resultdata.message = ex.Message;
+            }
+            return Json(resultdata, JsonRequestBehavior.AllowGet);
+        }
     }
 }

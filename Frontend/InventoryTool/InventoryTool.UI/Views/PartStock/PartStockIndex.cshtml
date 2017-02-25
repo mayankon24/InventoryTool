@@ -18,6 +18,8 @@
     @*Bind _LineItemList using ajax call*@
 </div>
 <div class="container" style="width:100%;">
+    <div id="divDisplayPartMessages">
+    </div>
     @Html.Partial("_StockEntry", Model)  
 </div>
 
@@ -135,26 +137,23 @@
                 });
             },
             UpdateStock: function () {
-
+                debugger;
                 var urlPath, Part_Id, Store_Id, Quantity, Decription
 
-                Part_Type_Id = $("#ddlPart_Type").find("option:selected").val();
+                var row = $("#grdFilterList").find("#tblFilterList").find("tr.selected");
+                var data = $(row);                
+                var Part_Id = $(data).attr("data-Part_Id");
+               
                 
-                urlPath = "/PartStock/GetPartByFilter";
+                urlPath = "/PartStock/UpdatePartStock";
                 $.ajax({
                     type: "Get",
                     cache: false,
                     url: urlPath,
                     data: {
-                        Part_Type_Id: Part_Type_Id,
-                        Outsource_Type_Id: Outsource_Type_Id,
-                        Part_Code: Part_Code,
-                        Part_Name: Part_Name,
-                        Unit_Id: Unit_Id,
-                        Category_Id: Category_Id,
-                        Color_Id: Color_Id,
-                        Material_Id: Material_Id,
-                        Criticality_Id: Criticality_Id
+                        Part_Id: Part_Id,
+                        Store_Id: $("#ddlStore").val(),
+                        Description: $("#Description").val(),
                     },
                     beforeSend: function () {
                         Common.showDialog.show('Please wait....', {
@@ -166,9 +165,13 @@
                         Common.showDialog.hide();
                     },
                     success: function (result) {
-                        debugger;
-                        $("#grdFilterList").html('');
-                        $("#grdFilterList").html(result);
+                        if (result.operationstatuscode == 3) {
+                            fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-success');
+                            Partjs.fn_ReloadPartGrid();
+                        }
+                        else {
+                            fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-danger');
+                        }
                     },
                     error: function (ex) {
                         alert(ex.responseText);
