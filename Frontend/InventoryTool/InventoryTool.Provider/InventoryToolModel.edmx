@@ -339,6 +339,7 @@
           <Property Type="String" Name="Material_Name" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="Criticality_Id" Nullable="false" />
           <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Balance_Quantity" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -525,6 +526,7 @@
                 <ScalarProperty Name="Material_Name" ColumnName="Material_Name" />
                 <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
                 <ScalarProperty Name="Criticality_Name" ColumnName="Criticality_Name" />
+                <ScalarProperty Name="Balance_Quantity" ColumnName="Balance_Quantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

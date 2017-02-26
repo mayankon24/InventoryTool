@@ -50,8 +50,8 @@ namespace InventoryTool.API.Controllers
                     Part_Type = s.Part_Type,
                     Unit_Name = s.Unit_Name,
                     Criticality_Id = s.Criticality_Id,
-                    Criticality_Name = s.Criticality_Name
-
+                    Criticality_Name = s.Criticality_Name,
+                    Balance_Quantity = s.Balance_Quantity
                 }).ToList();
                 return RetVal;
             }

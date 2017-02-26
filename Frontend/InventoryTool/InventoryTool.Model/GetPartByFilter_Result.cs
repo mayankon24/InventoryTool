@@ -30,5 +30,6 @@ namespace InventoryTool.Model
         public string Material_Name { get; set; }
         public int Criticality_Id { get; set; }
         public string Criticality_Name { get; set; }
+        public Nullable<int> Balance_Quantity { get; set; }
     }
 }

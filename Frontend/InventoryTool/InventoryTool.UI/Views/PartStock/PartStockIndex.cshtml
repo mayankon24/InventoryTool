@@ -194,6 +194,7 @@
                     success: function (result) {                       
                         if (result.operationstatuscode == 1) {
                             fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-success');                           
+                            PartStockjs.GetFilterresult();
                         }
                         else {
                             fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-danger');
