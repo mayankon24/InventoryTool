@@ -146,8 +146,14 @@
                 Part_Id = $(data).attr("data-Part_Id");
                 Store_Id = $("#ddlStore").val(),
                 Quantity = $("#Quantity").val();
-                In_Quantity = Quantity;
-                Out_Quantity = '';
+                if ($("#rdInput").is(":checked")) {
+                    In_Quantity = Quantity;
+                    Out_Quantity = '';
+                }
+                else {
+                    In_Quantity = '';
+                    Out_Quantity = Quantity;
+                }                    
                 Date = $("#Date").val();
 
                 //put validation here
@@ -157,6 +163,9 @@
                     }
                 if (Date == "") {
                     strValidationMsglists = strValidationMsglists + "<li>Date is required.</li>";
+                }
+                if (Part_Id < 1 || Part_Id == '' || Part_Id === "undefined") {
+                    strValidationMsglists = strValidationMsglists + "<li>Select a valid Store.</li>";
                 }
                 if (Store_Id < 1) {
                     strValidationMsglists = strValidationMsglists + "<li>Select a valid Store.</li>";

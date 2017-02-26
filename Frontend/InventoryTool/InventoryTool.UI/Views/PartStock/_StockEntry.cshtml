@@ -5,12 +5,11 @@
         <label>Store</label>
         @Html.DropDownList("ddlStore", (new SelectList(Model.StoreList, "Store_Id", "Store_Name")), "Select Store", new { @class = " form-control" })
     </div> 
-    <div>
-        @*@foreach (var item in Model)
-            {
-            @Html.RadioButtonFor(m => m.item, "Yes") @:Yes
-            @Html.RadioButtonFor(m => m.item, "No") @:No
-            }*@
+    <div style="float: left;  margin: 20px 8px;">
+        <form action="">
+            <input type="radio" id="rdInput" name="rdbutton" value="Input" checked="checked">Input<br>
+            <input type="radio" id="rdOutput" name="rdbutton" value="Output">Output
+        </form>
     </div> 
     <div style="float: left;  margin: 0px 8px;">
         <label>Date</label>       
