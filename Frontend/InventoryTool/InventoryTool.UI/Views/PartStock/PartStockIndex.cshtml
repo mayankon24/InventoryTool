@@ -156,16 +156,15 @@
                 }                    
                 Date = $("#Date").val();
 
-                //put validation here
-
+                //put validation here                
                 if ((Quantity == "") || (fn_numbervalidation(Quantity))) {
-                    strValidationMsglists = strValidationMsglists + "<li>Quantity is required.</li>";
+                    strValidationMsglists = strValidationMsglists + "<li>Quantity is required and it should be numeric.</li>";
                     }
                 if (Date == "") {
                     strValidationMsglists = strValidationMsglists + "<li>Date is required.</li>";
                 }
-                if (Part_Id < 1 || Part_Id == '' || Part_Id === "undefined") {
-                    strValidationMsglists = strValidationMsglists + "<li>Select a valid Store.</li>";
+                if (Part_Id < 1 || Part_Id == '' || typeof  Part_Id === "undefined") {
+                    strValidationMsglists = strValidationMsglists + "<li>Select a valid Part from table.</li>";
                 }
                 if (Store_Id < 1) {
                     strValidationMsglists = strValidationMsglists + "<li>Select a valid Store.</li>";
