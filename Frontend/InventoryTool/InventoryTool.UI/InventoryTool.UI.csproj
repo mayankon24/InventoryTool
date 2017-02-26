@@ -523,7 +523,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\BudgetUI.pubxml" />
-    <None Include="Properties\PublishProfiles\inventorytoolui - Web Deploy.pubxml" />
     <Content Include="Scripts\ajaxfileupload.css" />
     <Content Include="Scripts\ajaxfileupload.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -603,6 +602,7 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <None Include="Properties\PublishProfiles\inventorytoolui - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\highchecktree.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
