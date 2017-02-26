@@ -13,6 +13,8 @@ CREATE procedure [dbo].[GetPartByFilter]
 	,@criticality_Id int
 )
 as 
+
+SET FMTONLY OFF
 SELECT [Part_Id]
       ,P.Part_Type_Id
 	  ,P.Part_Type
@@ -80,7 +82,7 @@ SELECT [Part_Id]
 
 
   select P.*
-  --,temp.Balance_Quantity 
+  ,isnull(temp.Balance_Quantity ,0) as Balance_Quantity 
   from #Part P
   left join 
   (
