@@ -10,7 +10,8 @@
             <th style="text-align:left">Material</th>
             <th style="text-align:left">Criticality</th>
             <th style="text-align:left">Unit</th> 
-            <th style="text-align:left">Balance</th>          
+            <th style="text-align:left">Balance</th> 
+            <th style="text-align:left">Store Balance</th>          
         </tr>
     </thead>    
     <tbody>
@@ -19,7 +20,7 @@
             foreach (var data in Model)
             {
                 //Display mode row start here
-                <tr data-Part_Id="@data.Part_Id" class="display-mode">
+                <tr data-Part_Id="@data.Part_Id" >
                     <td title="@data.Part_Code" >
                         @data.Part_Code
                     </td>
@@ -49,13 +50,27 @@
                     </td> 
                     <td title="@data.Balance_Quantity">
                         @data.Balance_Quantity
-                    </td>                   
-                </tr>
+                    </td> 
+                    <td style="width:2%">
+                        <a >show</a>
+                    </td>
+                 </tr>
             }
         }
 
     </tbody>
 </table>
+<style>
+    .selected {
+        background: #d9e9f9;
+    }
+</style>
+<script>
+    $("#tblFilterList tbody tr").click(function () {
+        $('#tblFilterList tbody tr').removeClass('selected');
+        $(this).toggleClass('selected');
+    });
+</script>
 
 
 
