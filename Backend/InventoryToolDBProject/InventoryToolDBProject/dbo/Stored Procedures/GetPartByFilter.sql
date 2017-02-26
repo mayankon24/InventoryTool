@@ -1,4 +1,5 @@
 ﻿
+--exec GetPartByFilter null, null, null, null, null, null, null, null, null
 CREATE procedure [dbo].[GetPartByFilter]
 (
 
@@ -87,7 +88,7 @@ SELECT [Part_Id]
   left join 
   (
 	  select Part_Id
-	  ,(sum(In_Quantity) - sum(Out_Quantity)) as Balance_Quantity  
+	  ,(sum(isnull(In_Quantity,0)) - sum(isnull(Out_Quantity,0))) as Balance_Quantity  
 	  from TX_Part_Stock
 	  group by Part_Id
   ) temp 

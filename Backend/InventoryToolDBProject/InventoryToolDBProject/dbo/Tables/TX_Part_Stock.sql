@@ -11,6 +11,10 @@
     [LastModifiedBy]      NVARCHAR (100) NULL,
     [LastModifiedUTCDate] DATETIME       NULL,
     [IsActive]            BIT            NOT NULL,
-    CONSTRAINT [PK_TX_Part_Stock] PRIMARY KEY CLUSTERED ([Part_Stock_Id] ASC)
+    CONSTRAINT [PK_TX_Part_Stock] PRIMARY KEY CLUSTERED ([Part_Stock_Id] ASC),
+    CONSTRAINT [FK_TX_Part_Stock_LK_Store] FOREIGN KEY ([Store_Id]) REFERENCES [dbo].[LK_Store] ([Store_Id]),
+    CONSTRAINT [FK_TX_Part_Stock_M_Part] FOREIGN KEY ([Part_Id]) REFERENCES [dbo].[M_Part] ([Part_Id])
 );
+
+
 
