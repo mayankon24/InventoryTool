@@ -57,6 +57,18 @@
           <Property Name="LastModifiedUTCDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_TX_Part_Stock_M_Part">
+          <End Role="M_Part" Type="Self.M_Part" Multiplicity="0..1" />
+          <End Role="TX_Part_Stock" Type="Self.TX_Part_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Part">
+              <PropertyRef Name="Part_Id" />
+            </Principal>
+            <Dependent Role="TX_Part_Stock">
+              <PropertyRef Name="Part_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="DeletePart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Part_Id" Type="int" Mode="In" />
           <Parameter Name="LastModifiedBy" Type="nvarchar" Mode="In" />
@@ -131,6 +143,10 @@
           <EntitySet Name="M_Part" EntityType="Self.M_Part" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Product" EntityType="Self.M_Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TX_Part_Stock" EntityType="Self.TX_Part_Stock" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TX_Part_Stock_M_Part" Association="Self.FK_TX_Part_Stock_M_Part">
+            <End Role="M_Part" EntitySet="M_Part" />
+            <End Role="TX_Part_Stock" EntitySet="TX_Part_Stock" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -210,6 +226,10 @@
             <Parameter Name="Material_Id" Mode="In" Type="Int32" />
             <Parameter Name="Criticality_Id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_TX_Part_Stock_M_Part" Association="InventoryToolDBModel.FK_TX_Part_Stock_M_Part">
+            <End Role="M_Part" EntitySet="M_Part" />
+            <End Role="TX_Part_Stock" EntitySet="TX_Part_Stock" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
@@ -237,24 +257,25 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Unit_Id" Type="Int32" />
           <Property Name="Criticality_Id" Type="Int32" />
+          <NavigationProperty Name="TX_Part_Stock" Relationship="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" FromRole="M_Part" ToRole="TX_Part_Stock" />
         </EntityType>
         <ComplexType Name="GetAllPart_Result">
           <Property Type="Int32" Name="Part_Id" Nullable="false" />
-          <Property Type="Int32" Name="Part_Type_Id" Nullable="false" />
-          <Property Type="Int32" Name="Outsource_Type_Id" Nullable="false" />
+          <Property Type="Int32" Name="Part_Type_Id" Nullable="true" />
+          <Property Type="Int32" Name="Outsource_Type_Id" Nullable="true" />
           <Property Type="String" Name="Part_Code" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Part_Name" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Category_Id" Nullable="false" />
-          <Property Type="Int32" Name="Color_Id" Nullable="false" />
-          <Property Type="Int32" Name="Material_Id" Nullable="false" />
+          <Property Type="Int32" Name="Category_Id" Nullable="true" />
+          <Property Type="Int32" Name="Color_Id" Nullable="true" />
+          <Property Type="Int32" Name="Material_Id" Nullable="true" />
           <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Color_Name" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Material_Name" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="Unit_Id" Nullable="false" />
+          <Property Type="Int32" Name="Unit_Id" Nullable="true" />
           <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Part_Type" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Criticality_Id" Nullable="false" />
+          <Property Type="Int32" Name="Criticality_Id" Nullable="true" />
           <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
           </ComplexType>
         <EntityType Name="M_Product">
@@ -320,27 +341,40 @@
           <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="M_Part" Relationship="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" FromRole="TX_Part_Stock" ToRole="M_Part" />
         </EntityType>
         <ComplexType Name="GetPartByFilter_Result">
           <Property Type="Int32" Name="Part_Id" Nullable="false" />
-          <Property Type="Int32" Name="Part_Type_Id" Nullable="false" />
+          <Property Type="Int32" Name="Part_Type_Id" Nullable="true" />
           <Property Type="String" Name="Part_Type" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Outsource_Type_Id" Nullable="false" />
+          <Property Type="Int32" Name="Outsource_Type_Id" Nullable="true" />
           <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Part_Code" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Part_Name" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Unit_Id" Nullable="false" />
+          <Property Type="Int32" Name="Unit_Id" Nullable="true" />
           <Property Type="String" Name="Unit_Name" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Category_Id" Nullable="false" />
+          <Property Type="Int32" Name="Category_Id" Nullable="true" />
           <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Color_Id" Nullable="false" />
+          <Property Type="Int32" Name="Color_Id" Nullable="true" />
           <Property Type="String" Name="Color_Name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Material_Id" Nullable="false" />
+          <Property Type="Int32" Name="Material_Id" Nullable="true" />
           <Property Type="String" Name="Material_Name" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="Criticality_Id" Nullable="false" />
+          <Property Type="Int32" Name="Criticality_Id" Nullable="true" />
           <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Balance_Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Balance_Quantity" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_TX_Part_Stock_M_Part">
+          <End Type="InventoryToolDBModel.M_Part" Role="M_Part" Multiplicity="0..1" />
+          <End Type="InventoryToolDBModel.TX_Part_Stock" Role="TX_Part_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Part">
+              <PropertyRef Name="Part_Id" />
+            </Principal>
+            <Dependent Role="TX_Part_Stock">
+              <PropertyRef Name="Part_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

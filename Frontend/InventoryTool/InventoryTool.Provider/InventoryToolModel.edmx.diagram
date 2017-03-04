@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="InventoryToolDBModel.M_Part" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="InventoryToolDBModel.M_Product" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="InventoryToolDBModel.TX_Part_Stock" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,12 @@ namespace InventoryTool.Model
     
     public partial class M_Part
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public M_Part()
+        {
+            this.TX_Part_Stock = new HashSet<TX_Part_Stock>();
+        }
+    
         public int Part_Id { get; set; }
         public Nullable<int> Part_Type_Id { get; set; }
         public Nullable<int> Outsource_Type_Id { get; set; }
@@ -29,5 +35,8 @@ namespace InventoryTool.Model
         public bool IsActive { get; set; }
         public Nullable<int> Unit_Id { get; set; }
         public Nullable<int> Criticality_Id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TX_Part_Stock> TX_Part_Stock { get; set; }
     }
 }

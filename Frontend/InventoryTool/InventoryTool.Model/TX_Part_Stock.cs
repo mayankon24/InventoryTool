@@ -26,5 +26,7 @@ namespace InventoryTool.Model
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedUTCDate { get; set; }
         public bool IsActive { get; set; }
+    
+        public virtual M_Part M_Part { get; set; }
     }
 }
