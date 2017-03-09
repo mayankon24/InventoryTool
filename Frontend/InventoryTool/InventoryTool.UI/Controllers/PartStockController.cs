@@ -47,18 +47,18 @@ namespace InventoryTool.UI.Controllers
             return PartialView("_FilterList", partFilterList);            
         }
 
-        public ActionResult UpdatePartStock(TX_Part_Stock PartStock)
+        public ActionResult UpdatePartStock(VMAddPartStock AddPartStock)
         {
             UserResultModel resultdata = new UserResultModel();
-            if (PartStock != null)
+            if (AddPartStock != null)
             {
-                PartStock.LastModifiedBy = UserExtended.GetCurrentUserAlias();
+                AddPartStock.LastModifiedBy = UserExtended.GetCurrentUserAlias();
             }
 
             try
             {
                 int OperationStatus = PartStockProxy.Instance.UpdatePartStock(ConfigExtension.GetWebApiUri,
-                    "api/PartStock/UpdatePartStock", PartStock);
+                    "api/PartStock/UpdatePartStock", AddPartStock);
 
                 if (OperationStatus == (int)operation_status.Insert)
                 {

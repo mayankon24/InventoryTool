@@ -1,6 +1,7 @@
 ﻿<table style="width:100%;" cellspacing="0" class="table table-bordred" id="tblFilterList">
     <thead>
         <tr>
+            <th style="text-align:center">select</th>
             <th style="text-align:left">Part Code</th>
             <th style="text-align:left">Name</th>
             <th style="text-align:left">Type</th>
@@ -11,7 +12,8 @@
             <th style="text-align:left">Criticality</th>
             <th style="text-align:left">Unit</th> 
             <th style="text-align:left">Balance</th> 
-            <th style="text-align:left">Store Balance</th>          
+            <th style="text-align:left">Quantity</th> 
+            <th style="text-align:left">Detail</th>          
         </tr>
     </thead>    
     <tbody>
@@ -19,8 +21,10 @@
         {
             foreach (var data in Model)
             {
-                //Display mode row start here
-                <tr data-Part_Id="@data.Part_Id" >
+                 <tr data-Part_Id="@data.Part_Id" >
+                     <td >
+                         <input type="checkbox" id="chkSelect" value="false" />
+                     </td>
                     <td title="@data.Part_Code" >
                         @data.Part_Code
                     </td>
@@ -50,7 +54,10 @@
                     </td> 
                     <td title="@data.Balance_Quantity">
                         @data.Balance_Quantity
-                    </td> 
+                    </td>                     
+                    <td>
+                        <input type="text" id="Quantity" class="form-control" placeholder="QTY" style="width:60px;">
+                    </td>                    
                     <td style="width:2%">
                         <a >show</a>
                     </td>

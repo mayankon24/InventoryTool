@@ -36,9 +36,9 @@ namespace InventoryTool.UI.Proxy
         }
 
 
-        public int UpdatePartStock(string apiUri, string requestUri, TX_Part_Stock PartStock)
+        public int UpdatePartStock(string apiUri, string requestUri, VMAddPartStock AddPartStock)
         {
-            var result = ProxyHelper.PostRequestToApi(apiUri, requestUri, PartStock);
+            var result = ProxyHelper.PostRequestToApi(apiUri, requestUri, AddPartStock);
             return JsonConvert.DeserializeObject<int>(result);
         }
 

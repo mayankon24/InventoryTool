@@ -41,7 +41,7 @@
                     PartStockjs.GetFilterresult();
                 });
                 $('#btnUpdateStock').on('click', function () {
-                    PartStockjs.UpdateStock();
+                   PartStockjs.UpdateStock();
                 });
             },
 
@@ -137,33 +137,35 @@
             },
             UpdateStock: function () {
                 debugger;
-                var urlPath, Part_Id, Store_Id, Quantity, Decription, Store_Id, Description
-                    , In_Quantity, Out_Quantity, Date, Store_Id
+                var urlPath, Store_Id, Decription, IsInput, Date
+                var arrPartQuantity = [];
                 var strValidationMsglists = "";
-
-                var row = $("#grdFilterList").find("#tblFilterList").find("tr.selected");
-                var data = $(row);                
-                Part_Id = $(data).attr("data-Part_Id");
-                Store_Id = $("#ddlStore").val(),
-                Quantity = $("#Quantity").val();
+                   
+                var rows = $("#grdFilterList").find("#tblFilterList").find("tr");
+                rows.each(function (index, rowhtml) {                                    
+                    if ($('input[type="checkbox"]:checked', rowhtml).length == 1) {
+                        var Part_Id = $(rowhtml).attr("data-Part_Id");
+                        var Quantity = $(rowhtml).find('#Quantity').val();
+                        var ObjPart = { 'Part_Id': Part_Id, 'Quantity': Quantity }
+                        arrPartQuantity.push(ObjPart);
+                    }
+                });
+             
+               
+                Store_Id = $("#ddlStore").val();               
                 if ($("#rdInput").is(":checked")) {
-                    In_Quantity = Quantity;
-                    Out_Quantity = '';
+                    IsInput = true;
                 }
                 else {
-                    In_Quantity = '';
-                    Out_Quantity = Quantity;
+                    IsInput = false;
                 }                    
                 Date = $("#Date").val();
 
-                //put validation here                
-                if ((Quantity == "") || (fn_numbervalidation(Quantity))) {
-                    strValidationMsglists = strValidationMsglists + "<li>Quantity is required and it should be numeric.</li>";
-                    }
+                //put validation here 
                 if (Date == "") {
                     strValidationMsglists = strValidationMsglists + "<li>Date is required.</li>";
                 }
-                if (Part_Id < 1 || Part_Id == '' || typeof  Part_Id === "undefined") {
+                if (arrPartQuantity < 1) {
                     strValidationMsglists = strValidationMsglists + "<li>Select a valid Part from table.</li>";
                 }
                 if (Store_Id < 1) {
@@ -182,11 +184,10 @@
                     url: urlPath,
                     data: {
 
-                        Part_Id: Part_Id,
+                        PartQuantity: things,
                         Store_Id: Store_Id,
+                        IsInput: IsInput,
                         Description: $("#Description").val(),
-                        In_Quantity: In_Quantity,
-                        Out_Quantity: Out_Quantity,
                         Date: Date
 
                     },

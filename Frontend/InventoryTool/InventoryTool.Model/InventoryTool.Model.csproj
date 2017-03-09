@@ -112,6 +112,7 @@
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserResultModel.cs" />
+    <Compile Include="VMAddPartStock.cs" />
     <Compile Include="VMPartStock.cs" />
     <Compile Include="VMPart.cs" />
   </ItemGroup>
