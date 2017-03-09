@@ -1,7 +1,7 @@
 ﻿
 --declare @returnStatus INT
 --exec UpdatePart -1,4,2,'256','259',1,1,2,5,2,'', @return_Status = @returnStatus output
-CREATE PROCEDURE [dbo].[UpdatePart] (
+create PROCEDURE [dbo].[UpdatePart] (
 	@Part_Id INT
 	,@Part_Type_Id int
 	,@Outsource_Type_Id int
@@ -23,14 +23,16 @@ BEGIN TRANSACTION
         if exists(select 1 from [M_Part] 
                     where Part_Code = @Part_Code                                             
                                             and isactive = 1 
-                                            and @Part_Id <= 0)
+                                            and @Part_Id <= 0
+											and Part_Code <> 'N/A')
                                             SET @return_status = -2
 
         else if exists (select 1 from [M_Part]  
                     where Part_Code = @Part_Code                                                               
                                             and Isactive = 1 
                                             and @Part_Id > 0
-                                            and Part_Id <> @Part_Id)
+                                            and Part_Id <> @Part_Id
+											and Part_Code <> 'N/A')
 
         SET @return_status = -2
 
