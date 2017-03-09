@@ -14,8 +14,15 @@ CREATE procedure [dbo].[GetPartByFilter]
 	,@Criticality_Id int
 )
 as 
-
 SET FMTONLY OFF
+
+select val
+,seq
+into #PartCode
+from dbo.f_split(@Part_Code, ',')
+
+
+
 SELECT [Part_Id]
       ,P.Part_Type_Id
 	  ,P.Part_Type
@@ -73,7 +80,7 @@ SELECT [Part_Id]
               )       
        AND (
               @part_Code IS NULL
-              OR part_Code LIKE '%' + @part_Code + '%'                     
+              OR part_Code in( select val from #PartCode )                     
               )
 		AND (
               @part_Name IS NULL
@@ -93,3 +100,6 @@ SELECT [Part_Id]
 	  group by Part_Id
   ) temp 
   on P.Part_Id = temp.Part_Id
+
+  --drop table #PartCode
+  --drop table #Part
