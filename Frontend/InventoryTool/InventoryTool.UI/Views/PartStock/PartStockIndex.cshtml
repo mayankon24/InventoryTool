@@ -177,19 +177,21 @@
                     return false;
                 }
 
+                var data = {
+                    PartQuantity: arrPartQuantity,
+                    Store_Id: Store_Id,
+                    IsInput: IsInput,
+                    Description: $("#Description").val(),
+                    Date: Date
+                };
+
                 urlPath = "/PartStock/UpdatePartStock";
                 $.ajax({
                     type: "Get",
                     cache: false,
                     url: urlPath,
                     data: {
-
-                        PartQuantity: things,
-                        Store_Id: Store_Id,
-                        IsInput: IsInput,
-                        Description: $("#Description").val(),
-                        Date: Date
-
+                        GroupData: JSON.stringify(data)
                     },
                     beforeSend: function () {
                         Common.showDialog.show('Please wait....', {

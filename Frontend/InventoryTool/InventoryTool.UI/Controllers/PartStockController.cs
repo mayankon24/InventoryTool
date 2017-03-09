@@ -3,9 +3,11 @@ using InventoryTool.UI.Helper;
 using InventoryTool.UI.Proxy;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace InventoryTool.UI.Controllers
 {
@@ -47,8 +49,10 @@ namespace InventoryTool.UI.Controllers
             return PartialView("_FilterList", partFilterList);            
         }
 
-        public ActionResult UpdatePartStock(VMAddPartStock AddPartStock)
+        public ActionResult UpdatePartStock(string GroupData)
         {
+            JavaScriptSerializer jsSerializer = new JavaScriptSerializer(new SimpleTypeResolver());
+            VMAddPartStock AddPartStock = jsSerializer.Deserialize<VMAddPartStock>(GroupData);//Deserialize list.
             UserResultModel resultdata = new UserResultModel();
             if (AddPartStock != null)
             {
