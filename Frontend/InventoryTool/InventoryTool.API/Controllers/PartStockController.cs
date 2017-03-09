@@ -14,13 +14,13 @@ namespace InventoryTool.API.Controllers
     {
         [Route("UpdatePartStock")]
         [HttpPost]
-        public IHttpActionResult UpdatePartStock(TX_Part_Stock PartStock)
+        public IHttpActionResult UpdatePartStock(VMAddPartStock AddPartStock)
         {
             var return_Status = new ObjectParameter("return_Status", typeof(int));
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
             {
-                entity.UpdatePartStock(PartStock.Part_Id, PartStock.Store_Id, PartStock.Date, PartStock.In_Quantity, PartStock.Out_Quantity
-                                     , PartStock.Description, PartStock.LastModifiedBy
+                entity.UpdatePartStock(AddPartStock.PartQuantity[0].Part_Id, AddPartStock.Store_Id, AddPartStock.Date, AddPartStock.PartQuantity[0].Quantity, 0
+                                     , AddPartStock.Description, AddPartStock.LastModifiedBy
                                      , return_Status);
                 return Ok(return_Status.Value);
             }

@@ -135,8 +135,7 @@
                     }
                 });
             },
-            UpdateStock: function () {
-                debugger;
+            UpdateStock: function () {              
                 var urlPath, Store_Id, Decription, IsInput, Date
                 var arrPartQuantity = [];
                 var strValidationMsglists = "";
@@ -144,8 +143,13 @@
                 var rows = $("#grdFilterList").find("#tblFilterList").find("tr");
                 rows.each(function (index, rowhtml) {                                    
                     if ($('input[type="checkbox"]:checked', rowhtml).length == 1) {
+
                         var Part_Id = $(rowhtml).attr("data-Part_Id");
+                        var Part_Code = $(rowhtml).attr("data-Part_Code");
                         var Quantity = $(rowhtml).find('#Quantity').val();
+                        if ((Quantity == "") || (fn_numbervalidation(Quantity))) {
+                            strValidationMsglists = strValidationMsglists + "<li>Enter valid quantity for part '" + Part_Code + "'.</li>";
+                        }
                         var ObjPart = { 'Part_Id': Part_Id, 'Quantity': Quantity }
                         arrPartQuantity.push(ObjPart);
                     }
