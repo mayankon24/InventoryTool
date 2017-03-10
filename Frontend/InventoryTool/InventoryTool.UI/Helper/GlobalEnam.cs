@@ -49,4 +49,11 @@
         CanDownload,
         CanUpload
     }
+
+    public enum StockType
+    {
+        input = 1,
+        output = 2,
+        transfer = 3
+    }
 }

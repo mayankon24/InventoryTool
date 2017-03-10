@@ -1,17 +1,27 @@
 ﻿@model InventoryTool.Model.VMPartStock
 
 <div>
-    <div style="float: left;  margin: 0px 8px;">
-        <label>Store</label>
-        @Html.DropDownList("ddlStore", (new SelectList(Model.StoreList, "Store_Id", "Store_Name")), "Select Store", new { @class = " form-control" })
-    </div> 
-    <div style="float: left;  margin: 20px 8px;">
+    <div style="float: left; margin: 0px 20px;" ">
         <form action="">
-            <input type="radio" id="rdInput" name="rdbutton" value="Input" checked="checked">Input<br>
-            <input type="radio" id="rdOutput" name="rdbutton" value="Output">Output
+            <input type="radio" id="rdTransfer" name="rdbutton" value="3" checked="checked">Transfer<br>
+            <input type="radio" id="rdInput" name="rdbutton" value="1">Input<br>
+            <input type="radio" id="rdOutput" name="rdbutton" value="2">Output             
         </form>
     </div> 
     <div style="float: left;  margin: 0px 8px;">
+        <label>Department</label>
+        @Html.DropDownList("ddlFromStore", (new SelectList(Model.StoreList, "Store_Id", "Store_Name")), "Select Store", new { @class = " form-control" })
+    </div> 
+    <div id="divToStore">
+        <div style="float: left;  margin: 25px 8px;">
+            <label>===></label>
+        </div>
+        <div style="float: left;  margin: 0px 8px;">
+            <label></label>
+            @Html.DropDownList("ddlToStore", (new SelectList(Model.StoreList, "Store_Id", "Store_Name")), "Select Store", new { @class = " form-control" })
+        </div>
+    </div>
+    <div style="float: left;  margin: 0px 20px;">
         <label>Date</label>       
         <input type="date" data-val="true" id="Date" data-val-required="Date is required" class="form-control" value=@DateTime.Now placeholder="Date" style="width:150px;">
     </div>    
@@ -21,6 +31,6 @@
     </div>
    
     <div style="float: left;  margin: 30px 8px;">
-        <button type="button" id="btnUpdateStock">save</button>
+        <button type="button" style="background-color: #B0EB30; width:100px; " id="btnUpdateStock">save</button>
     </div>
 </div>

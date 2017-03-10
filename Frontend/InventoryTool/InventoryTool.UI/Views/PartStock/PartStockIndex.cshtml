@@ -43,6 +43,10 @@
                 $('#btnUpdateStock').on('click', function () {
                    PartStockjs.UpdateStock();
                 });
+               
+                $('[name="rdbutton"]').on('click', function () {
+                    PartStockjs.ShowHideStore();
+                });
             },
 
             GetFilterresult: function () {
@@ -156,7 +160,9 @@
                 });
              
                
-                Store_Id = $("#ddlStore").val();               
+                FromStore_Id = $("#ddlFromStore").val();
+                ToStore_Id = $("#ddlToStore").val();
+                StokeType = $('[name="rdbutton"]').val();
                 if ($("#rdInput").is(":checked")) {
                     IsInput = true;
                 }
@@ -183,8 +189,9 @@
 
                 var data = {
                     PartQuantity: arrPartQuantity,
-                    Store_Id: Store_Id,
-                    IsInput: IsInput,
+                    FromStore_Id: FromStore_Id,
+                    ToStore_Id: ToStore_Id,
+                    StokeType: StokeType,
                     Description: $("#Description").val(),
                     Date: Date
                 };
@@ -220,6 +227,15 @@
                     }
                 });
             },
+            ShowHideStore: function () {
+
+                if ($("#rdTransfer").is(":checked")) {
+                    $("#divToStore").show();
+                }
+                else {
+                    $("#divToStore").hide();
+                }
+            }
         }
         PartStockjs.init();
     });

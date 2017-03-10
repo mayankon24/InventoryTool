@@ -19,7 +19,7 @@ namespace InventoryTool.API.Controllers
             var return_Status = new ObjectParameter("return_Status", typeof(int));
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
             {
-                entity.UpdatePartStock(AddPartStock.PartQuantity[0].Part_Id, AddPartStock.Store_Id, AddPartStock.Date, AddPartStock.PartQuantity[0].Quantity, 0
+                entity.UpdatePartStock(AddPartStock.PartQuantity[0].Part_Id, AddPartStock.FromStore_Id, AddPartStock.Date, AddPartStock.PartQuantity[0].Quantity, 0
                                      , AddPartStock.Description, AddPartStock.LastModifiedBy
                                      , return_Status);
                 return Ok(return_Status.Value);

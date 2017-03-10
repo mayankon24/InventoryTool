@@ -8,8 +8,9 @@ namespace InventoryTool.Model
 {
     public class VMAddPartStock
     {
-        public int Store_Id { get; set; }
-        public bool  IsInput { get; set; }
+        public int FromStore_Id { get; set; }
+        public int ToStore_Id { get; set; }
+        public int  StokeType { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string LastModifiedBy { get; set; }
