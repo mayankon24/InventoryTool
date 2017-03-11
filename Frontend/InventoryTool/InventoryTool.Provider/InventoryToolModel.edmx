@@ -121,7 +121,6 @@
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
         <Function Name="UpdatePartStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Part_Id" Type="int" Mode="In" />
           <Parameter Name="Store_Id" Type="int" Mode="In" />
           <Parameter Name="Date" Type="datetime" Mode="In" />
           <Parameter Name="In_Quantity" Type="int" Mode="In" />
@@ -206,7 +205,6 @@
           <FunctionImport Name="GetAllStore" ReturnType="Collection(InventoryToolDBModel.GetAllStore_Result)" />
           <EntitySet Name="TX_Part_Stock" EntityType="InventoryToolDBModel.TX_Part_Stock" />
           <FunctionImport Name="UpdatePartStock">
-            <Parameter Name="Part_Id" Mode="In" Type="Int32" />
             <Parameter Name="Store_Id" Mode="In" Type="Int32" />
             <Parameter Name="Date" Mode="In" Type="DateTime" />
             <Parameter Name="In_Quantity" Mode="In" Type="Int32" />

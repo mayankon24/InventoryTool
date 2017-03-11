@@ -52,17 +52,17 @@ namespace InventoryTool.UI.Controllers
         public ActionResult UpdatePartStock(string GroupData)
         {
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer(new SimpleTypeResolver());
-            VMAddPartStock AddPartStock = jsSerializer.Deserialize<VMAddPartStock>(GroupData);//Deserialize list.
+            UpdatePartStock UpdatePartStock = jsSerializer.Deserialize<UpdatePartStock>(GroupData);//Deserialize list.
             UserResultModel resultdata = new UserResultModel();
-            if (AddPartStock != null)
+            if (UpdatePartStock != null)
             {
-                AddPartStock.LastModifiedBy = UserExtended.GetCurrentUserAlias();
+                UpdatePartStock.ModifiedBy = UserExtended.GetCurrentUserAlias();
             }
 
             try
             {
                 int OperationStatus = PartStockProxy.Instance.UpdatePartStock(ConfigExtension.GetWebApiUri,
-                    "api/PartStock/UpdatePartStock", AddPartStock);
+                    "api/PartStock/UpdatePartStock", UpdatePartStock);
 
                 if (OperationStatus == (int)operation_status.Insert)
                 {

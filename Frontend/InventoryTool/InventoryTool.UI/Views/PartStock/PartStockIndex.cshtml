@@ -140,10 +140,10 @@
                 });
             },
             UpdateStock: function () {              
-                var urlPath, Store_Id, Decription, IsInput, Date
+                var urlPath, FromStore_Id, ToStore_Id, Decription, Date, StoreTransferType_Id
                 var arrPartQuantity = [];
                 var strValidationMsglists = "";
-                   
+                debugger;
                 var rows = $("#grdFilterList").find("#tblFilterList").find("tr");
                 rows.each(function (index, rowhtml) {                                    
                     if ($('input[type="checkbox"]:checked', rowhtml).length == 1) {
@@ -157,28 +157,27 @@
                         var ObjPart = { 'Part_Id': Part_Id, 'Quantity': Quantity }
                         arrPartQuantity.push(ObjPart);
                     }
-                });
-             
-               
+                });               
                 FromStore_Id = $("#ddlFromStore").val();
                 ToStore_Id = $("#ddlToStore").val();
-                StokeType = $('[name="rdbutton"]').val();
-                if ($("#rdInput").is(":checked")) {
-                    IsInput = true;
-                }
-                else {
-                    IsInput = false;
-                }                    
+                StoreTransferType_Id = $('input[name=rdbutton]:checked').val();
+                                               
                 Date = $("#Date").val();
 
                 //put validation here 
+                if (ToStore_Id < 1 && StoreTransferType_Id == 3) {
+                    strValidationMsglists = strValidationMsglists + "<li>Select a valid Store to transfer.</li>";                    
+                }
+                else {
+                    ToStore_Id = 0;
+                }
                 if (Date == "") {
                     strValidationMsglists = strValidationMsglists + "<li>Date is required.</li>";
                 }
                 if (arrPartQuantity < 1) {
                     strValidationMsglists = strValidationMsglists + "<li>Select a valid Part from table.</li>";
                 }
-                if (Store_Id < 1) {
+                if (FromStore_Id < 1) {
                     strValidationMsglists = strValidationMsglists + "<li>Select a valid Store.</li>";
                 }
                 if (strValidationMsglists != "") {
@@ -191,7 +190,7 @@
                     PartQuantity: arrPartQuantity,
                     FromStore_Id: FromStore_Id,
                     ToStore_Id: ToStore_Id,
-                    StokeType: StokeType,
+                    StoreTransferType_Id: StoreTransferType_Id,
                     Description: $("#Description").val(),
                     Date: Date
                 };

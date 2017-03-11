@@ -207,12 +207,8 @@ namespace InventoryTool.Provider
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllStore_Result>("GetAllStore");
         }
     
-        public virtual int UpdatePartStock(Nullable<int> part_Id, Nullable<int> store_Id, Nullable<System.DateTime> date, Nullable<int> in_Quantity, Nullable<int> out_Quantity, string description, string modifiedBy, ObjectParameter return_Status)
+        public virtual int UpdatePartStock(Nullable<int> store_Id, Nullable<System.DateTime> date, Nullable<int> in_Quantity, Nullable<int> out_Quantity, string description, string modifiedBy, ObjectParameter return_Status)
         {
-            var part_IdParameter = part_Id.HasValue ?
-                new ObjectParameter("Part_Id", part_Id) :
-                new ObjectParameter("Part_Id", typeof(int));
-    
             var store_IdParameter = store_Id.HasValue ?
                 new ObjectParameter("Store_Id", store_Id) :
                 new ObjectParameter("Store_Id", typeof(int));
@@ -237,7 +233,7 @@ namespace InventoryTool.Provider
                 new ObjectParameter("ModifiedBy", modifiedBy) :
                 new ObjectParameter("ModifiedBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePartStock", part_IdParameter, store_IdParameter, dateParameter, in_QuantityParameter, out_QuantityParameter, descriptionParameter, modifiedByParameter, return_Status);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePartStock", store_IdParameter, dateParameter, in_QuantityParameter, out_QuantityParameter, descriptionParameter, modifiedByParameter, return_Status);
         }
     
         public virtual ObjectResult<GetPartByFilter_Result> GetPartByFilter(Nullable<int> part_Type_Id, Nullable<int> outsource_Type_Id, string part_Code, string part_Name, Nullable<int> unit_Id, Nullable<int> category_Id, Nullable<int> color_Id, Nullable<int> material_Id, Nullable<int> criticality_Id)

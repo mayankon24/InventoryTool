@@ -111,8 +111,9 @@
     <Compile Include="TX_Part_Stock.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="udt_PartQuantity.cs" />
     <Compile Include="UserResultModel.cs" />
-    <Compile Include="VMAddPartStock.cs" />
+    <Compile Include="UpdatePartStock.cs" />
     <Compile Include="VMPartStock.cs" />
     <Compile Include="VMPart.cs" />
   </ItemGroup>

@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Http;
 using InventoryTool.Model;
 using InventoryTool.Provider;
+using EntityFrameworkExtras.EF6;
+using System.Data;
 
 namespace InventoryTool.API.Controllers
 {
@@ -14,15 +16,12 @@ namespace InventoryTool.API.Controllers
     {
         [Route("UpdatePartStock")]
         [HttpPost]
-        public IHttpActionResult UpdatePartStock(VMAddPartStock AddPartStock)
+        public IHttpActionResult UpdatePartStock(UpdatePartStock UpdatePartStock)
         {
-            var return_Status = new ObjectParameter("return_Status", typeof(int));
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
-            {
-                entity.UpdatePartStock(AddPartStock.PartQuantity[0].Part_Id, AddPartStock.FromStore_Id, AddPartStock.Date, AddPartStock.PartQuantity[0].Quantity, 0
-                                     , AddPartStock.Description, AddPartStock.LastModifiedBy
-                                     , return_Status);
-                return Ok(return_Status.Value);
+            {               
+                entity.Database.ExecuteStoredProcedure(UpdatePartStock);
+                return Ok(UpdatePartStock.return_Status);
             }
         }
 
@@ -58,4 +57,6 @@ namespace InventoryTool.API.Controllers
 
         }
     }
+
+   
 }
