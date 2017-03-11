@@ -292,12 +292,7 @@ namespace InventoryTool.Provider
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteCustomer", customer_IdParameter, lastModifiedByParameter, return_Status);
         }
     
-        public virtual ObjectResult<GetAllCustomer_Result> GetAllCustomer()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllCustomer_Result>("GetAllCustomer");
-        }
-    
-        public virtual int UpdateCustomer(Nullable<int> customer_Id, string customer_Code, string customer_Name, Nullable<int> manufacturing_Days, string description, string modifiedBy, ObjectParameter return_Status)
+        public virtual int UpdateCustomer(Nullable<int> customer_Id, string customer_Code, string customer_Name, string contact_No, string email, string address1, string address2, string city, string state, string pinCode, string tinNo, string vatNo, string note, string modifiedBy, ObjectParameter return_Status)
         {
             var customer_IdParameter = customer_Id.HasValue ?
                 new ObjectParameter("Customer_Id", customer_Id) :
@@ -311,19 +306,51 @@ namespace InventoryTool.Provider
                 new ObjectParameter("Customer_Name", customer_Name) :
                 new ObjectParameter("Customer_Name", typeof(string));
     
-            var manufacturing_DaysParameter = manufacturing_Days.HasValue ?
-                new ObjectParameter("Manufacturing_Days", manufacturing_Days) :
-                new ObjectParameter("Manufacturing_Days", typeof(int));
+            var contact_NoParameter = contact_No != null ?
+                new ObjectParameter("Contact_No", contact_No) :
+                new ObjectParameter("Contact_No", typeof(string));
     
-            var descriptionParameter = description != null ?
-                new ObjectParameter("Description", description) :
-                new ObjectParameter("Description", typeof(string));
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var address1Parameter = address1 != null ?
+                new ObjectParameter("Address1", address1) :
+                new ObjectParameter("Address1", typeof(string));
+    
+            var address2Parameter = address2 != null ?
+                new ObjectParameter("Address2", address2) :
+                new ObjectParameter("Address2", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var pinCodeParameter = pinCode != null ?
+                new ObjectParameter("PinCode", pinCode) :
+                new ObjectParameter("PinCode", typeof(string));
+    
+            var tinNoParameter = tinNo != null ?
+                new ObjectParameter("TinNo", tinNo) :
+                new ObjectParameter("TinNo", typeof(string));
+    
+            var vatNoParameter = vatNo != null ?
+                new ObjectParameter("VatNo", vatNo) :
+                new ObjectParameter("VatNo", typeof(string));
+    
+            var noteParameter = note != null ?
+                new ObjectParameter("Note", note) :
+                new ObjectParameter("Note", typeof(string));
     
             var modifiedByParameter = modifiedBy != null ?
                 new ObjectParameter("ModifiedBy", modifiedBy) :
                 new ObjectParameter("ModifiedBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCustomer", customer_IdParameter, customer_CodeParameter, customer_NameParameter, manufacturing_DaysParameter, descriptionParameter, modifiedByParameter, return_Status);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCustomer", customer_IdParameter, customer_CodeParameter, customer_NameParameter, contact_NoParameter, emailParameter, address1Parameter, address2Parameter, cityParameter, stateParameter, pinCodeParameter, tinNoParameter, vatNoParameter, noteParameter, modifiedByParameter, return_Status);
         }
     
         public virtual int DeleteSupplier(Nullable<int> supplier_Id, string lastModifiedBy, ObjectParameter return_Status)
@@ -344,7 +371,7 @@ namespace InventoryTool.Provider
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllSupplier_Result>("GetAllSupplier");
         }
     
-        public virtual int UpdateSupplier(Nullable<int> supplier_Id, string supplier_Code, string supplier_Name, Nullable<int> manufacturing_Days, string description, string modifiedBy, ObjectParameter return_Status)
+        public virtual int UpdateSupplier(Nullable<int> supplier_Id, string supplier_Code, string supplier_Name, string contact_No, string email, string address1, string address2, string city, string state, string pinCode, string tinNo, string vatNo, string note, string modifiedBy, ObjectParameter return_Status)
         {
             var supplier_IdParameter = supplier_Id.HasValue ?
                 new ObjectParameter("Supplier_Id", supplier_Id) :
@@ -358,19 +385,56 @@ namespace InventoryTool.Provider
                 new ObjectParameter("Supplier_Name", supplier_Name) :
                 new ObjectParameter("Supplier_Name", typeof(string));
     
-            var manufacturing_DaysParameter = manufacturing_Days.HasValue ?
-                new ObjectParameter("Manufacturing_Days", manufacturing_Days) :
-                new ObjectParameter("Manufacturing_Days", typeof(int));
+            var contact_NoParameter = contact_No != null ?
+                new ObjectParameter("Contact_No", contact_No) :
+                new ObjectParameter("Contact_No", typeof(string));
     
-            var descriptionParameter = description != null ?
-                new ObjectParameter("Description", description) :
-                new ObjectParameter("Description", typeof(string));
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var address1Parameter = address1 != null ?
+                new ObjectParameter("Address1", address1) :
+                new ObjectParameter("Address1", typeof(string));
+    
+            var address2Parameter = address2 != null ?
+                new ObjectParameter("Address2", address2) :
+                new ObjectParameter("Address2", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var pinCodeParameter = pinCode != null ?
+                new ObjectParameter("PinCode", pinCode) :
+                new ObjectParameter("PinCode", typeof(string));
+    
+            var tinNoParameter = tinNo != null ?
+                new ObjectParameter("TinNo", tinNo) :
+                new ObjectParameter("TinNo", typeof(string));
+    
+            var vatNoParameter = vatNo != null ?
+                new ObjectParameter("VatNo", vatNo) :
+                new ObjectParameter("VatNo", typeof(string));
+    
+            var noteParameter = note != null ?
+                new ObjectParameter("Note", note) :
+                new ObjectParameter("Note", typeof(string));
     
             var modifiedByParameter = modifiedBy != null ?
                 new ObjectParameter("ModifiedBy", modifiedBy) :
                 new ObjectParameter("ModifiedBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateSupplier", supplier_IdParameter, supplier_CodeParameter, supplier_NameParameter, manufacturing_DaysParameter, descriptionParameter, modifiedByParameter, return_Status);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateSupplier", supplier_IdParameter, supplier_CodeParameter, supplier_NameParameter, contact_NoParameter, emailParameter, address1Parameter, address2Parameter, cityParameter, stateParameter, pinCodeParameter, tinNoParameter, vatNoParameter, noteParameter, modifiedByParameter, return_Status);
+        }
+    
+        public virtual ObjectResult<GetAllCustomer_Result> GetAllCustomer()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllCustomer_Result>("GetAllCustomer");
         }
     }
 }

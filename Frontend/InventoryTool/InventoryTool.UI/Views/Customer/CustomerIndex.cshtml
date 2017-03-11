@@ -28,10 +28,10 @@
                                 @Html.TextBox("Customer_Name", "", new { @class = "clsCustomer_Name form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Manufacturing_Days", "", new { @class = "clsManufacturing_Days form-control" })
+                                @Html.TextBox("Contact_No", "", new { @class = "clsContact_No form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Description", "", new { @class = "clsDescription form-control" })
+                                @Html.TextBox("Email", "", new { @class = "clsEmail form-control" })
                             </td>                            
                             <td>
                                 <a href="javascript:void(0);" title="Save" class="clsAddUpdateCustomer">  Save</a>
@@ -46,10 +46,10 @@
                                 @Html.TextBox("Customer_Name", "", new { @class = "clsCustomer_Name form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Manufacturing_Days", "", new { @class = "clsManufacturing_Days form-control" })
+                                @Html.TextBox("Contact_No", "", new { @class = "clsContact_No form-control" })
                             </td>
                             <td>
-                                @Html.TextBox("Description", "", new { @class = "clsDescription form-control" })
+                                @Html.TextBox("Email", "", new { @class = "clsEmail form-control" })
                             </td>   
                             <td>
                                 <a href="javascript:void(0);" title="Update" class="clsAddUpdateCustomer">Update</a>
@@ -157,8 +157,8 @@
                                 var row = $("#MasterRowEdit_Customer").clone();
                                 $(row).find('.clsCustomer_Code').val(result.Customer_Code);                                
                                 $(row).find('.clsCustomer_Name').val(result.Customer_Name);
-                                $(row).find('.clsManufacturing_Days').val(result.Manufacturing_Days);
-                                $(row).find('.clsDescription').val(result.Description);
+                                $(row).find('.clsContact_No').val(result.Contact_No);
+                                $(row).find('.clsEmail').val(result.Email);
                                 $(row).removeAttr("style");
                                 $(row).attr("data-Customer_Id", Customer_Id);
                                 $(data).after(row);
@@ -178,8 +178,8 @@
                     $(row).removeAttr("style");
                     $(row).find('.clsCustomer_Code').val('');
                     $(row).find('.clsCustomer_Name').val('');
-                    $(row).find('.clsManufacturing_Days').val('');
-                    $(row).find('.clsDescription').val('');
+                    $(row).find('.clsContact_No').val('');
+                    $(row).find('.clsEmail').val('');
                     $("#tblCustomerList >tbody").prepend(row);// now will append the clone row to table.
                 });
                 ///Handle the Cancel update functionality
@@ -202,8 +202,8 @@
                     
                     Customer_Name = $(data).find(".clsCustomer_Name").val();
                     Customer_Code = $(data).find(".clsCustomer_Code").val();
-                    Manufacturing_Days = $(data).find(".clsManufacturing_Days").val();
-                    Description = $(data).find(".clsDescription").val();
+                    Contact_No = $(data).find(".clsContact_No").val();
+                    Email = $(data).find(".clsEmail").val();
                     //put validation here
 
                     if (Customer_Name == "")  {
@@ -212,7 +212,7 @@
                     if (Customer_Code == "")  {
                         strValidationMsglists = strValidationMsglists + "<li>Customer Code is required.</li>";
                     }
-                    if ((Manufacturing_Days == "") || ((fn_numbervalidation(Manufacturing_Days)))) {
+                    if ((Contact_No == "") || ((fn_numbervalidation(Contact_No)))) {
                         strValidationMsglists = strValidationMsglists + "<li>Manufacturing Days is required and it shouldn’t be numeric.</li>";
                     }
                     if (strValidationMsglists != "") {
@@ -230,8 +230,8 @@
                                 Customer_Id: Customer_Id,
                                 Customer_Code: Customer_Code, 
                                 Customer_Name: Customer_Name,
-                                Manufacturing_Days: Manufacturing_Days,
-                                Description: Description
+                                Contact_No: Contact_No,
+                                Email: Email
                             },
                             beforeSend: function () {
                                 Common.showDialog.show('Please wait....', {

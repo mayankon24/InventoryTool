@@ -19,7 +19,9 @@ namespace InventoryTool.API.Controllers
             var return_Status = new ObjectParameter("return_Status", typeof(int));
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
             {
-                entity.UpdateCustomer(Customer.Customer_Id, Customer.Customer_Code, Customer.Customer_Name, Customer.Manufacturing_Days, Customer.Description, Customer.LastModifiedBy, return_Status);
+                entity.UpdateCustomer(Customer.Customer_Id, Customer.Customer_Code, Customer.Customer_Name, Customer.Contact_No,
+                    Customer.Email, Customer.Address1, Customer.Address2, Customer.City, Customer.State, Customer.PinCode, 
+                    Customer.TinNo, Customer.VatNo, Customer.Note, Customer.LastModifiedBy, return_Status);
                 return Convert.ToInt32(return_Status.Value);
             }
         }
@@ -44,12 +46,21 @@ namespace InventoryTool.API.Controllers
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
             {
                 var RetVal = entity.GetAllCustomer().ToList().Select(s => new GetAllCustomer_Result
-                {
-                    Description = s.Description,
-                    Manufacturing_Days = s.Manufacturing_Days,
+                {                    
                     Customer_Code = s.Customer_Code,
                     Customer_Id = s.Customer_Id,
-                    Customer_Name = s.Customer_Name
+                    Customer_Name = s.Customer_Name,
+                    Address1 = s.Address1,
+                    Address2 = s.Address2,
+                    City = s.City,
+                    Contact_No = s.Contact_No,
+                    Email = s.Email,
+                    Note = s.Note,
+                    PinCode = s.PinCode,
+                    State = s.State,
+                    TinNo = s.TinNo,
+                    VatNo = s.VatNo
+                    
                 }).ToList();
                 return RetVal;
             }

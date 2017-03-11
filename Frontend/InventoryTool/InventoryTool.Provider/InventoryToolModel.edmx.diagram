@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b30a0852462d4c14a9c53dfb19d06a47" Name="Diagram1">
+      <Diagram DiagramId="b30a0852462d4c14a9c53dfb19d06a47" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="InventoryToolDBModel.M_Part" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="InventoryToolDBModel.M_Product" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="InventoryToolDBModel.TX_Part_Stock" Width="1.5" PointX="0.75" PointY="4.75" />
         <AssociationConnector Association="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" />
         <EntityTypeShape EntityType="InventoryToolDBModel.M_Customer" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InventoryToolDBModel.M_Supplier" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="InventoryToolDBModel.M_Supplier" Width="1.5" PointX="3.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

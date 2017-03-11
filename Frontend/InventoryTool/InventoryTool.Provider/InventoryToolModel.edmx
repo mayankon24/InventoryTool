@@ -12,8 +12,16 @@
           <Property Name="Customer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Customer_Code" Type="nvarchar" MaxLength="100" />
           <Property Name="Customer_Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="Manufacturing_Days" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Contact_No" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="TinNo" Type="nvarchar" MaxLength="15" />
+          <Property Name="VatNo" Type="nvarchar" MaxLength="15" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedUTCDate" Type="datetime" />
           <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="100" />
@@ -62,8 +70,16 @@
           <Property Name="Supplier_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Supplier_Code" Type="nvarchar" MaxLength="100" />
           <Property Name="Supplier_Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="Manufacturing_Days" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Contact_No" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="TinNo" Type="nvarchar" MaxLength="15" />
+          <Property Name="VatNo" Type="nvarchar" MaxLength="15" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedUTCDate" Type="datetime" />
           <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="100" />
@@ -154,8 +170,16 @@
           <Parameter Name="Customer_Id" Type="int" Mode="In" />
           <Parameter Name="Customer_Code" Type="nvarchar" Mode="In" />
           <Parameter Name="Customer_Name" Type="nvarchar" Mode="In" />
-          <Parameter Name="Manufacturing_Days" Type="int" Mode="In" />
-          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contact_No" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="PinCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="TinNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="VatNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Note" Type="nvarchar" Mode="In" />
           <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
@@ -195,8 +219,16 @@
           <Parameter Name="Supplier_Id" Type="int" Mode="In" />
           <Parameter Name="Supplier_Code" Type="nvarchar" Mode="In" />
           <Parameter Name="Supplier_Name" Type="nvarchar" Mode="In" />
-          <Parameter Name="Manufacturing_Days" Type="int" Mode="In" />
-          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contact_No" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="PinCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="TinNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="VatNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Note" Type="nvarchar" Mode="In" />
           <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
@@ -292,23 +324,28 @@
             <End Role="M_Part" EntitySet="M_Part" />
             <End Role="TX_Part_Stock" EntitySet="TX_Part_Stock" />
           </AssociationSet>
-          <EntitySet Name="M_Customer" EntityType="InventoryToolDBModel.M_Customer" />
           <FunctionImport Name="DeleteCustomer">
             <Parameter Name="Customer_Id" Mode="In" Type="Int32" />
             <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAllCustomer" ReturnType="Collection(InventoryToolDBModel.GetAllCustomer_Result)" />
           <FunctionImport Name="UpdateCustomer">
             <Parameter Name="Customer_Id" Mode="In" Type="Int32" />
             <Parameter Name="Customer_Code" Mode="In" Type="String" />
             <Parameter Name="Customer_Name" Mode="In" Type="String" />
-            <Parameter Name="Manufacturing_Days" Mode="In" Type="Int32" />
-            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Contact_No" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Address1" Mode="In" Type="String" />
+            <Parameter Name="Address2" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="PinCode" Mode="In" Type="String" />
+            <Parameter Name="TinNo" Mode="In" Type="String" />
+            <Parameter Name="VatNo" Mode="In" Type="String" />
+            <Parameter Name="Note" Mode="In" Type="String" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="M_Supplier" EntityType="InventoryToolDBModel.M_Supplier" />
           <FunctionImport Name="DeleteSupplier">
             <Parameter Name="Supplier_Id" Mode="In" Type="Int32" />
             <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
@@ -319,11 +356,22 @@
             <Parameter Name="Supplier_Id" Mode="In" Type="Int32" />
             <Parameter Name="Supplier_Code" Mode="In" Type="String" />
             <Parameter Name="Supplier_Name" Mode="In" Type="String" />
-            <Parameter Name="Manufacturing_Days" Mode="In" Type="Int32" />
-            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Contact_No" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Address1" Mode="In" Type="String" />
+            <Parameter Name="Address2" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="PinCode" Mode="In" Type="String" />
+            <Parameter Name="TinNo" Mode="In" Type="String" />
+            <Parameter Name="VatNo" Mode="In" Type="String" />
+            <Parameter Name="Note" Mode="In" Type="String" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="M_Customer" EntityType="InventoryToolDBModel.M_Customer" />
+          <EntitySet Name="M_Supplier" EntityType="InventoryToolDBModel.M_Supplier" />
+          <FunctionImport Name="GetAllCustomer" ReturnType="Collection(InventoryToolDBModel.GetAllCustomer_Result)" />
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
@@ -471,6 +519,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetAllSupplier_Result">
+          <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
+          <Property Type="String" Name="Supplier_Code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Supplier_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Contact_No" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PinCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TinNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="VatNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Note" Nullable="true" MaxLength="1000" />
+          </ComplexType>
         <EntityType Name="M_Customer">
           <Key>
             <PropertyRef Name="Customer_Id" />
@@ -478,8 +541,39 @@
           <Property Name="Customer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Customer_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Customer_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Manufacturing_Days" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TinNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="VatNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="M_Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_Id" />
+          </Key>
+          <Property Name="Supplier_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TinNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="VatNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -490,30 +584,16 @@
           <Property Type="Int32" Name="Customer_Id" Nullable="false" />
           <Property Type="String" Name="Customer_Code" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Customer_Name" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Manufacturing_Days" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
-        </ComplexType>
-        <EntityType Name="M_Supplier">
-          <Key>
-            <PropertyRef Name="Supplier_Id" />
-          </Key>
-          <Property Name="Supplier_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Supplier_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Supplier_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Manufacturing_Days" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <ComplexType Name="GetAllSupplier_Result">
-          <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
-          <Property Type="String" Name="Supplier_Code" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Supplier_Name" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Manufacturing_Days" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Contact_No" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PinCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TinNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="VatNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Note" Nullable="true" MaxLength="1000" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -706,6 +786,29 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteCustomer" FunctionName="InventoryToolDBModel.Store.DeleteCustomer" />
+          <FunctionImportMapping FunctionImportName="UpdateCustomer" FunctionName="InventoryToolDBModel.Store.UpdateCustomer" />
+          <FunctionImportMapping FunctionImportName="DeleteSupplier" FunctionName="InventoryToolDBModel.Store.DeleteSupplier" />
+          <FunctionImportMapping FunctionImportName="GetAllSupplier" FunctionName="InventoryToolDBModel.Store.GetAllSupplier">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllSupplier_Result">
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+                <ScalarProperty Name="Supplier_Code" ColumnName="Supplier_Code" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="TinNo" ColumnName="TinNo" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateSupplier" FunctionName="InventoryToolDBModel.Store.UpdateSupplier" />
           <EntitySetMapping Name="M_Customer">
             <EntityTypeMapping TypeName="InventoryToolDBModel.M_Customer">
               <MappingFragment StoreEntitySet="M_Customer">
@@ -714,27 +817,22 @@
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="TinNo" ColumnName="TinNo" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
                 <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
                 <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
                 <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="DeleteCustomer" FunctionName="InventoryToolDBModel.Store.DeleteCustomer" />
-          <FunctionImportMapping FunctionImportName="GetAllCustomer" FunctionName="InventoryToolDBModel.Store.GetAllCustomer">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllCustomer_Result">
-                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
-                <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
-                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
-                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UpdateCustomer" FunctionName="InventoryToolDBModel.Store.UpdateCustomer" />
           <EntitySetMapping Name="M_Supplier">
             <EntityTypeMapping TypeName="InventoryToolDBModel.M_Supplier">
               <MappingFragment StoreEntitySet="M_Supplier">
@@ -743,27 +841,41 @@
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="TinNo" ColumnName="TinNo" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
                 <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
                 <ScalarProperty Name="Supplier_Code" ColumnName="Supplier_Code" />
                 <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="DeleteSupplier" FunctionName="InventoryToolDBModel.Store.DeleteSupplier" />
-          <FunctionImportMapping FunctionImportName="GetAllSupplier" FunctionName="InventoryToolDBModel.Store.GetAllSupplier">
+          <FunctionImportMapping FunctionImportName="GetAllCustomer" FunctionName="InventoryToolDBModel.Store.GetAllCustomer">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllSupplier_Result">
-                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
-                <ScalarProperty Name="Supplier_Code" ColumnName="Supplier_Code" />
-                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
-                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllCustomer_Result">
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="TinNo" ColumnName="TinNo" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UpdateSupplier" FunctionName="InventoryToolDBModel.Store.UpdateSupplier" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
