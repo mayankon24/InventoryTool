@@ -16,12 +16,12 @@ namespace InventoryTool.API.Controllers
     {
         [Route("UpdatePartStock")]
         [HttpPost]
-        public IHttpActionResult UpdatePartStock(UpdatePartStock UpdatePartStock)
+        public int UpdatePartStock(UpdatePartStock UpdatePartStock)
         {
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
-            {               
+            {
                 entity.Database.ExecuteStoredProcedure(UpdatePartStock);
-                return Ok(UpdatePartStock.return_Status);
+                return Convert.ToInt32(UpdatePartStock.return_Status);
             }
         }
 
