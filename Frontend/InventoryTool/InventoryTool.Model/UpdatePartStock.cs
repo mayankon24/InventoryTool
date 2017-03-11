@@ -25,7 +25,7 @@ namespace InventoryTool.Model
         public string Description { get; set; }
         [StoredProcedureParameter(SqlDbType.NVarChar)]
         public string ModifiedBy { get; set; }
-        [StoredProcedureParameter(SqlDbType.Int)]
-        public int return_Status { get; set; }
+        [StoredProcedureParameter(SqlDbType.Int,Direction = ParameterDirection.Output )]
+        public int return_Status { get; set; }       
     }
 }
