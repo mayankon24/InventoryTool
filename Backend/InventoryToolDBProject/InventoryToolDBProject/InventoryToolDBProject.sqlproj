@@ -113,6 +113,14 @@
     <Build Include="dbo\Functions\f_split.sql" />
     <Build Include="dbo\Tables\LK_StoreTransferType.sql" />
     <Build Include="dbo\User Defined Types\udt_PartQuantity.sql" />
+    <Build Include="dbo\Tables\M_Supplier.sql" />
+    <Build Include="dbo\Tables\M_Customer.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateSupplier.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateCustomer.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllSupplier.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllCustomer.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteSupplier.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteCustomer.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InventortCompare_Azure.scmp" />
