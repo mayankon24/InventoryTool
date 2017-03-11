@@ -168,7 +168,7 @@
                 if (ToStore_Id < 1 && StoreTransferType_Id == 3) {
                     strValidationMsglists = strValidationMsglists + "<li>Select a valid Store to transfer.</li>";                    
                 }
-                else {
+                else if (StoreTransferType_Id != 3){
                     ToStore_Id = 0;
                 }
                 if (Date == "") {
