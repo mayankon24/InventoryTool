@@ -55,6 +55,21 @@
           <Property Name="LastModifiedUTCDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="M_Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_Id" />
+          </Key>
+          <Property Name="Supplier_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier_Code" Type="nvarchar" MaxLength="100" />
+          <Property Name="Supplier_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Manufacturing_Days" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedUTCDate" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastModifiedUTCDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="TX_Part_Stock">
           <Key>
             <PropertyRef Name="Part_Stock_Id" />
@@ -101,6 +116,11 @@
           <Parameter Name="LastModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="DeleteSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Supplier_Id" Type="int" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="return_Status" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="GetAllCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllColor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllCriticality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -111,6 +131,7 @@
         <Function Name="GetAllPartType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllUnit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetPartByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Part_Type_Id" Type="int" Mode="In" />
@@ -170,10 +191,20 @@
           <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="UpdateSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Supplier_Id" Type="int" Mode="In" />
+          <Parameter Name="Supplier_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="Supplier_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Manufacturing_Days" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="return_Status" Type="int" Mode="InOut" />
+        </Function>
         <EntityContainer Name="InventoryToolDBModelStoreContainer">
           <EntitySet Name="M_Customer" EntityType="Self.M_Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Part" EntityType="Self.M_Part" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Product" EntityType="Self.M_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Supplier" EntityType="Self.M_Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TX_Part_Stock" EntityType="Self.TX_Part_Stock" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TX_Part_Stock_M_Part" Association="Self.FK_TX_Part_Stock_M_Part">
             <End Role="M_Part" EntitySet="M_Part" />
@@ -272,6 +303,22 @@
             <Parameter Name="Customer_Id" Mode="In" Type="Int32" />
             <Parameter Name="Customer_Code" Mode="In" Type="String" />
             <Parameter Name="Customer_Name" Mode="In" Type="String" />
+            <Parameter Name="Manufacturing_Days" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="M_Supplier" EntityType="InventoryToolDBModel.M_Supplier" />
+          <FunctionImport Name="DeleteSupplier">
+            <Parameter Name="Supplier_Id" Mode="In" Type="Int32" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSupplier" ReturnType="Collection(InventoryToolDBModel.GetAllSupplier_Result)" />
+          <FunctionImport Name="UpdateSupplier">
+            <Parameter Name="Supplier_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Supplier_Code" Mode="In" Type="String" />
+            <Parameter Name="Supplier_Name" Mode="In" Type="String" />
             <Parameter Name="Manufacturing_Days" Mode="In" Type="Int32" />
             <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
@@ -443,6 +490,28 @@
           <Property Type="Int32" Name="Customer_Id" Nullable="false" />
           <Property Type="String" Name="Customer_Code" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Customer_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Manufacturing_Days" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <EntityType Name="M_Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_Id" />
+          </Key>
+          <Property Name="Supplier_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturing_Days" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="GetAllSupplier_Result">
+          <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
+          <Property Type="String" Name="Supplier_Code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Supplier_Name" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Manufacturing_Days" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
         </ComplexType>
@@ -666,6 +735,35 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateCustomer" FunctionName="InventoryToolDBModel.Store.UpdateCustomer" />
+          <EntitySetMapping Name="M_Supplier">
+            <EntityTypeMapping TypeName="InventoryToolDBModel.M_Supplier">
+              <MappingFragment StoreEntitySet="M_Supplier">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+                <ScalarProperty Name="Supplier_Code" ColumnName="Supplier_Code" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteSupplier" FunctionName="InventoryToolDBModel.Store.DeleteSupplier" />
+          <FunctionImportMapping FunctionImportName="GetAllSupplier" FunctionName="InventoryToolDBModel.Store.GetAllSupplier">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetAllSupplier_Result">
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+                <ScalarProperty Name="Supplier_Code" ColumnName="Supplier_Code" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+                <ScalarProperty Name="Manufacturing_Days" ColumnName="Manufacturing_Days" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateSupplier" FunctionName="InventoryToolDBModel.Store.UpdateSupplier" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

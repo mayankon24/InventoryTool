@@ -1,0 +1,312 @@
+﻿@model IEnumerable<InventoryTool.Model.GetAllSupplier_Result>
+@{
+    ViewBag.Title = "Suppliers";
+}
+<script src="~/Scripts/Supplier/Supplier.js"></script>
+<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="Stylesheet" type="text/css">
+<link href="~/Content/custom-css/custome.css" rel="stylesheet" />
+<link href="~/Content/custom-css/shared.css" rel="stylesheet" />
+<div role="tabpanel" class="tab-pane active" id="Supplier">
+    <div class="container">
+        <div style="margin-top:23px">
+            <div class="panel panel-default" style="margin-bottom:25px">
+                <div style="margin-top:1%">
+                    <label style="margin-left:30px">Supplier</label><br />
+                    <a href="javascript:void(0)" id="lnkAddNewSupplier" style="color:#01A4EF;text-decoration:underline;margin-left:30px; ">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        Add New Item
+                    </a>
+                    <div id="divDisplaySupplierMessages">
+                    </div>
+                    @* This row will use in clone*@
+                    <table id="tblMasterSupplier" style="display:none">
+                        <tr data-Supplier_Id="-1" id="MasterRow_Supplier">
+                            <td>
+                                @Html.TextBox("Supplier_Code", "", new { @class = "clsSupplier_Code form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Supplier_Name", "", new { @class = "clsSupplier_Name form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Manufacturing_Days", "", new { @class = "clsManufacturing_Days form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Description", "", new { @class = "clsDescription form-control" })
+                            </td>                            
+                            <td>
+                                <a href="javascript:void(0);" title="Save" class="clsAddUpdateSupplier">  Save</a>
+                                <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
+                            </td>
+                        </tr>
+                        <tr data-Supplier_Id="" class="edit-mode" id="MasterRowEdit_Supplier">
+                            <td>
+                                @Html.TextBox("Supplier_Code", "", new { @class = "clsSupplier_Code form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Supplier_Name", "", new { @class = "clsSupplier_Name form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Manufacturing_Days", "", new { @class = "clsManufacturing_Days form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Description", "", new { @class = "clsDescription form-control" })
+                            </td>   
+                            <td>
+                                <a href="javascript:void(0);" title="Update" class="clsAddUpdateSupplier">Update</a>
+                                <a href="javascript:void(0);" title="Cancel" class="clsCancelSupplierUpdate">Cancel</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--End of Master Row* -->
+
+                    <div id="dvSupplierList">
+                        @Html.Partial("_SupplierList", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+   
+    $(document).ready(function () {
+        var Supplierjs = {
+            init: function () {
+                var obj = Supplierjs;                
+                obj.LoadSupplier();
+                Common.setAttributeList(obj);
+            },
+            LoadSupplier: function () {
+              
+                //  var obj = Supplierjs;
+                //initial load the Datatable setting.
+                Supplierjs.ReinitiateDataTable('tblSupplierList');
+
+                $("#Supplier").find("#dvSupplierList").on("click", ".clsDeleteSupplier", function () {
+                   
+                    var data, Supplier_Id, urlPath;
+                    var promptdelete = confirm('Are you sure you want to delete this record? There could be dependent budget requests which may get impacted based on this action');
+                    if (promptdelete) {
+                        data = $(this).parents('tr');
+                        Supplier_Id = $(data).attr('data-Supplier_id');
+                        urlPath = "/Supplier/DeleteSupplier";
+                        if (Supplier_Id != '') {
+                            $.ajax({
+                                type: "Get",
+                                cache: false,
+                                url: urlPath,
+                                data: {
+                                    Supplier_Id: Supplier_Id
+                                },
+                                beforeSend: function () {
+                                    Common.showDialog.show('Please wait....', {
+                                        dialogSize: 'sm',
+                                        progressType: 'warning'
+                                    });
+                                },
+                                complete: function () {
+                                    Common.showDialog.hide();
+                                },
+                                success: function (result) {
+                                    if (result.operationstatuscode == 3) {
+                                        fn_ShowHideUserMessageDivWithCssClass_common('divDisplaySupplierMessages', result.messagedata, true, 'alert alert-success');
+                                        Supplierjs.fn_ReloadSupplierGrid();
+                                    }
+                                    else {
+                                        fn_ShowHideUserMessageDivWithCssClass_common('divDisplaySupplierMessages', result.messagedata, true, 'alert alert-danger');
+                                    }
+                                },
+                                error: function (ex) {
+                                    alert(ex.responseText);
+                                }
+                            });
+                        }
+
+                    }
+
+
+                });
+                ///Get Row Data in Edit Mode
+                $("#Supplier").find("#dvSupplierList").on("click", ".clsEditSupplier", function () {
+
+                    var Supplier_Id, data, urlPath;
+                    data = $(this).parents('tr');
+                    Supplier_Id = $(data).attr('data-Supplier_id');
+                    urlPath = "/Supplier/GetSupplierBySupplierId";
+                    if (Supplier_Id != '') {
+                        $('.clsEditSupplier ,.clsDeleteSupplier').css('display', 'none');
+                        $.ajax({
+                            type: "Get",
+                            cache: false,
+                            url: urlPath,
+                            data: {
+                                Supplier_Id: Supplier_Id
+                            },
+                            beforeSend: function () {
+                                Common.showDialog.show('Please wait....', {
+                                    dialogSize: 'sm',
+                                    progressType: 'warning'
+                                });
+                            },
+                            complete: function () {
+                                Common.showDialog.hide();
+                            },
+                            success: function (result) {
+                                $(data).hide();
+                                var row = $("#MasterRowEdit_Supplier").clone();
+                                $(row).find('.clsSupplier_Code').val(result.Supplier_Code);                                
+                                $(row).find('.clsSupplier_Name').val(result.Supplier_Name);
+                                $(row).find('.clsManufacturing_Days').val(result.Manufacturing_Days);
+                                $(row).find('.clsDescription').val(result.Description);
+                                $(row).removeAttr("style");
+                                $(row).attr("data-Supplier_Id", Supplier_Id);
+                                $(data).after(row);
+                            },
+                            error: function (ex) {
+                                alert(ex.responseText);
+                            }
+                        });
+                    }
+
+                });
+                $("#lnkAddNewSupplier").on('click', function () {
+                    var oTable = $('#tblSupplierList').dataTable();
+                    oTable.fnPageChange('first');
+                    //get the clone row.
+                    var row = $("#MasterRow_Supplier").clone();
+                    $(row).removeAttr("style");
+                    $(row).find('.clsSupplier_Code').val('');
+                    $(row).find('.clsSupplier_Name').val('');
+                    $(row).find('.clsManufacturing_Days').val('');
+                    $(row).find('.clsDescription').val('');
+                    $("#tblSupplierList >tbody").prepend(row);// now will append the clone row to table.
+                });
+                ///Handle the Cancel update functionality
+                $("#Supplier").find("#dvSupplierList").on("click", ".clsCancelSupplierUpdate", function () {
+
+                    var data;
+                    data = $(this).parents('tr');
+                    $(data).closest('tr.edit-mode').hide();
+                    $(data).closest('tr').prev('tr.display-mode').show();
+                    $('.clsEditSupplier,.clsDeleteSupplier').removeAttr('style');
+                });
+                ///Handle the Add/update functionality
+                $("#Supplier").find("#dvSupplierList").on("click", ".clsAddUpdateSupplier", function () {
+                   
+                    var Supplier_Id, Supplier_Name, data, urlPath;
+                    var strValidationMsglists = "";
+
+                    data = $(this).parents('tr');
+                    Supplier_Id = $(data).attr('data-Supplier_Id');
+                    
+                    Supplier_Name = $(data).find(".clsSupplier_Name").val();
+                    Supplier_Code = $(data).find(".clsSupplier_Code").val();
+                    Manufacturing_Days = $(data).find(".clsManufacturing_Days").val();
+                    Description = $(data).find(".clsDescription").val();
+                    //put validation here
+
+                    if (Supplier_Name == "")  {
+                        strValidationMsglists = strValidationMsglists + "<li>Supplier Name is required.</li>";
+                    }
+                    if (Supplier_Code == "")  {
+                        strValidationMsglists = strValidationMsglists + "<li>Supplier Code is required.</li>";
+                    }
+                    if ((Manufacturing_Days == "") || ((fn_numbervalidation(Manufacturing_Days)))) {
+                        strValidationMsglists = strValidationMsglists + "<li>Manufacturing Days is required and it shouldn’t be numeric.</li>";
+                    }
+                    if (strValidationMsglists != "") {
+                        strValidationMsglists = "<ol>" + strValidationMsglists + "</ol>"
+                        fn_ShowHideUserMessageDivWithCssClass_common('divDisplaySupplierMessages', strValidationMsglists, true, 'alert alert-danger'); //common function to display error message.
+                        return false;
+                    }
+                    urlPath = "/Supplier/AddUpdateSupplier";
+                    if (true) {
+                        $.ajax({
+                            type: "Get",
+                            cache: false,
+                            url: urlPath,
+                            data: {
+                                Supplier_Id: Supplier_Id,
+                                Supplier_Code: Supplier_Code, 
+                                Supplier_Name: Supplier_Name,
+                                Manufacturing_Days: Manufacturing_Days,
+                                Description: Description
+                            },
+                            beforeSend: function () {
+                                Common.showDialog.show('Please wait....', {
+                                    dialogSize: 'sm',
+                                    progressType: 'warning'
+                                });
+                            },
+                            complete: function () {
+                                Common.showDialog.hide();
+                            },
+                            success: function (result) {
+                                if (result.operationstatuscode == 1 || result.operationstatuscode == 2) {
+                                    fn_ShowHideUserMessageDivWithCssClass_common('divDisplaySupplierMessages', result.messagedata, true, 'alert alert-success');
+                                    Supplierjs.fn_ReloadSupplierGrid();
+                                }
+                                else {
+                                    fn_ShowHideUserMessageDivWithCssClass_common('divDisplaySupplierMessages', result.messagedata, true, 'alert alert-danger');
+                                }
+                            },
+                            error: function (ex) {
+                                alert(ex.responseText);
+                            }
+                        });
+                    }
+                });
+            },
+
+            ///This function refresh the grid data.
+            fn_ReloadSupplierGrid: function () {
+
+                var urlPath = "/Supplier/GetSupplierPartial";
+                if (true) {
+                    $.ajax({
+                        type: "Get",
+                        cache: false,
+                        url: urlPath,
+                        beforeSend: function () {
+                            //Common.showDialog.show('Please wait....', {
+                            //    dialogSize: 'sm',
+                            //    progressType: 'warning'
+                            //});
+                        },
+                        complete: function () {
+                            Supplierjs.ReinitiateDataTable('tblSupplierList');
+                            Common.showDialog.hide();
+
+                        },
+                        success: function (result) {
+                            $("#dvSupplierList").html(result);
+                            Common.showDialog.hide();
+                        },
+                        error: function (ex) {
+                            alert(ex.responseText);
+                        }
+                    });
+                }
+
+
+            },
+            ReinitiateDataTable: function (tableId) {
+
+
+                $("#" + tableId).DataTable(
+                {
+                    bFilter: false, bInfo: false, bLengthChange: false, "order": [0, 'asc'],
+                    "aoColumnDefs": [
+                     {
+                         'bSortable': false,
+                         'aTargets': ['action-col', 'text-holder']
+                     }]
+                }
+                  );
+            }
+
+        }
+        Supplierjs.init();
+    });
+</script>

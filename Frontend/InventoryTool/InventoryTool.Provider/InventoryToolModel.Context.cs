@@ -32,6 +32,7 @@ namespace InventoryTool.Provider
         public virtual DbSet<M_Product> M_Product { get; set; }
         public virtual DbSet<TX_Part_Stock> TX_Part_Stock { get; set; }
         public virtual DbSet<M_Customer> M_Customer { get; set; }
+        public virtual DbSet<M_Supplier> M_Supplier { get; set; }
     
         public virtual int DeleteProduct(Nullable<int> product_Id, string lastModifiedBy, ObjectParameter return_Status)
         {
@@ -323,6 +324,53 @@ namespace InventoryTool.Provider
                 new ObjectParameter("ModifiedBy", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCustomer", customer_IdParameter, customer_CodeParameter, customer_NameParameter, manufacturing_DaysParameter, descriptionParameter, modifiedByParameter, return_Status);
+        }
+    
+        public virtual int DeleteSupplier(Nullable<int> supplier_Id, string lastModifiedBy, ObjectParameter return_Status)
+        {
+            var supplier_IdParameter = supplier_Id.HasValue ?
+                new ObjectParameter("Supplier_Id", supplier_Id) :
+                new ObjectParameter("Supplier_Id", typeof(int));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("LastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("LastModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteSupplier", supplier_IdParameter, lastModifiedByParameter, return_Status);
+        }
+    
+        public virtual ObjectResult<GetAllSupplier_Result> GetAllSupplier()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllSupplier_Result>("GetAllSupplier");
+        }
+    
+        public virtual int UpdateSupplier(Nullable<int> supplier_Id, string supplier_Code, string supplier_Name, Nullable<int> manufacturing_Days, string description, string modifiedBy, ObjectParameter return_Status)
+        {
+            var supplier_IdParameter = supplier_Id.HasValue ?
+                new ObjectParameter("Supplier_Id", supplier_Id) :
+                new ObjectParameter("Supplier_Id", typeof(int));
+    
+            var supplier_CodeParameter = supplier_Code != null ?
+                new ObjectParameter("Supplier_Code", supplier_Code) :
+                new ObjectParameter("Supplier_Code", typeof(string));
+    
+            var supplier_NameParameter = supplier_Name != null ?
+                new ObjectParameter("Supplier_Name", supplier_Name) :
+                new ObjectParameter("Supplier_Name", typeof(string));
+    
+            var manufacturing_DaysParameter = manufacturing_Days.HasValue ?
+                new ObjectParameter("Manufacturing_Days", manufacturing_Days) :
+                new ObjectParameter("Manufacturing_Days", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var modifiedByParameter = modifiedBy != null ?
+                new ObjectParameter("ModifiedBy", modifiedBy) :
+                new ObjectParameter("ModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateSupplier", supplier_IdParameter, supplier_CodeParameter, supplier_NameParameter, manufacturing_DaysParameter, descriptionParameter, modifiedByParameter, return_Status);
         }
     }
 }

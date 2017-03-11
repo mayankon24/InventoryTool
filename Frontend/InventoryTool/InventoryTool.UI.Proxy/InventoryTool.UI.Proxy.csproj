@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SupplierProxy.cs" />
     <Compile Include="LookupProxy.cs" />
     <Compile Include="PartStockProxy.cs" />
     <Compile Include="PartProxy.cs" />
