@@ -195,6 +195,7 @@
     <Compile Include="Controllers\LookupController.cs" />
     <Compile Include="Controllers\PartStockController.cs" />
     <Compile Include="Controllers\PartController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Filters\ProcessException.cs" />
     <Compile Include="Filters\ProcessExceptionFilterAttribute.cs" />

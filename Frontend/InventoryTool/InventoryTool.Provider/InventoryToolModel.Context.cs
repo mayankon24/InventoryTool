@@ -31,6 +31,7 @@ namespace InventoryTool.Provider
         public virtual DbSet<M_Part> M_Part { get; set; }
         public virtual DbSet<M_Product> M_Product { get; set; }
         public virtual DbSet<TX_Part_Stock> TX_Part_Stock { get; set; }
+        public virtual DbSet<M_Customer> M_Customer { get; set; }
     
         public virtual int DeleteProduct(Nullable<int> product_Id, string lastModifiedBy, ObjectParameter return_Status)
         {
@@ -207,23 +208,23 @@ namespace InventoryTool.Provider
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllStore_Result>("GetAllStore");
         }
     
-        public virtual int UpdatePartStock(Nullable<int> store_Id, Nullable<System.DateTime> date, Nullable<int> in_Quantity, Nullable<int> out_Quantity, string description, string modifiedBy, ObjectParameter return_Status)
+        public virtual int UpdatePartStock(Nullable<int> fromStore_Id, Nullable<int> toStore_Id, Nullable<System.DateTime> date, Nullable<int> storeTransferType_Id, string description, string modifiedBy, ObjectParameter return_Status)
         {
-            var store_IdParameter = store_Id.HasValue ?
-                new ObjectParameter("Store_Id", store_Id) :
-                new ObjectParameter("Store_Id", typeof(int));
+            var fromStore_IdParameter = fromStore_Id.HasValue ?
+                new ObjectParameter("FromStore_Id", fromStore_Id) :
+                new ObjectParameter("FromStore_Id", typeof(int));
+    
+            var toStore_IdParameter = toStore_Id.HasValue ?
+                new ObjectParameter("ToStore_Id", toStore_Id) :
+                new ObjectParameter("ToStore_Id", typeof(int));
     
             var dateParameter = date.HasValue ?
                 new ObjectParameter("Date", date) :
                 new ObjectParameter("Date", typeof(System.DateTime));
     
-            var in_QuantityParameter = in_Quantity.HasValue ?
-                new ObjectParameter("In_Quantity", in_Quantity) :
-                new ObjectParameter("In_Quantity", typeof(int));
-    
-            var out_QuantityParameter = out_Quantity.HasValue ?
-                new ObjectParameter("Out_Quantity", out_Quantity) :
-                new ObjectParameter("Out_Quantity", typeof(int));
+            var storeTransferType_IdParameter = storeTransferType_Id.HasValue ?
+                new ObjectParameter("StoreTransferType_Id", storeTransferType_Id) :
+                new ObjectParameter("StoreTransferType_Id", typeof(int));
     
             var descriptionParameter = description != null ?
                 new ObjectParameter("Description", description) :
@@ -233,7 +234,7 @@ namespace InventoryTool.Provider
                 new ObjectParameter("ModifiedBy", modifiedBy) :
                 new ObjectParameter("ModifiedBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePartStock", store_IdParameter, dateParameter, in_QuantityParameter, out_QuantityParameter, descriptionParameter, modifiedByParameter, return_Status);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePartStock", fromStore_IdParameter, toStore_IdParameter, dateParameter, storeTransferType_IdParameter, descriptionParameter, modifiedByParameter, return_Status);
         }
     
         public virtual ObjectResult<GetPartByFilter_Result> GetPartByFilter(Nullable<int> part_Type_Id, Nullable<int> outsource_Type_Id, string part_Code, string part_Name, Nullable<int> unit_Id, Nullable<int> category_Id, Nullable<int> color_Id, Nullable<int> material_Id, Nullable<int> criticality_Id)
@@ -275,6 +276,53 @@ namespace InventoryTool.Provider
                 new ObjectParameter("Criticality_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPartByFilter_Result>("GetPartByFilter", part_Type_IdParameter, outsource_Type_IdParameter, part_CodeParameter, part_NameParameter, unit_IdParameter, category_IdParameter, color_IdParameter, material_IdParameter, criticality_IdParameter);
+        }
+    
+        public virtual int DeleteCustomer(Nullable<int> customer_Id, string lastModifiedBy, ObjectParameter return_Status)
+        {
+            var customer_IdParameter = customer_Id.HasValue ?
+                new ObjectParameter("Customer_Id", customer_Id) :
+                new ObjectParameter("Customer_Id", typeof(int));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("LastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("LastModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteCustomer", customer_IdParameter, lastModifiedByParameter, return_Status);
+        }
+    
+        public virtual ObjectResult<GetAllCustomer_Result> GetAllCustomer()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllCustomer_Result>("GetAllCustomer");
+        }
+    
+        public virtual int UpdateCustomer(Nullable<int> customer_Id, string customer_Code, string customer_Name, Nullable<int> manufacturing_Days, string description, string modifiedBy, ObjectParameter return_Status)
+        {
+            var customer_IdParameter = customer_Id.HasValue ?
+                new ObjectParameter("Customer_Id", customer_Id) :
+                new ObjectParameter("Customer_Id", typeof(int));
+    
+            var customer_CodeParameter = customer_Code != null ?
+                new ObjectParameter("Customer_Code", customer_Code) :
+                new ObjectParameter("Customer_Code", typeof(string));
+    
+            var customer_NameParameter = customer_Name != null ?
+                new ObjectParameter("Customer_Name", customer_Name) :
+                new ObjectParameter("Customer_Name", typeof(string));
+    
+            var manufacturing_DaysParameter = manufacturing_Days.HasValue ?
+                new ObjectParameter("Manufacturing_Days", manufacturing_Days) :
+                new ObjectParameter("Manufacturing_Days", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var modifiedByParameter = modifiedBy != null ?
+                new ObjectParameter("ModifiedBy", modifiedBy) :
+                new ObjectParameter("ModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCustomer", customer_IdParameter, customer_CodeParameter, customer_NameParameter, manufacturing_DaysParameter, descriptionParameter, modifiedByParameter, return_Status);
         }
     }
 }

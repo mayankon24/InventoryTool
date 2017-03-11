@@ -64,6 +64,7 @@
     <Compile Include="LookupProxy.cs" />
     <Compile Include="PartStockProxy.cs" />
     <Compile Include="PartProxy.cs" />
+    <Compile Include="CustomerProxy.cs" />
     <Compile Include="ProductProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyHelper.cs" />

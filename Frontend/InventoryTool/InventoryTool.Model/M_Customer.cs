@@ -12,23 +12,17 @@ namespace InventoryTool.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TX_Part_Stock
+    public partial class M_Customer
     {
-        public long Part_Stock_Id { get; set; }
-        public Nullable<int> Part_Id { get; set; }
-        public Nullable<int> Store_Id { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> In_Quantity { get; set; }
-        public Nullable<int> Out_Quantity { get; set; }
+        public int Customer_Id { get; set; }
+        public string Customer_Code { get; set; }
+        public string Customer_Name { get; set; }
+        public Nullable<int> Manufacturing_Days { get; set; }
         public string Description { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedUTCDate { get; set; }
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedUTCDate { get; set; }
         public bool IsActive { get; set; }
-        public Nullable<System.Guid> Action_Guid { get; set; }
-        public Nullable<bool> Is_Transfer { get; set; }
-    
-        public virtual M_Part M_Part { get; set; }
     }
 }

@@ -60,6 +60,9 @@
     <Compile Include="GetAllCriticality_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllCustomer_Result.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllPartType_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
@@ -99,6 +102,9 @@
     <Compile Include="InventoryToolModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_Customer.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="M_Part.cs">

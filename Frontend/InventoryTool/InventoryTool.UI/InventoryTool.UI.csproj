@@ -257,6 +257,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\PartStockController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -658,6 +659,8 @@
     <Content Include="Views\PartStock\_FilterPanel.cshtml" />
     <Content Include="Views\PartStock\_FilterList.cshtml" />
     <Content Include="Views\PartStock\_StockEntry.cshtml" />
+    <Content Include="Views\Customer\_CustomerList.cshtml" />
+    <Content Include="Views\Customer\CustomerIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
