@@ -8,63 +8,19 @@
 <link href="~/Content/custom-css/shared.css" rel="stylesheet" />
 <div role="tabpanel" class="tab-pane active" id="Customer">
     <div class="container">
-        <div style="margin-top:23px">
-            <div class="panel panel-default" style="margin-bottom:25px">
+            <div class="panel panel-default" style="margin-bottom:25px; margin-top:23px">
                 <div style="margin-top:1%">
-                    <label style="margin-left:30px">Customer</label><br />
-                    <a href="javascript:void(0)" id="lnkAddNewCustomer" style="color:#01A4EF;text-decoration:underline;margin-left:30px; ">
-                        <span class="glyphicon glyphicon-plus-sign"></span>
-                        Add New Item
-                    </a>
+                    <label style="margin-left:30px;">Customer</label><br />
                     <div id="divDisplayCustomerMessages">
                     </div>
-                    @* This row will use in clone*@
-                    <table id="tblMasterCustomer" style="display:none">
-                        <tr data-Customer_Id="-1" id="MasterRow_Customer">
-                            <td>
-                                @Html.TextBox("Customer_Code", "", new { @class = "clsCustomer_Code form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Customer_Name", "", new { @class = "clsCustomer_Name form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Contact_No", "", new { @class = "clsContact_No form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Email", "", new { @class = "clsEmail form-control" })
-                            </td>                            
-                            <td>
-                                <a href="javascript:void(0);" title="Save" class="clsAddUpdateCustomer">  Save</a>
-                                <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
-                            </td>
-                        </tr>
-                        <tr data-Customer_Id="" class="edit-mode" id="MasterRowEdit_Customer">
-                            <td>
-                                @Html.TextBox("Customer_Code", "", new { @class = "clsCustomer_Code form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Customer_Name", "", new { @class = "clsCustomer_Name form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Contact_No", "", new { @class = "clsContact_No form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Email", "", new { @class = "clsEmail form-control" })
-                            </td>   
-                            <td>
-                                <a href="javascript:void(0);" title="Update" class="clsAddUpdateCustomer">Update</a>
-                                <a href="javascript:void(0);" title="Cancel" class="clsCancelCustomerUpdate">Cancel</a>
-                            </td>
-                        </tr>
-                    </table>
-                    <!--End of Master Row* -->
-
-                    <div id="dvCustomerList">
+                    <div id="dvCustomerList" style="width:650px; float:left;">
                         @Html.Partial("_CustomerList", Model)
+                    </div>
+                    <div id="divCustomerDetail" style="float:right;">
+                        @Html.Partial("_AddCustomer", Model)
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 
@@ -78,8 +34,7 @@
                 Common.setAttributeList(obj);
             },
             LoadCustomer: function () {
-              
-                //  var obj = Customerjs;
+                             
                 //initial load the Datatable setting.
                 Customerjs.ReinitiateDataTable('tblCustomerList');
 
@@ -122,12 +77,9 @@
                                 }
                             });
                         }
-
                     }
-
-
                 });
-                ///Get Row Data in Edit Mode
+                ///Get Data in Edit Mode
                 $("#Customer").find("#dvCustomerList").on("click", ".clsEditCustomer", function () {
 
                     var Customer_Id, data, urlPath;
@@ -135,7 +87,6 @@
                     Customer_Id = $(data).attr('data-Customer_id');
                     urlPath = "/Customer/GetCustomerByCustomerId";
                     if (Customer_Id != '') {
-                        $('.clsEditCustomer ,.clsDeleteCustomer').css('display', 'none');
                         $.ajax({
                             type: "Get",
                             cache: false,
@@ -153,15 +104,20 @@
                                 Common.showDialog.hide();
                             },
                             success: function (result) {
-                                $(data).hide();
-                                var row = $("#MasterRowEdit_Customer").clone();
+                                var row = $("#divCustomerDetail");
+                                $(row).find('.clsCustomer_Id').val(result.Customer_Id);
                                 $(row).find('.clsCustomer_Code').val(result.Customer_Code);                                
                                 $(row).find('.clsCustomer_Name').val(result.Customer_Name);
                                 $(row).find('.clsContact_No').val(result.Contact_No);
                                 $(row).find('.clsEmail').val(result.Email);
-                                $(row).removeAttr("style");
-                                $(row).attr("data-Customer_Id", Customer_Id);
-                                $(data).after(row);
+                                $(row).find('.clsAddress1').val(result.Address1);
+                                $(row).find('.clsAddress2').val(result.Address2);
+                                $(row).find('.clsCity').val(result.City);
+                                $(row).find('.clsState').val(result.State);
+                                $(row).find('.clsPinCode').val(result.PinCode);
+                                $(row).find('.clsTinNo').val(result.TinNo);
+                                $(row).find('.clsVatNo').val(result.VatNo);
+                                $(row).find('.clsNote').val(result.Note);                                                                                              
                             },
                             error: function (ex) {
                                 alert(ex.responseText);
@@ -170,40 +126,32 @@
                     }
 
                 });
-                $("#lnkAddNewCustomer").on('click', function () {
-                    var oTable = $('#tblCustomerList').dataTable();
-                    oTable.fnPageChange('first');
-                    //get the clone row.
-                    var row = $("#MasterRow_Customer").clone();
-                    $(row).removeAttr("style");
-                    $(row).find('.clsCustomer_Code').val('');
-                    $(row).find('.clsCustomer_Name').val('');
-                    $(row).find('.clsContact_No').val('');
-                    $(row).find('.clsEmail').val('');
-                    $("#tblCustomerList >tbody").prepend(row);// now will append the clone row to table.
-                });
                 ///Handle the Cancel update functionality
-                $("#Customer").find("#dvCustomerList").on("click", ".clsCancelCustomerUpdate", function () {
+                $("#Customer").find("#divCustomerDetail").on("click", "#btnCancelButton", function () {
+                  
+                    Customerjs.clearCustomerDetail();
 
-                    var data;
-                    data = $(this).parents('tr');
-                    $(data).closest('tr.edit-mode').hide();
-                    $(data).closest('tr').prev('tr.display-mode').show();
-                    $('.clsEditCustomer,.clsDeleteCustomer').removeAttr('style');
                 });
                 ///Handle the Add/update functionality
-                $("#Customer").find("#dvCustomerList").on("click", ".clsAddUpdateCustomer", function () {
-                   
+                $("#Customer").find("#divCustomerDetail").on("click", "#btnAddUpdateCustomer", function () {
+                                     
                     var Customer_Id, Customer_Name, data, urlPath;
                     var strValidationMsglists = "";
-
-                    data = $(this).parents('tr');
-                    Customer_Id = $(data).attr('data-Customer_Id');
-                    
+                   
+                    var data = $("#divCustomerDetail");
+                    Customer_Id = $(data).find(".clsCustomer_Id").val();
                     Customer_Name = $(data).find(".clsCustomer_Name").val();
                     Customer_Code = $(data).find(".clsCustomer_Code").val();
                     Contact_No = $(data).find(".clsContact_No").val();
                     Email = $(data).find(".clsEmail").val();
+                    Address1 = $(data).find(".clsAddress1").val();
+                    Address2 = $(data).find(".clsAddress2").val();
+                    City = $(data).find(".clsCity").val();
+                    State = $(data).find(".clsState").val();
+                    PinCode = $(data).find(".clsPinCode").val();
+                    TinNo = $(data).find(".clsTinNo").val();
+                    VatNo = $(data).find(".clsVatNo").val();
+                    Note = $(data).find(".clsNote").val();
                     //put validation here
 
                     if (Customer_Name == "")  {
@@ -212,9 +160,10 @@
                     if (Customer_Code == "")  {
                         strValidationMsglists = strValidationMsglists + "<li>Customer Code is required.</li>";
                     }
-                    if ((Contact_No == "") || ((fn_numbervalidation(Contact_No)))) {
-                        strValidationMsglists = strValidationMsglists + "<li>Manufacturing Days is required and it shouldn’t be numeric.</li>";
+                    if (Email != "" && ! isEmail(Email)) {
+                        strValidationMsglists = strValidationMsglists + "<li>Enter a valid Email.</li>";
                     }
+                  
                     if (strValidationMsglists != "") {
                         strValidationMsglists = "<ol>" + strValidationMsglists + "</ol>"
                         fn_ShowHideUserMessageDivWithCssClass_common('divDisplayCustomerMessages', strValidationMsglists, true, 'alert alert-danger'); //common function to display error message.
@@ -231,7 +180,15 @@
                                 Customer_Code: Customer_Code, 
                                 Customer_Name: Customer_Name,
                                 Contact_No: Contact_No,
-                                Email: Email
+                                Email: Email,
+                                Address1: Address1,
+                                Address2: Address2,
+                                City: City,
+                                State: State,
+                                PinCode: PinCode,
+                                TinNo: TinNo,
+                                VatNo: VatNo,
+                                Note: Note,
                             },
                             beforeSend: function () {
                                 Common.showDialog.show('Please wait....', {
@@ -245,6 +202,7 @@
                             success: function (result) {
                                 if (result.operationstatuscode == 1 || result.operationstatuscode == 2) {
                                     fn_ShowHideUserMessageDivWithCssClass_common('divDisplayCustomerMessages', result.messagedata, true, 'alert alert-success');
+                                    Customerjs.clearCustomerDetail();
                                     Customerjs.fn_ReloadCustomerGrid();
                                 }
                                 else {
@@ -288,11 +246,8 @@
                         }
                     });
                 }
-
-
             },
             ReinitiateDataTable: function (tableId) {
-
 
                 $("#" + tableId).DataTable(
                 {
@@ -304,6 +259,22 @@
                      }]
                 }
                   );
+            },
+            clearCustomerDetail: function(){
+                var row = $("#divCustomerDetail");
+                $(row).find('.clsCustomer_Id').val('-1');
+                $(row).find('.clsCustomer_Code').val('');
+                $(row).find('.clsCustomer_Name').val('');
+                $(row).find('.clsContact_No').val('');
+                $(row).find('.clsEmail').val('');
+                $(row).find('.clsAddress1').val('');
+                $(row).find('.clsAddress2').val('');
+                $(row).find('.clsCity').val('');
+                $(row).find('.clsState').val('');
+                $(row).find('.clsPinCode').val('');
+                $(row).find('.clsTinNo').val('');
+                $(row).find('.clsVatNo').val('');
+                $(row).find('.clsNote').val('');
             }
 
         }

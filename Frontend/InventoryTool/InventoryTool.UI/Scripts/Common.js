@@ -234,7 +234,6 @@ function fn_closeMe(obj)
 }
 
 // common name validation
-
 function fn_textvalidation(name) {
     var value
     var condition = /^[0-9]+$/;
@@ -257,7 +256,6 @@ function fn_Decimalvalidation(name) {
     value = !condition.test(name);
     return value;
 }
-
 // Removing commas and converting to integer
 function fn_RemovingCommas(number)
 {
@@ -271,13 +269,17 @@ function fn_RemovingCommas(number)
         return 0;
     }
 }
-
 //Keeping commas
 function fn_KeepingCommas(x) {
     
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
+}
+//validate Email
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
 }
 
 

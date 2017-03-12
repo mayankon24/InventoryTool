@@ -664,6 +664,7 @@
     <Content Include="Views\Customer\CustomerIndex.cshtml" />
     <Content Include="Views\Supplier\_SupplierList.cshtml" />
     <Content Include="Views\Supplier\SupplierIndex.cshtml" />
+    <Content Include="Views\Customer\_AddCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

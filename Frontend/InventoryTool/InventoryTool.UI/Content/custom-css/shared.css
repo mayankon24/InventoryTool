@@ -342,8 +342,10 @@ a:hover {
     background: -moz-linear-gradient(to bottom, rgb(191,191,191) 0%,rgb(216,216,216) 100%);
     background: -o-linear-gradient(to bottom, rgb(191,191,191) 0%,rgb(216,216,216) 100%);
 }
-
-.myButton {
+/***************************************************************************************************
+                                             Button
+***************************************************************************************************/
+.saveButton {
 	background-color:#44c767;
 	-moz-border-radius:28px;
 	-webkit-border-radius:28px;
@@ -354,15 +356,51 @@ a:hover {
 	color:#ffffff;
 	font-family:Arial;
 	font-size:17px;
-	padding:10px 30px;
+	padding:8px 30px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 }
-.myButton:hover {
+.saveButton:hover {
 	background-color:#5cbf2a;
 }
-.myButton:active {
+.saveButton:active {
 	position:relative;
 	top:1px;
 }
 
+.cancelButton {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
+	background:-moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:-webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:-o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:-ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
+	background-color:#fe1a00;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #d83526;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:8px 30px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.cancelButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
+	background:-moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:-webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:-o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:-ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
+	background-color:#ce0100;
+}
+.cancelButton:active {
+	position:relative;
+	top:1px;
+}
