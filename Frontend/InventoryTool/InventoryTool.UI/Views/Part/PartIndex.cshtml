@@ -44,6 +44,9 @@
                             </td>
                             <td>
                                 @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
+                            </td>                             
+                            <td>                                
+                                @Html.TextBox("Min_Quantity", "", new { @class = "clsMin_Quantity form-control" })
                             </td> 
                             <td>
                                 @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
@@ -77,6 +80,9 @@
                             </td>
                             <td>
                                 @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
+                            </td> 
+                            <td>
+                                @Html.TextBox("Min_Quantity", "", new { @class = "clsMin_Quantity form-control" })
                             </td> 
                             <td>
                                 @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
@@ -192,6 +198,7 @@
                                 $(row).find('.clsColor_Id').val(result.Color_Id);
                                 $(row).find('.clsMaterial_Id').val(result.Material_Id);
                                 $(row).find('.clsCriticality_Id').val(result.Criticality_Id);
+                                $(row).find('.clsMin_Quantity').val(result.Min_Quantity);
                                 $(row).find('.clsUnit_Id').val(result.Unit_Id);
                                 $(row).removeAttr("style");
                                 $(row).attr("data-Part_Id", Part_Id);
@@ -211,7 +218,8 @@
                     var row = $("#MasterRow_Part").clone();
                     $(row).removeAttr("style");
                     $(row).find('.clsPart_Code').val('');
-                    $(row).find('.clsPart_Name').val('');                  
+                    $(row).find('.clsPart_Name').val('');
+                    $(row).find('.clsMin_Quantity').val('');                    
                     $("#tblPartList >tbody").prepend(row);// now will append the clone row to table.
                 });
                 ///Handle the Cancel update functionality
@@ -240,6 +248,7 @@
                     Color_Id = $(data).find('.clsColor_Id').val();
                     Material_Id = $(data).find('.clsMaterial_Id').val();
                     Criticality_Id = $(data).find('.clsCriticality_Id').val();
+                    Min_Quantity = $(data).find(".clsMin_Quantity").val();
                     Unit_Id = $(data).find('.clsUnit_Id').val();
                     //put validation here
 
@@ -291,6 +300,7 @@
                                 Color_Id:Color_Id,
                                 Material_Id: Material_Id,
                                 Criticality_Id: Criticality_Id,
+                                Min_Quantity: Min_Quantity,
                                 Unit_Id: Unit_Id
                             },
                             beforeSend: function () {
