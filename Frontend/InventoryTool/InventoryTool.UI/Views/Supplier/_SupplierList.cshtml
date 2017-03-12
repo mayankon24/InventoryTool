@@ -1,10 +1,18 @@
-﻿<table style="width:100%;" cellspacing="0" class="table table-bordred" id="tblSupplierList">
+﻿<table class="table table-bordred" id="tblSupplierList">
     <thead>
         <tr>
             <th style="text-align:left">Supplier Code</th>
             <th style="text-align:left">Supplier Name</th>
-            <th style="text-align:left">Manufacturing Days</th>
-            <th style="text-align:left">Description</th>
+            <th style="text-align:left">Contact No</th>
+            <th style="text-align:left">Email</th>
+            @*<th style="text-align:left">Address1</th>
+                <th style="text-align:left">Address2</th>*@
+            <th style="text-align:left">City</th>
+            @*<th style="text-align:left">State</th>
+                <th style="text-align:left">Pin Code</th>
+                <th style="text-align:left">Tin No</th>
+                <th style="text-align:left">Vat No</th>
+                <th style="text-align:left">Note</th>*@
             <th class="action-col"></th>
         </tr>
     </thead>
@@ -15,23 +23,47 @@
             {
                 //Display mode row start here
                 <tr data-Supplier_Id="@data.Supplier_Id" class="display-mode">
-                    <td title="@data.Supplier_Code" style="width:90%">
+                    <td title="@data.Supplier_Code">
                         @data.Supplier_Code
                     </td>
-                    <td title="@data.Supplier_Name" style="width:90%">
+                    <td title="@data.Supplier_Name">
                         @data.Supplier_Name
                     </td>
-                    <td title="@data.Manufacturing_Days" style="width:90%">
-                        @data.Manufacturing_Days
+                    <td title="@data.Contact_No">
+                        @data.Contact_No
                     </td>
-                    <td title="@data.Description" style="width:90%">
-                        @data.Description
-                    </td>                    
-                    <td class="clsAction" style="width:10%">
+                    <td title="@data.Email">
+                        @data.Email
+                    </td>
+                    @*<td title="@data.Address1" >
+                            @data.Address1
+                        </td>
+                        <td title="@data.Address2" >
+                            @data.Address2
+                        </td>*@
+                    <td title="@data.City">
+                        @data.City
+                    </td>
+                    @*<td title="@data.State" >
+                            @data.State
+                        </td>
+                        <td title="@data.PinCode" >
+                            @data.PinCode
+                        </td>
+                        <td title="@data.TinNo" >
+                            @data.TinNo
+                        </td>
+                        <td title="@data.VatNo" >
+                            @data.VatNo
+                        </td>
+                        <td title="@data.Note" >
+                            @data.Note
+                        </td>*@
+                    <td class="clsAction">
                         <a href="javascript:void(0);" title="Edit" class="clsEditSupplier">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="javascript:void(0);" title="Delete" class="clsDeleteSupplier" @*name="deleteSupplier"*@>
+                        <a href="javascript:void(0);" title="Delete" class="clsDeleteSupplier">
                             <span class="glyphicon glyphicon-remove-sign"></span>
                         </a>
                     </td>

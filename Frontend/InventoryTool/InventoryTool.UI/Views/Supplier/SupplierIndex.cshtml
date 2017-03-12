@@ -8,60 +8,16 @@
 <link href="~/Content/custom-css/shared.css" rel="stylesheet" />
 <div role="tabpanel" class="tab-pane active" id="Supplier">
     <div class="container">
-        <div style="margin-top:23px">
-            <div class="panel panel-default" style="margin-bottom:25px">
-                <div style="margin-top:1%">
-                    <label style="margin-left:30px">Supplier</label><br />
-                    <a href="javascript:void(0)" id="lnkAddNewSupplier" style="color:#01A4EF;text-decoration:underline;margin-left:30px; ">
-                        <span class="glyphicon glyphicon-plus-sign"></span>
-                        Add New Item
-                    </a>
-                    <div id="divDisplaySupplierMessages">
-                    </div>
-                    @* This row will use in clone*@
-                    <table id="tblMasterSupplier" style="display:none">
-                        <tr data-Supplier_Id="-1" id="MasterRow_Supplier">
-                            <td>
-                                @Html.TextBox("Supplier_Code", "", new { @class = "clsSupplier_Code form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Supplier_Name", "", new { @class = "clsSupplier_Name form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Manufacturing_Days", "", new { @class = "clsManufacturing_Days form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Description", "", new { @class = "clsDescription form-control" })
-                            </td>                            
-                            <td>
-                                <a href="javascript:void(0);" title="Save" class="clsAddUpdateSupplier">  Save</a>
-                                <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
-                            </td>
-                        </tr>
-                        <tr data-Supplier_Id="" class="edit-mode" id="MasterRowEdit_Supplier">
-                            <td>
-                                @Html.TextBox("Supplier_Code", "", new { @class = "clsSupplier_Code form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Supplier_Name", "", new { @class = "clsSupplier_Name form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Manufacturing_Days", "", new { @class = "clsManufacturing_Days form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Description", "", new { @class = "clsDescription form-control" })
-                            </td>   
-                            <td>
-                                <a href="javascript:void(0);" title="Update" class="clsAddUpdateSupplier">Update</a>
-                                <a href="javascript:void(0);" title="Cancel" class="clsCancelSupplierUpdate">Cancel</a>
-                            </td>
-                        </tr>
-                    </table>
-                    <!--End of Master Row* -->
-
-                    <div id="dvSupplierList">
-                        @Html.Partial("_SupplierList", Model)
-                    </div>
+        <div class="panel panel-default" style="margin-bottom:25px; margin-top:23px">
+            <div style="margin-top:1%">
+                <label style="margin-left:30px;">Supplier</label><br />
+                <div id="divDisplaySupplierMessages">
+                </div>
+                <div id="dvSupplierList" style="width:650px; float:left;">
+                    @Html.Partial("_SupplierList", Model)
+                </div>
+                <div id="divSupplierDetail" style="float:right;">
+                    @Html.Partial("_AddSupplier", Model)
                 </div>
             </div>
         </div>
@@ -69,22 +25,21 @@
 </div>
 
 <script type="text/javascript">
-   
+
     $(document).ready(function () {
         var Supplierjs = {
             init: function () {
-                var obj = Supplierjs;                
+                var obj = Supplierjs;
                 obj.LoadSupplier();
                 Common.setAttributeList(obj);
             },
             LoadSupplier: function () {
-              
-                //  var obj = Supplierjs;
+
                 //initial load the Datatable setting.
                 Supplierjs.ReinitiateDataTable('tblSupplierList');
 
                 $("#Supplier").find("#dvSupplierList").on("click", ".clsDeleteSupplier", function () {
-                   
+
                     var data, Supplier_Id, urlPath;
                     var promptdelete = confirm('Are you sure you want to delete this record? There could be dependent budget requests which may get impacted based on this action');
                     if (promptdelete) {
@@ -122,12 +77,9 @@
                                 }
                             });
                         }
-
                     }
-
-
                 });
-                ///Get Row Data in Edit Mode
+                ///Get Data in Edit Mode
                 $("#Supplier").find("#dvSupplierList").on("click", ".clsEditSupplier", function () {
 
                     var Supplier_Id, data, urlPath;
@@ -135,7 +87,6 @@
                     Supplier_Id = $(data).attr('data-Supplier_id');
                     urlPath = "/Supplier/GetSupplierBySupplierId";
                     if (Supplier_Id != '') {
-                        $('.clsEditSupplier ,.clsDeleteSupplier').css('display', 'none');
                         $.ajax({
                             type: "Get",
                             cache: false,
@@ -153,15 +104,20 @@
                                 Common.showDialog.hide();
                             },
                             success: function (result) {
-                                $(data).hide();
-                                var row = $("#MasterRowEdit_Supplier").clone();
-                                $(row).find('.clsSupplier_Code').val(result.Supplier_Code);                                
+                                var row = $("#divSupplierDetail");
+                                $(row).find('.clsSupplier_Id').val(result.Supplier_Id);
+                                $(row).find('.clsSupplier_Code').val(result.Supplier_Code);
                                 $(row).find('.clsSupplier_Name').val(result.Supplier_Name);
-                                $(row).find('.clsManufacturing_Days').val(result.Manufacturing_Days);
-                                $(row).find('.clsDescription').val(result.Description);
-                                $(row).removeAttr("style");
-                                $(row).attr("data-Supplier_Id", Supplier_Id);
-                                $(data).after(row);
+                                $(row).find('.clsContact_No').val(result.Contact_No);
+                                $(row).find('.clsEmail').val(result.Email);
+                                $(row).find('.clsAddress1').val(result.Address1);
+                                $(row).find('.clsAddress2').val(result.Address2);
+                                $(row).find('.clsCity').val(result.City);
+                                $(row).find('.clsState').val(result.State);
+                                $(row).find('.clsPinCode').val(result.PinCode);
+                                $(row).find('.clsTinNo').val(result.TinNo);
+                                $(row).find('.clsVatNo').val(result.VatNo);
+                                $(row).find('.clsNote').val(result.Note);
                             },
                             error: function (ex) {
                                 alert(ex.responseText);
@@ -170,40 +126,32 @@
                     }
 
                 });
-                $("#lnkAddNewSupplier").on('click', function () {
-                    var oTable = $('#tblSupplierList').dataTable();
-                    oTable.fnPageChange('first');
-                    //get the clone row.
-                    var row = $("#MasterRow_Supplier").clone();
-                    $(row).removeAttr("style");
-                    $(row).find('.clsSupplier_Code').val('');
-                    $(row).find('.clsSupplier_Name').val('');
-                    $(row).find('.clsManufacturing_Days').val('');
-                    $(row).find('.clsDescription').val('');
-                    $("#tblSupplierList >tbody").prepend(row);// now will append the clone row to table.
-                });
                 ///Handle the Cancel update functionality
-                $("#Supplier").find("#dvSupplierList").on("click", ".clsCancelSupplierUpdate", function () {
+                $("#Supplier").find("#divSupplierDetail").on("click", "#btnCancelButton", function () {
 
-                    var data;
-                    data = $(this).parents('tr');
-                    $(data).closest('tr.edit-mode').hide();
-                    $(data).closest('tr').prev('tr.display-mode').show();
-                    $('.clsEditSupplier,.clsDeleteSupplier').removeAttr('style');
+                    Supplierjs.clearSupplierDetail();
+
                 });
                 ///Handle the Add/update functionality
-                $("#Supplier").find("#dvSupplierList").on("click", ".clsAddUpdateSupplier", function () {
-                   
+                $("#Supplier").find("#divSupplierDetail").on("click", "#btnAddUpdateSupplier", function () {
+
                     var Supplier_Id, Supplier_Name, data, urlPath;
                     var strValidationMsglists = "";
 
-                    data = $(this).parents('tr');
-                    Supplier_Id = $(data).attr('data-Supplier_Id');
-                    
+                    var data = $("#divSupplierDetail");
+                    Supplier_Id = $(data).find(".clsSupplier_Id").val();
                     Supplier_Name = $(data).find(".clsSupplier_Name").val();
                     Supplier_Code = $(data).find(".clsSupplier_Code").val();
-                    Manufacturing_Days = $(data).find(".clsManufacturing_Days").val();
-                    Description = $(data).find(".clsDescription").val();
+                    Contact_No = $(data).find(".clsContact_No").val();
+                    Email = $(data).find(".clsEmail").val();
+                    Address1 = $(data).find(".clsAddress1").val();
+                    Address2 = $(data).find(".clsAddress2").val();
+                    City = $(data).find(".clsCity").val();
+                    State = $(data).find(".clsState").val();
+                    PinCode = $(data).find(".clsPinCode").val();
+                    TinNo = $(data).find(".clsTinNo").val();
+                    VatNo = $(data).find(".clsVatNo").val();
+                    Note = $(data).find(".clsNote").val();
                     //put validation here
 
                     if (Supplier_Name == "")  {
@@ -212,9 +160,10 @@
                     if (Supplier_Code == "")  {
                         strValidationMsglists = strValidationMsglists + "<li>Supplier Code is required.</li>";
                     }
-                    if ((Manufacturing_Days == "") || ((fn_numbervalidation(Manufacturing_Days)))) {
-                        strValidationMsglists = strValidationMsglists + "<li>Manufacturing Days is required and it shouldn’t be numeric.</li>";
+                    if (Email != "" && ! isEmail(Email)) {
+                        strValidationMsglists = strValidationMsglists + "<li>Enter a valid Email.</li>";
                     }
+
                     if (strValidationMsglists != "") {
                         strValidationMsglists = "<ol>" + strValidationMsglists + "</ol>"
                         fn_ShowHideUserMessageDivWithCssClass_common('divDisplaySupplierMessages', strValidationMsglists, true, 'alert alert-danger'); //common function to display error message.
@@ -228,10 +177,18 @@
                             url: urlPath,
                             data: {
                                 Supplier_Id: Supplier_Id,
-                                Supplier_Code: Supplier_Code, 
+                                Supplier_Code: Supplier_Code,
                                 Supplier_Name: Supplier_Name,
-                                Manufacturing_Days: Manufacturing_Days,
-                                Description: Description
+                                Contact_No: Contact_No,
+                                Email: Email,
+                                Address1: Address1,
+                                Address2: Address2,
+                                City: City,
+                                State: State,
+                                PinCode: PinCode,
+                                TinNo: TinNo,
+                                VatNo: VatNo,
+                                Note: Note,
                             },
                             beforeSend: function () {
                                 Common.showDialog.show('Please wait....', {
@@ -245,6 +202,7 @@
                             success: function (result) {
                                 if (result.operationstatuscode == 1 || result.operationstatuscode == 2) {
                                     fn_ShowHideUserMessageDivWithCssClass_common('divDisplaySupplierMessages', result.messagedata, true, 'alert alert-success');
+                                    Supplierjs.clearSupplierDetail();
                                     Supplierjs.fn_ReloadSupplierGrid();
                                 }
                                 else {
@@ -288,11 +246,8 @@
                         }
                     });
                 }
-
-
             },
             ReinitiateDataTable: function (tableId) {
-
 
                 $("#" + tableId).DataTable(
                 {
@@ -304,6 +259,22 @@
                      }]
                 }
                   );
+            },
+            clearSupplierDetail: function(){
+                var row = $("#divSupplierDetail");
+                $(row).find('.clsSupplier_Id').val('-1');
+                $(row).find('.clsSupplier_Code').val('');
+                $(row).find('.clsSupplier_Name').val('');
+                $(row).find('.clsContact_No').val('');
+                $(row).find('.clsEmail').val('');
+                $(row).find('.clsAddress1').val('');
+                $(row).find('.clsAddress2').val('');
+                $(row).find('.clsCity').val('');
+                $(row).find('.clsState').val('');
+                $(row).find('.clsPinCode').val('');
+                $(row).find('.clsTinNo').val('');
+                $(row).find('.clsVatNo').val('');
+                $(row).find('.clsNote').val('');
             }
 
         }
