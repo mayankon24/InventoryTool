@@ -33,6 +33,7 @@ namespace InventoryTool.Provider
         public virtual DbSet<TX_Part_Stock> TX_Part_Stock { get; set; }
         public virtual DbSet<M_Customer> M_Customer { get; set; }
         public virtual DbSet<M_Supplier> M_Supplier { get; set; }
+        public virtual DbSet<vw_MinimumBalance> vw_MinimumBalance { get; set; }
     
         public virtual int DeleteProduct(Nullable<int> product_Id, string lastModifiedBy, ObjectParameter return_Status)
         {

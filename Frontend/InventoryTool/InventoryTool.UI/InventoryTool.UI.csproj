@@ -261,6 +261,7 @@
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\PartStockController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -666,6 +667,8 @@
     <Content Include="Views\Supplier\SupplierIndex.cshtml" />
     <Content Include="Views\Customer\_AddCustomer.cshtml" />
     <Content Include="Views\Supplier\_AddSupplier.cshtml" />
+    <Content Include="Views\Report\ReportIndex.cshtml" />
+    <Content Include="Views\Report\_MinBalanceReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

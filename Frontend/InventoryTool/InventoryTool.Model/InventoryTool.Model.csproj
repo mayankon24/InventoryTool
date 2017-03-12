@@ -128,6 +128,9 @@
     <Compile Include="UpdatePartStock.cs" />
     <Compile Include="VMPartStock.cs" />
     <Compile Include="VMPart.cs" />
+    <Compile Include="vw_MinimumBalance.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="InventoryToolModel.Context.tt">
