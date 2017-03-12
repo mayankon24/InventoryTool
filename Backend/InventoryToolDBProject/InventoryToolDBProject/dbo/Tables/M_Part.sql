@@ -9,6 +9,7 @@
     [Color_Id]            INT            NULL,
     [Material_Id]         INT            NULL,
     [Criticality_Id]      INT            NULL,
+    [Min_Quantity]        INT            NULL,
     [CreatedBy]           NVARCHAR (100) NULL,
     [CreatedUTCDate]      DATETIME       NULL,
     [LastModifiedBy]      NVARCHAR (100) NULL,
@@ -23,6 +24,8 @@
     CONSTRAINT [FK_M_Part_LK_Part_Type] FOREIGN KEY ([Part_Type_Id]) REFERENCES [dbo].[LK_Part_Type] ([Part_Type_Id]),
     CONSTRAINT [FK_M_Part_LK_Unit] FOREIGN KEY ([Unit_Id]) REFERENCES [dbo].[LK_Unit] ([Unit_Id])
 );
+
+
 
 
 

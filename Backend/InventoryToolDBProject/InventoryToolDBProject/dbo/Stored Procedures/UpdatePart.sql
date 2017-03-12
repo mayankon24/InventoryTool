@@ -1,7 +1,7 @@
 ﻿
 --declare @returnStatus INT
 --exec UpdatePart -1,4,2,'256','259',1,1,2,5,2,'', @return_Status = @returnStatus output
-create PROCEDURE [dbo].[UpdatePart] (
+CREATE PROCEDURE [dbo].[UpdatePart] (
 	@Part_Id INT
 	,@Part_Type_Id int
 	,@Outsource_Type_Id int
@@ -11,7 +11,8 @@ create PROCEDURE [dbo].[UpdatePart] (
 	,@Category_Id int
 	,@Color_Id int
 	,@Material_Id int
-	,@Criticality_Id int					
+	,@Criticality_Id int
+	,@Min_Quantity int					
 	,@ModifiedBy NVARCHAR(100)
 	,@return_Status INT OUTPUT
 )
@@ -50,6 +51,7 @@ BEGIN TRANSACTION
 						,[Color_Id]
 						,[Material_Id]
 						,Criticality_Id
+						,Min_Quantity
 						,[CreatedBy]
 						,[CreatedUTCDate]
 						,[LastModifiedBy]
@@ -65,6 +67,7 @@ BEGIN TRANSACTION
 						,@Color_Id
 						,@Material_Id
 						,@Criticality_Id
+						,@Min_Quantity
 						,@ModifiedBy
 						,getutcdate()
 						,null
@@ -87,7 +90,7 @@ BEGIN TRANSACTION
 								,[Color_Id] = @Color_Id
 								,[Material_Id] = @Material_Id
 								,Criticality_Id= @Criticality_Id
-									 
+							    ,Min_Quantity = @Min_Quantity
 							WHERE Part_Id = @Part_Id
 
 

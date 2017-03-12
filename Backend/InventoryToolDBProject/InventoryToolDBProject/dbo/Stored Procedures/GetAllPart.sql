@@ -9,6 +9,7 @@ SELECT [Part_Id]
 	  ,O.Outsource_Type
       ,[Part_Code]
       ,[Part_Name]
+	  ,Min_Quantity
 	  ,U.Unit_Id
 	  ,U.Unit_Name
       ,C.Category_Id
