@@ -30,5 +30,6 @@ namespace InventoryTool.Model
         public string Outsource_Type { get; set; }
         public Nullable<int> Criticality_Id { get; set; }
         public string Criticality_Name { get; set; }
+        public Nullable<int> Min_Quantity { get; set; }
     }
 }

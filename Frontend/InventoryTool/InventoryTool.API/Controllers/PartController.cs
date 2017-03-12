@@ -19,7 +19,8 @@ namespace InventoryTool.API.Controllers
             var return_Status = new ObjectParameter("return_Status", typeof(int));
             using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
             {
-                entity.UpdatePart(Part.Part_Id, Part.Part_Type_Id, Part.Outsource_Type_Id, Part.Part_Code, Part.Part_Name, Part.Unit_Id, Part.Category_Id, Part.Color_Id, Part.Material_Id,Part.Criticality_Id, Part.LastModifiedBy, return_Status);
+                entity.UpdatePart(Part.Part_Id, Part.Part_Type_Id, Part.Outsource_Type_Id, Part.Part_Code, Part.Part_Name, Part.Unit_Id,
+                    Part.Category_Id, Part.Color_Id, Part.Material_Id,Part.Criticality_Id, Part.Min_Quantity, Part.LastModifiedBy, return_Status);
                 return Ok(return_Status.Value);
             }
         }
@@ -60,7 +61,8 @@ namespace InventoryTool.API.Controllers
                     Part_Type = s.Part_Type,
                     Unit_Name = s.Unit_Name,
                     Criticality_Id = s.Criticality_Id,
-                    Criticality_Name = s.Criticality_Name
+                    Criticality_Name = s.Criticality_Name,
+                    Min_Quantity = s.Min_Quantity
 
                 }).ToList();
                 return RetVal;

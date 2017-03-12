@@ -42,6 +42,7 @@
           <Property Name="Color_Id" Type="int" />
           <Property Name="Material_Id" Type="int" />
           <Property Name="Criticality_Id" Type="int" />
+          <Property Name="Min_Quantity" Type="int" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedUTCDate" Type="datetime" />
           <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="100" />
@@ -194,6 +195,7 @@
           <Parameter Name="Color_Id" Type="int" Mode="In" />
           <Parameter Name="Material_Id" Type="int" Mode="In" />
           <Parameter Name="Criticality_Id" Type="int" Mode="In" />
+          <Parameter Name="Min_Quantity" Type="int" Mode="In" />
           <Parameter Name="ModifiedBy" Type="nvarchar" Mode="In" />
           <Parameter Name="return_Status" Type="int" Mode="InOut" />
         </Function>
@@ -287,6 +289,7 @@
             <Parameter Name="Color_Id" Mode="In" Type="Int32" />
             <Parameter Name="Material_Id" Mode="In" Type="Int32" />
             <Parameter Name="Criticality_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Min_Quantity" Mode="In" Type="Int32" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
             <Parameter Name="return_Status" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -400,6 +403,7 @@
           <Property Name="Unit_Id" Type="Int32" />
           <Property Name="Criticality_Id" Type="Int32" />
           <NavigationProperty Name="TX_Part_Stock" Relationship="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" FromRole="M_Part" ToRole="TX_Part_Stock" />
+          <Property Name="Min_Quantity" Type="Int32" />
         </EntityType>
         <ComplexType Name="GetAllPart_Result">
           <Property Type="Int32" Name="Part_Id" Nullable="false" />
@@ -419,6 +423,7 @@
           <Property Type="String" Name="Outsource_Type" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Criticality_Id" Nullable="true" />
           <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Min_Quantity" Nullable="true" />
           </ComplexType>
         <EntityType Name="M_Product">
           <Key>
@@ -618,6 +623,7 @@
           <EntitySetMapping Name="M_Part">
             <EntityTypeMapping TypeName="InventoryToolDBModel.M_Part">
               <MappingFragment StoreEntitySet="M_Part">
+                <ScalarProperty Name="Min_Quantity" ColumnName="Min_Quantity" />
                 <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
                 <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -657,6 +663,7 @@
                 <ScalarProperty Name="Outsource_Type" ColumnName="Outsource_Type" />
                 <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
                 <ScalarProperty Name="Criticality_Name" ColumnName="Criticality_Name" />
+                <ScalarProperty Name="Min_Quantity" ColumnName="Min_Quantity" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

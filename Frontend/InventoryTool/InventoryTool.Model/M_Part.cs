@@ -35,6 +35,7 @@ namespace InventoryTool.Model
         public bool IsActive { get; set; }
         public Nullable<int> Unit_Id { get; set; }
         public Nullable<int> Criticality_Id { get; set; }
+        public Nullable<int> Min_Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TX_Part_Stock> TX_Part_Stock { get; set; }
