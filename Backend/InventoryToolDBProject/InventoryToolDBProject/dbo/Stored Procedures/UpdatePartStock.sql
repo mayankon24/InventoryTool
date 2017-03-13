@@ -76,7 +76,7 @@ end
            ,[In_Quantity]
            ,[Out_Quantity]
 		   ,[Action_Guid]
-		   ,[Is_Transfer]
+		   ,StoreTransferType_Id
            ,[Description]
            ,[CreatedBy]
            ,[CreatedUTCDate]
@@ -90,7 +90,7 @@ end
 			,temp.In_Quantity
 			,temp.Out_Quantity
 			,@Action_Guid
-			,case when @StoreTransferType_Id = 3 then 1 else 0 end as Is_Transfer
+			,@StoreTransferType_Id
 			,@Description as Description
 			,@ModifiedBy as CreatedBy
 			,getutcdate() as CreatedUTCDate
