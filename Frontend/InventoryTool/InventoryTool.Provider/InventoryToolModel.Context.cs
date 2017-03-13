@@ -30,10 +30,10 @@ namespace InventoryTool.Provider
     
         public virtual DbSet<M_Part> M_Part { get; set; }
         public virtual DbSet<M_Product> M_Product { get; set; }
-        public virtual DbSet<TX_Part_Stock> TX_Part_Stock { get; set; }
         public virtual DbSet<M_Customer> M_Customer { get; set; }
         public virtual DbSet<M_Supplier> M_Supplier { get; set; }
         public virtual DbSet<vw_MinimumBalance> vw_MinimumBalance { get; set; }
+        public virtual DbSet<TX_Part_Stock> TX_Part_Stock { get; set; }
     
         public virtual int DeleteProduct(Nullable<int> product_Id, string lastModifiedBy, ObjectParameter return_Status)
         {
@@ -440,6 +440,15 @@ namespace InventoryTool.Provider
         public virtual ObjectResult<GetAllCustomer_Result> GetAllCustomer()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllCustomer_Result>("GetAllCustomer");
+        }
+    
+        public virtual ObjectResult<GetStockPartDetailReport_Result> GetStockPartDetailReport(Nullable<int> part_Id)
+        {
+            var part_IdParameter = part_Id.HasValue ?
+                new ObjectParameter("Part_Id", part_Id) :
+                new ObjectParameter("Part_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStockPartDetailReport_Result>("GetStockPartDetailReport", part_IdParameter);
         }
     }
 }

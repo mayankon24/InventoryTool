@@ -10,25 +10,20 @@
 namespace InventoryTool.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TX_Part_Stock
+    public partial class GetStockPartDetailReport_Result
     {
         public long Part_Stock_Id { get; set; }
-        public Nullable<int> Part_Id { get; set; }
-        public Nullable<int> Store_Id { get; set; }
+        public int Part_Id { get; set; }
+        public string Part_Name { get; set; }
+        public int Store_Id { get; set; }
+        public string Store_Name { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> In_Quantity { get; set; }
         public Nullable<int> Out_Quantity { get; set; }
         public Nullable<System.Guid> Action_Guid { get; set; }
-        public Nullable<int> StoreTransferType_Id { get; set; }
+        public int StoreTransferType_Id { get; set; }
+        public string StoreTransferType_Name { get; set; }
         public string Description { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedUTCDate { get; set; }
-        public string LastModifiedBy { get; set; }
-        public Nullable<System.DateTime> LastModifiedUTCDate { get; set; }
-        public bool IsActive { get; set; }
-    
-        public virtual M_Part M_Part { get; set; }
     }
 }

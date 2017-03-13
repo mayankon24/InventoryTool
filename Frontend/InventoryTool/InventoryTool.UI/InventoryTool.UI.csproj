@@ -267,6 +267,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ViewHelper.cs" />
     <Compile Include="Models\AdalTokenCache.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Helper\ConfigExtension.cs" />
@@ -633,6 +634,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Customer\CustomerIndex.cshtml" />
+    <Content Include="Views\Customer\_AddCustomer.cshtml" />
+    <Content Include="Views\Customer\_CustomerList.cshtml" />
+    <Content Include="Views\Supplier\SupplierIndex.cshtml" />
+    <Content Include="Views\Supplier\_AddSupplier.cshtml" />
+    <Content Include="Views\Supplier\_SupplierList.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -661,15 +668,13 @@
     <Content Include="Views\PartStock\_FilterPanel.cshtml" />
     <Content Include="Views\PartStock\_FilterList.cshtml" />
     <Content Include="Views\PartStock\_StockEntry.cshtml" />
-    <Content Include="Views\Report\ReportIndex.cshtml" />
     <Content Include="Views\Report\_MinBalanceReport.cshtml" />
+    <Content Include="Views\Report\_StockPartDetailReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\PartStock\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\Customer\" />
-    <Folder Include="Views\Supplier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

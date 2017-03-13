@@ -98,7 +98,7 @@
           <Property Name="In_Quantity" Type="int" />
           <Property Name="Out_Quantity" Type="int" />
           <Property Name="Action_Guid" Type="uniqueidentifier" />
-          <Property Name="Is_Transfer" Type="bit" />
+          <Property Name="StoreTransferType_Id" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedUTCDate" Type="datetime" />
@@ -188,6 +188,9 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Parameter Name="Color_Id" Type="int" Mode="In" />
           <Parameter Name="Material_Id" Type="int" Mode="In" />
           <Parameter Name="Criticality_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStockPartDetailReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Part_Id" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertErrorLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Window_Id" Type="int" Mode="In" />
@@ -353,7 +356,6 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <FunctionImport Name="GetAllUnit" ReturnType="Collection(InventoryToolDBModel.GetAllUnit_Result)" />
           <FunctionImport Name="GetAllCriticality" ReturnType="Collection(InventoryToolDBModel.GetAllCriticality_Result)" />
           <FunctionImport Name="GetAllStore" ReturnType="Collection(InventoryToolDBModel.GetAllStore_Result)" />
-          <EntitySet Name="TX_Part_Stock" EntityType="InventoryToolDBModel.TX_Part_Stock" />
           <FunctionImport Name="UpdatePartStock">
             <Parameter Name="FromStore_Id" Mode="In" Type="Int32" />
             <Parameter Name="ToStore_Id" Mode="In" Type="Int32" />
@@ -374,10 +376,6 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
             <Parameter Name="Material_Id" Mode="In" Type="Int32" />
             <Parameter Name="Criticality_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK_TX_Part_Stock_M_Part" Association="InventoryToolDBModel.FK_TX_Part_Stock_M_Part">
-            <End Role="M_Part" EntitySet="M_Part" />
-            <End Role="TX_Part_Stock" EntitySet="TX_Part_Stock" />
-          </AssociationSet>
           <FunctionImport Name="DeleteCustomer">
             <Parameter Name="Customer_Id" Mode="In" Type="Int32" />
             <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
@@ -427,6 +425,14 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <EntitySet Name="M_Supplier" EntityType="InventoryToolDBModel.M_Supplier" />
           <FunctionImport Name="GetAllCustomer" ReturnType="Collection(InventoryToolDBModel.GetAllCustomer_Result)" />
           <EntitySet Name="vw_MinimumBalance" EntityType="InventoryToolDBModel.vw_MinimumBalance" />
+          <FunctionImport Name="GetStockPartDetailReport" ReturnType="Collection(InventoryToolDBModel.GetStockPartDetailReport_Result)">
+          <Parameter Name="Part_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TX_Part_Stock" EntityType="InventoryToolDBModel.TX_Part_Stock" />
+          <AssociationSet Name="FK_TX_Part_Stock_M_Part" Association="InventoryToolDBModel.FK_TX_Part_Stock_M_Part">
+            <End Role="M_Part" EntitySet="M_Part" />
+            <End Role="TX_Part_Stock" EntitySet="TX_Part_Stock" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
@@ -454,8 +460,8 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Unit_Id" Type="Int32" />
           <Property Name="Criticality_Id" Type="Int32" />
-          <NavigationProperty Name="TX_Part_Stock" Relationship="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" FromRole="M_Part" ToRole="TX_Part_Stock" />
           <Property Name="Min_Quantity" Type="Int32" />
+          <NavigationProperty Name="TX_Part_Stock" Relationship="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" FromRole="M_Part" ToRole="TX_Part_Stock" />
         </EntityType>
         <ComplexType Name="GetAllPart_Result">
           <Property Type="Int32" Name="Part_Id" Nullable="false" />
@@ -524,26 +530,6 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Property Type="Int32" Name="Store_Id" Nullable="false" />
           <Property Type="String" Name="Store_Name" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <EntityType Name="TX_Part_Stock">
-          <Key>
-            <PropertyRef Name="Part_Stock_Id" />
-          </Key>
-          <Property Name="Part_Stock_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Part_Id" Type="Int32" />
-          <Property Name="Store_Id" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="In_Quantity" Type="Int32" />
-          <Property Name="Out_Quantity" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="M_Part" Relationship="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" FromRole="TX_Part_Stock" ToRole="M_Part" />
-          <Property Name="Action_Guid" Type="Guid" />
-          <Property Name="Is_Transfer" Type="Boolean" />
-        </EntityType>
         <ComplexType Name="GetPartByFilter_Result">
           <Property Type="Int32" Name="Part_Id" Nullable="false" />
           <Property Type="Int32" Name="Part_Type_Id" Nullable="true" />
@@ -564,18 +550,6 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Balance_Quantity" Nullable="false" />
         </ComplexType>
-        <Association Name="FK_TX_Part_Stock_M_Part">
-          <End Type="InventoryToolDBModel.M_Part" Role="M_Part" Multiplicity="0..1" />
-          <End Type="InventoryToolDBModel.TX_Part_Stock" Role="TX_Part_Stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="M_Part">
-              <PropertyRef Name="Part_Id" />
-            </Principal>
-            <Dependent Role="TX_Part_Stock">
-              <PropertyRef Name="Part_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GetAllSupplier_Result">
           <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
           <Property Type="String" Name="Supplier_Code" Nullable="true" MaxLength="100" />
@@ -678,6 +652,52 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Property Name="Criticality_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Balance_Quantity" Type="Int32" Nullable="false" />
         </EntityType>
+        <ComplexType Name="GetStockPartDetailReport_Result">
+          <Property Type="Int64" Name="Part_Stock_Id" Nullable="false" />
+          <Property Type="Int32" Name="Part_Id" Nullable="false" />
+          <Property Type="String" Name="Part_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Store_Id" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="In_Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Out_Quantity" Nullable="true" />
+          <Property Type="Guid" Name="Action_Guid" Nullable="true" />
+          <Property Type="Int32" Name="StoreTransferType_Id" Nullable="false" />
+          <Property Type="String" Name="StoreTransferType_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <EntityType Name="TX_Part_Stock">
+          <Key>
+            <PropertyRef Name="Part_Stock_Id" />
+          </Key>
+          <Property Name="Part_Stock_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Part_Id" Type="Int32" />
+          <Property Name="Store_Id" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="In_Quantity" Type="Int32" />
+          <Property Name="Out_Quantity" Type="Int32" />
+          <Property Name="Action_Guid" Type="Guid" />
+          <Property Name="StoreTransferType_Id" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedUTCDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="M_Part" Relationship="InventoryToolDBModel.FK_TX_Part_Stock_M_Part" FromRole="TX_Part_Stock" ToRole="M_Part" />
+        </EntityType>
+        <Association Name="FK_TX_Part_Stock_M_Part">
+          <End Type="InventoryToolDBModel.M_Part" Role="M_Part" Multiplicity="0..1" />
+          <End Type="InventoryToolDBModel.TX_Part_Stock" Role="TX_Part_Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="M_Part">
+              <PropertyRef Name="Part_Id" />
+            </Principal>
+            <Dependent Role="TX_Part_Stock">
+              <PropertyRef Name="Part_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -826,26 +846,6 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="TX_Part_Stock">
-            <EntityTypeMapping TypeName="InventoryToolDBModel.TX_Part_Stock">
-              <MappingFragment StoreEntitySet="TX_Part_Stock">
-                <ScalarProperty Name="Is_Transfer" ColumnName="Is_Transfer" />
-                <ScalarProperty Name="Action_Guid" ColumnName="Action_Guid" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Out_Quantity" ColumnName="Out_Quantity" />
-                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
-                <ScalarProperty Name="Part_Id" ColumnName="Part_Id" />
-                <ScalarProperty Name="Part_Stock_Id" ColumnName="Part_Stock_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdatePartStock" FunctionName="InventoryToolDBModel.Store.UpdatePartStock" />
           <FunctionImportMapping FunctionImportName="GetPartByFilter" FunctionName="InventoryToolDBModel.Store.GetPartByFilter">
             <ResultMapping>
@@ -983,6 +983,44 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
                 <ScalarProperty Name="Part_Type_Id" ColumnName="Part_Type_Id" />
                 <ScalarProperty Name="Min_Quantity" ColumnName="Min_Quantity" />
                 <ScalarProperty Name="Part_Id" ColumnName="Part_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetStockPartDetailReport" FunctionName="InventoryToolDBModel.Store.GetStockPartDetailReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetStockPartDetailReport_Result">
+                <ScalarProperty Name="Part_Stock_Id" ColumnName="Part_Stock_Id" />
+                <ScalarProperty Name="Part_Id" ColumnName="Part_Id" />
+                <ScalarProperty Name="Part_Name" ColumnName="Part_Name" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="Out_Quantity" ColumnName="Out_Quantity" />
+                <ScalarProperty Name="Action_Guid" ColumnName="Action_Guid" />
+                <ScalarProperty Name="StoreTransferType_Id" ColumnName="StoreTransferType_Id" />
+                <ScalarProperty Name="StoreTransferType_Name" ColumnName="StoreTransferType_Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TX_Part_Stock">
+            <EntityTypeMapping TypeName="InventoryToolDBModel.TX_Part_Stock">
+              <MappingFragment StoreEntitySet="TX_Part_Stock">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedUTCDate" ColumnName="LastModifiedUTCDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedUTCDate" ColumnName="CreatedUTCDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StoreTransferType_Id" ColumnName="StoreTransferType_Id" />
+                <ScalarProperty Name="Action_Guid" ColumnName="Action_Guid" />
+                <ScalarProperty Name="Out_Quantity" ColumnName="Out_Quantity" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Part_Id" ColumnName="Part_Id" />
+                <ScalarProperty Name="Part_Stock_Id" ColumnName="Part_Stock_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

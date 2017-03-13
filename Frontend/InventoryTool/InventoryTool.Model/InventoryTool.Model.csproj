@@ -78,6 +78,9 @@
     <Compile Include="GetPartByFilter_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetStockPartDetailReport_Result.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LokkupModel.cs" />
     <Compile Include="GetAllCategory_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>

@@ -22,6 +22,17 @@ Post-Deployment Script Template
 --LK_Store
 
 
+SET IDENTITY_INSERT [dbo].[LK_StoreTransferType] ON 
+GO
+INSERT INTO [dbo].[LK_StoreTransferType] (StoreTransferType_Id, [StoreTransferType_Name], [IsActive]) VALUES(1, N'Input',1)
+GO										
+INSERT INTO [dbo].[LK_StoreTransferType] (StoreTransferType_Id, [StoreTransferType_Name], [IsActive]) VALUES(2, N'Output',1)
+GO										 
+INSERT INTO [dbo].[LK_StoreTransferType] (StoreTransferType_Id, [StoreTransferType_Name], [IsActive]) VALUES(3, N'Transfer',1)
+GO
+SET IDENTITY_INSERT [dbo].[LK_StoreTransferType] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Lk_Color] ON 
 
 SET IDENTITY_INSERT [dbo].[Lk_Category] ON 
 

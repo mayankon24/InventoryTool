@@ -46,5 +46,31 @@ namespace InventoryTool.API.Controllers
                 return RetVal;
             }
         }
+
+        
+        [Route("GetStockPartDetailReport/{Part_Id:int?}")]
+        [HttpGet]
+        public List<GetStockPartDetailReport_Result> GetStockPartDetailReport(int? Part_Id)
+        {
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+               var RetVal = entity.GetStockPartDetailReport(Part_Id).ToList().Select(s => new GetStockPartDetailReport_Result
+                {
+                    Part_Name = s.Part_Name,
+                    Part_Id = s.Part_Id,
+                    Action_Guid = s.Action_Guid,
+                    Date = s.Date,
+                    Description = s.Description,
+                    In_Quantity = s.In_Quantity,
+                    Out_Quantity = s.Out_Quantity,
+                    Part_Stock_Id = s.Part_Stock_Id,
+                    StoreTransferType_Id = s.StoreTransferType_Id,
+                    StoreTransferType_Name = s.StoreTransferType_Name,
+                    Store_Id = s.Store_Id,
+                    Store_Name = s.Store_Name
+                }).ToList();
+                return RetVal;
+            }
+        }
     }
 }

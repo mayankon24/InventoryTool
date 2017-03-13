@@ -41,5 +41,11 @@ namespace InventoryTool.UI.Proxy
             var result = ProxyHelper.GetResponseFromApi(apiUri, requestUri);
             return JsonConvert.DeserializeObject<List<vw_MinimumBalance>>(result);
         }
+
+        public List<GetStockPartDetailReport_Result> GetStockPartDetailReport(string apiUri, string requestUri)
+        {
+            var result = ProxyHelper.GetResponseFromApi(apiUri, requestUri);
+            return JsonConvert.DeserializeObject<List<GetStockPartDetailReport_Result>>(result);
+        }
     }
 }

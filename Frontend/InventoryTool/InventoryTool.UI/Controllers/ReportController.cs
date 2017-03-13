@@ -11,11 +11,19 @@ namespace InventoryTool.UI.Controllers
 {
     public class ReportController : Controller
     {
-        public ActionResult ReportIndex()
+        public ActionResult MinBalanceReport()
         {
             List<vw_MinimumBalance> MinimumBalanceReport = ReportProxy.Instance.GetMinBalanceReport(ConfigExtension.GetWebApiUri,
                 "api/Report/GetMinBalanceReport");
-            return View("ReportIndex", MinimumBalanceReport);
+            return View("_MinBalanceReport", MinimumBalanceReport);
         }
+
+        public ActionResult StockPartDetailReport(int Part_Id = 2009)
+        {
+            List<GetStockPartDetailReport_Result> StockPartDetailReport = ReportProxy.Instance.GetStockPartDetailReport(ConfigExtension.GetWebApiUri,
+                "api/Report/GetStockPartDetailReport?Part_Id=" + Part_Id.ToString());
+            return View("_StockPartDetailReport", StockPartDetailReport);
+        }
+        
     }
 }
