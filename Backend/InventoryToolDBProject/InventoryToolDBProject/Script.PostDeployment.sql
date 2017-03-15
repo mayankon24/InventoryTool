@@ -20,6 +20,7 @@ Post-Deployment Script Template
 --LK_Unit
 --LK_Criticality
 --LK_Store
+--LK_StoreTransferType
 
 
 SET IDENTITY_INSERT [dbo].[LK_StoreTransferType] ON 

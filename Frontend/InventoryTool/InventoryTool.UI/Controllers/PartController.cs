@@ -32,7 +32,7 @@ namespace InventoryTool.UI.Controllers
             UserResultModel resultdata = new UserResultModel();
             if (Part != null)
             {
-                Part.LastModifiedBy = UserExtended.GetCurrentUserAlias();
+                Part.LastModifiedBy = UserExtended.GetCurrentUserName();
             }
 
             try
@@ -85,7 +85,7 @@ namespace InventoryTool.UI.Controllers
             M_Part Part = new M_Part
             {
                 Part_Id = Part_Id,
-                LastModifiedBy = UserExtended.GetCurrentUserAlias()
+                LastModifiedBy = UserExtended.GetCurrentUserName()
             };
             int OperationStatus = PartProxy.Instance.DeletePart(ConfigExtension.GetWebApiUri,
                 "api/Part/DeletePart/" + Part.Part_Id + "?LastModifiedBy=" + Part.LastModifiedBy, Part);

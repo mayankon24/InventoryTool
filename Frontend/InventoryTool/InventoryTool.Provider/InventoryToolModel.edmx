@@ -192,6 +192,9 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
         <Function Name="GetStockPartDetailReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Part_Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetUserPermission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="User_Name" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="InsertErrorLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Window_Id" Type="int" Mode="In" />
           <Parameter Name="Source" Type="nvarchar" Mode="In" />
@@ -433,6 +436,9 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
             <End Role="M_Part" EntitySet="M_Part" />
             <End Role="TX_Part_Stock" EntitySet="TX_Part_Stock" />
           </AssociationSet>
+          <FunctionImport Name="GetUserPermission" ReturnType="Collection(InventoryToolDBModel.GetUserPermission_Result)">
+            <Parameter Name="User_Name" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllProduct_Result">
           <Property Type="Int32" Name="Product_Id" Nullable="false" />
@@ -698,6 +704,18 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetUserPermission_Result">
+          <Property Type="String" Name="User_Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Window_Id" Nullable="false" />
+          <Property Type="Int32" Name="Role_Id" Nullable="true" />
+          <Property Type="Boolean" Name="CanView" Nullable="true" />
+          <Property Type="Boolean" Name="CanAdd" Nullable="true" />
+          <Property Type="Boolean" Name="CanUpdate" Nullable="true" />
+          <Property Type="Boolean" Name="CanDelete" Nullable="true" />
+          <Property Type="Boolean" Name="CanPrint" Nullable="true" />
+          <Property Type="Boolean" Name="CanDownload" Nullable="true" />
+          <Property Type="Boolean" Name="CanUpload" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1024,6 +1042,22 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUserPermission" FunctionName="InventoryToolDBModel.Store.GetUserPermission" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryToolDBModel.GetUserPermission_Result">
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Window_Id" ColumnName="Window_Id" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="CanView" ColumnName="CanView" />
+                <ScalarProperty Name="CanAdd" ColumnName="CanAdd" />
+                <ScalarProperty Name="CanUpdate" ColumnName="CanUpdate" />
+                <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
+                <ScalarProperty Name="CanPrint" ColumnName="CanPrint" />
+                <ScalarProperty Name="CanDownload" ColumnName="CanDownload" />
+                <ScalarProperty Name="CanUpload" ColumnName="CanUpload" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -56,7 +56,7 @@ namespace InventoryTool.UI.Controllers
             UserResultModel resultdata = new UserResultModel();
             if (UpdatePartStock != null)
             {
-                UpdatePartStock.ModifiedBy = UserExtended.GetCurrentUserAlias();
+                UpdatePartStock.ModifiedBy = UserExtended.GetCurrentUserName();
             }
 
             try

@@ -59,7 +59,7 @@ namespace InventoryTool.UI
                             await authContext.AcquireTokenByAuthorizationCodeAsync(
                                 code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, graphResourceId);
                             //Hookup the Method to Get UserRolePermission RoleSet.
-                            
+                            RoleHelper.GetUserPermission(context.AuthenticationTicket.Identity.Name, true);
                         },
                         AuthenticationFailed = context =>
                         {

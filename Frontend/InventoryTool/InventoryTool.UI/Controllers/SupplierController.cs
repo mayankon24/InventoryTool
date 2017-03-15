@@ -23,7 +23,7 @@ namespace InventoryTool.UI.Controllers
             UserResultModel resultdata = new UserResultModel();
             if (Supplier != null)
             {
-                Supplier.LastModifiedBy = UserExtended.GetCurrentUserAlias();
+                Supplier.LastModifiedBy = UserExtended.GetCurrentUserName();
             }
 
             try
@@ -76,7 +76,7 @@ namespace InventoryTool.UI.Controllers
             M_Supplier Supplier = new M_Supplier
             {
                 Supplier_Id = Supplier_Id,
-                LastModifiedBy = UserExtended.GetCurrentUserAlias()
+                LastModifiedBy = UserExtended.GetCurrentUserName()
             };
             int OperationStatus = SupplierProxy.Instance.DeleteSupplier(ConfigExtension.GetWebApiUri,
                 "api/Supplier/DeleteSupplier/" + Supplier.Supplier_Id + "?LastModifiedBy=" + Supplier.LastModifiedBy, Supplier);

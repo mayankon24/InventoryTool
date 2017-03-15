@@ -450,5 +450,14 @@ namespace InventoryTool.Provider
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStockPartDetailReport_Result>("GetStockPartDetailReport", part_IdParameter);
         }
+    
+        public virtual ObjectResult<GetUserPermission_Result> GetUserPermission(string user_Name)
+        {
+            var user_NameParameter = user_Name != null ?
+                new ObjectParameter("User_Name", user_Name) :
+                new ObjectParameter("User_Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserPermission_Result>("GetUserPermission", user_NameParameter);
+        }
     }
 }

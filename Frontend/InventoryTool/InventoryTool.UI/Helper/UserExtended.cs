@@ -20,15 +20,15 @@ namespace InventoryTool.UI.Helper
 
         }
 
-        public static string GetCurrentUserAlias()
+        public static string GetCurrentUserName()
         {
-            if (HttpContext.Current.Session["CurrentUserAlias"] == null)
+            if (HttpContext.Current.Session["CurrentUserName"] == null)
             {
                 var prinicpal = (ClaimsPrincipal)Thread.CurrentPrincipal;
 
-                HttpContext.Current.Session["CurrentUserAlias"] = ((ClaimsIdentity)prinicpal.Identity).Name;
+                HttpContext.Current.Session["CurrentUserName"] = ((ClaimsIdentity)prinicpal.Identity).Name;
             }
-            return HttpContext.Current.Session["CurrentUserAlias"].ToString();
+            return HttpContext.Current.Session["CurrentUserName"].ToString();
         }
     }
 }
