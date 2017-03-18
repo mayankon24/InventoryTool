@@ -9,7 +9,7 @@ namespace InventoryTool.UI.Controllers
 {
     public class MustHavePermissionAttribute : ActionFilterAttribute
     {
-        private readonly PermissionOfRoles  _PermissionOf;
+        private readonly PermissionOfRoles  _PermissionOfRoles;
         private readonly Window _ModuleName;
         private bool _isValidPermission;
         public string LoginUrl { get; set; }
@@ -21,7 +21,7 @@ namespace InventoryTool.UI.Controllers
         public MustHavePermissionAttribute(Window ModuleName, PermissionOfRoles PermissionOf)
         {
             _ModuleName = ModuleName;
-            _PermissionOf = PermissionOf;
+            _PermissionOfRoles = PermissionOf;
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace InventoryTool.UI.Controllers
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             _isValidPermission = false;
-            if (_PermissionOf > 0)
+            if (_PermissionOfRoles > 0)
             {
-                _isValidPermission = RoleHelper.IsValidRoleAction(_ModuleName, _PermissionOf);
+                _isValidPermission = RoleHelper.IsValidRoleAction(_ModuleName, _PermissionOfRoles);
             }
             if (PermissionOfList != null && PermissionOfList.Length > 0)
             {
@@ -76,7 +76,5 @@ namespace InventoryTool.UI.Controllers
             }
             base.OnActionExecuting(filterContext);
         }
-
-     
     }
 }

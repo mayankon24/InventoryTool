@@ -10,9 +10,10 @@ using InventoryTool.UI;
 
 namespace InventoryTool.UI.Controllers
 {
+    [Authorize]
     public class PartController : Controller
     {
-        
+        [MustHavePermission(Window.Part, PermissionOfRoles.CanView)]
         public ActionResult PartIndex()
         {
             VMPart _VMPart = new VMPart();
@@ -27,6 +28,7 @@ namespace InventoryTool.UI.Controllers
             _VMPart.UnitList = LookupProxy.Instance.GetAllUnit(ConfigExtension.GetWebApiUri, "api/Lookup/Unit");
             return View("PartIndex", _VMPart);
         }
+        [MustHavePermission(Window.Part, PermissionOfRoles.CanAdd)]
         public ActionResult AddUpdatePart(M_Part Part)
         {
             UserResultModel resultdata = new UserResultModel();
