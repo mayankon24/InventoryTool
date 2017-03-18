@@ -676,7 +676,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\PartStock\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
