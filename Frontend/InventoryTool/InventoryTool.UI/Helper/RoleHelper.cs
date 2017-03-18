@@ -36,7 +36,7 @@ namespace InventoryTool.UI.Helper
         public static bool IsValidRoleAction(Window ModuleName, PermissionOfRoles PermissionOf)
         {
             
-            List<GetUserPermission_Result> lstdata = GetUserPermission(UserExtended.GetCurrentUserName());
+            List<GetUserPermission_Result> lstdata = GetUserPermission(UserHelper.GetCurrentUserName());
             var toReturnBool = false;
             if (lstdata != null && lstdata.Count > 0)
             {
@@ -86,7 +86,7 @@ namespace InventoryTool.UI.Helper
 
         public static int GetUserRoleId()
         {
-            List<GetUserPermission_Result> lstdata = GetUserPermission(UserExtended.GetCurrentUserName());
+            List<GetUserPermission_Result> lstdata = GetUserPermission(UserHelper.GetCurrentUserName());
 
             int? roleId = lstdata.Select(r => r.Role_Id).First() ?? 0;
 

@@ -23,7 +23,7 @@ namespace InventoryTool.UI.Controllers
             UserResultModel resultdata = new UserResultModel();
             if (product != null)
             {
-                product.LastModifiedBy = UserExtended.GetCurrentUserName();
+                product.LastModifiedBy = UserHelper.GetCurrentUserName();
             }
 
             try
@@ -76,7 +76,7 @@ namespace InventoryTool.UI.Controllers
             M_Product product = new M_Product
             {
                 Product_Id = Product_Id,
-                LastModifiedBy = UserExtended.GetCurrentUserName()
+                LastModifiedBy = UserHelper.GetCurrentUserName()
             };
             int OperationStatus = ProductProxy.Instance.DeleteProduct(ConfigExtension.GetWebApiUri,
                 "api/Product/DeleteProduct/" + product.Product_Id + "?LastModifiedBy=" + product.LastModifiedBy, product);

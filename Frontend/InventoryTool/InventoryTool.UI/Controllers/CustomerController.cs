@@ -23,7 +23,7 @@ namespace InventoryTool.UI.Controllers
             UserResultModel resultdata = new UserResultModel();
             if (Customer != null)
             {
-                Customer.LastModifiedBy = UserExtended.GetCurrentUserName();
+                Customer.LastModifiedBy = UserHelper.GetCurrentUserName();
             }
 
             try
@@ -76,7 +76,7 @@ namespace InventoryTool.UI.Controllers
             M_Customer Customer = new M_Customer
             {
                 Customer_Id = Customer_Id,
-                LastModifiedBy = UserExtended.GetCurrentUserName()
+                LastModifiedBy = UserHelper.GetCurrentUserName()
             };
             int OperationStatus = CustomerProxy.Instance.DeleteCustomer(ConfigExtension.GetWebApiUri,
                 "api/Customer/DeleteCustomer/" + Customer.Customer_Id + "?LastModifiedBy=" + Customer.LastModifiedBy, Customer);

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace InventoryTool.UI.Helper
 {
-    public static class UserExtended
+    public static class UserHelper
     {
         public static string GetFullName(this IPrincipal user)
         {
