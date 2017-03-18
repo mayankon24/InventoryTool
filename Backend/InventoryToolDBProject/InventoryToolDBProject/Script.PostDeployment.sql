@@ -22,6 +22,37 @@ Post-Deployment Script Template
 --LK_Store
 --LK_StoreTransferType
 
+go
+SET IDENTITY_INSERT [dbo].[LK_Window] ON 
+GO
+INSERT [dbo].[LK_Window] ([Window_Id], [Page_Name], [Page_Description], [IsActive]) VALUES (1, N'Product', NULL, 1)
+GO
+INSERT [dbo].[LK_Window] ([Window_Id], [Page_Name], [Page_Description], [IsActive]) VALUES (2, N'Part', NULL, 1)
+GO
+INSERT [dbo].[LK_Window] ([Window_Id], [Page_Name], [Page_Description], [IsActive]) VALUES (3, N'Customer', NULL, 1)
+GO
+INSERT [dbo].[LK_Window] ([Window_Id], [Page_Name], [Page_Description], [IsActive]) VALUES (4, N'Supplier', NULL, 1)
+GO
+INSERT [dbo].[LK_Window] ([Window_Id], [Page_Name], [Page_Description], [IsActive]) VALUES (5, N'PartStock', NULL, 1)
+GO
+INSERT [dbo].[LK_Window] ([Window_Id], [Page_Name], [Page_Description], [IsActive]) VALUES (6, N'MinimumBalanceReport', NULL, 1)
+GO
+SET IDENTITY_INSERT [dbo].[LK_Window] OFF
+GO
+
+SET IDENTITY_INSERT [dbo].[LK_Role] ON 
+
+GO
+INSERT [dbo].[LK_Role] ([Role_Id], [User_Role], [RoleDescription], [Role_Priority], [CreatedBy], [CreatedUTCDate], [LastModifiedBy], [LastModifiedUTCDate], [IsActive]) VALUES (1, N'SuperAdmin', N'Full right', NULL, NULL, NULL, NULL, NULL, 1)
+GO
+INSERT [dbo].[LK_Role] ([Role_Id], [User_Role], [RoleDescription], [Role_Priority], [CreatedBy], [CreatedUTCDate], [LastModifiedBy], [LastModifiedUTCDate], [IsActive]) VALUES (2, N'Admin', N'semi admin', NULL, NULL, NULL, NULL, NULL, 1)
+GO
+INSERT [dbo].[LK_Role] ([Role_Id], [User_Role], [RoleDescription], [Role_Priority], [CreatedBy], [CreatedUTCDate], [LastModifiedBy], [LastModifiedUTCDate], [IsActive]) VALUES (3, N'Data Operator', N'store keeper', NULL, NULL, NULL, NULL, NULL, 1)
+GO
+SET IDENTITY_INSERT [dbo].[LK_Role] OFF
+GO
+
+
 
 SET IDENTITY_INSERT [dbo].[LK_StoreTransferType] ON 
 GO
@@ -33,10 +64,9 @@ INSERT INTO [dbo].[LK_StoreTransferType] (StoreTransferType_Id, [StoreTransferTy
 GO
 SET IDENTITY_INSERT [dbo].[LK_StoreTransferType] OFF
 GO
-SET IDENTITY_INSERT [dbo].[Lk_Color] ON 
+
 
 SET IDENTITY_INSERT [dbo].[Lk_Category] ON 
-
 GO
 INSERT [dbo].[Lk_Category] ([Category_Id], [Category_Name], [IsActive]) VALUES (1, N'N/A', 1)
 GO
@@ -44,8 +74,9 @@ INSERT [dbo].[Lk_Category] ([Category_Id], [Category_Name], [IsActive]) VALUES (
 GO
 SET IDENTITY_INSERT [dbo].[Lk_Category] OFF
 GO
-SET IDENTITY_INSERT [dbo].[Lk_Color] ON 
 
+
+SET IDENTITY_INSERT [dbo].[Lk_Color] ON 
 GO
 INSERT [dbo].[Lk_Color] ([Color_Id], [Color_Name], [IsActive]) VALUES (1, N'N/A', 1)
 GO
@@ -77,7 +108,6 @@ GO
 SET IDENTITY_INSERT [dbo].[LK_Material] OFF
 GO
 SET IDENTITY_INSERT [dbo].[LK_Outsource_Type] ON 
-
 GO
 INSERT [dbo].[LK_Outsource_Type] ([Outsource_Type_Id], [Outsource_Type], [IsActive]) VALUES (1, N'N/A', 1)
 GO

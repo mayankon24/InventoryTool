@@ -258,6 +258,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\MustHavePermissionAttribute.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\PartStockController.cs" />
     <Compile Include="Controllers\ProductController.cs" />

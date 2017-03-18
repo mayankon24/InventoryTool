@@ -15,28 +15,19 @@
 
     public enum Role
     {
-        Budget_Admin = 1,
-        Budget_Champion = 2,
-        Budget_Manager = 3,
-        Finance_Admin = 4,
-        Budget_Visitor = 5,
-        Budget_Director = 6,
-        Tool_Admin = 7
+        SuperAdmin = 1,
+        Admin = 2,
+        Data_Operator = 3
     }
     
     public enum Window
     {
-        Admin_Portal = 1,
-        Budget_Summary = 2,
-        Budget_Request = 3,
-        Budget_Report = 4,
-        Group = 5,
-        Team = 6,
-        Project = 7,
-        SubProject = 8,
-        Field1 = 9,
-        Field2 = 10,
-        Manage = 11
+        Product = 1,
+        Part = 2,
+        Customer = 3,
+        Supplier = 4,
+        PartStock = 5,
+        MinimumBalanceReport = 6
     }
 
     public enum PermissionOfRoles

@@ -124,6 +124,8 @@
     <Build Include="dbo\Stored Procedures\DeleteCustomer.sql" />
     <Build Include="dbo\Views\vw_MinimumBalance.sql" />
     <Build Include="dbo\Stored Procedures\GetStockPartDetailReport.sql" />
+    <Build Include="dbo\Functions\GetUserRoleId.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserPermission.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InventortCompare_Azure.scmp" />
