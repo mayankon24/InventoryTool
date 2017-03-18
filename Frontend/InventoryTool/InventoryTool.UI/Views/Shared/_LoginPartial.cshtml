@@ -3,7 +3,7 @@
     <text>
         @{
 
-            var fullname = InventoryTool.UI.Helper.UserExtended.GetFullName(User);
+            var fullname = InventoryTool.UI.Helper.UserHelper.GetFullName(User);
 
         }
         <input type="hidden" id="hdnUserName" value="@User.Identity.Name" />
@@ -13,10 +13,10 @@
         </a>
        
     </text>
-            }
-            else
-            {
-                <ul class="nav navbar-nav navbar-right">
-                    @*<li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-                </ul>
-            }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+    </ul>
+}

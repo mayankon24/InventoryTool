@@ -35,42 +35,44 @@ namespace InventoryTool.UI
 
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
+            //app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
-            app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
-            app.UseOpenIdConnectAuthentication(
-                new OpenIdConnectAuthenticationOptions
-                {
+            //app.UseOpenIdConnectAuthentication(
+            //    new OpenIdConnectAuthenticationOptions
+            //    {
 
-                    ClientId = clientId,
-                    Authority = Authority,
-                    PostLogoutRedirectUri = postLogoutRedirectUri,
+            //        ClientId = clientId,
+            //        Authority = Authority,
+            //        PostLogoutRedirectUri = postLogoutRedirectUri,
 
-                    Notifications = new OpenIdConnectAuthenticationNotifications()
-                    {
-                        // If there is a code in the OpenID Connect response, redeem it for an access token and refresh token, and store those away.
-                        AuthorizationCodeReceived = async (context) =>
-                        {
-                            var code = context.Code;
-                            ClientCredential credential = new ClientCredential(clientId, appKey);
-                            string signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
-                            AuthenticationContext authContext = new AuthenticationContext(Authority, new ADALTokenCache(signedInUserID));
-                            await authContext.AcquireTokenByAuthorizationCodeAsync(
-                                code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, graphResourceId);
-                            //Hookup the Method to Get UserRolePermission RoleSet.
-                            RoleHelper.GetUserPermission(context.AuthenticationTicket.Identity.Name, true);
-                        },
-                        AuthenticationFailed = context =>
-                        {
-                            context.HandleResponse();
-                            context.Response.Redirect("/Error/message=" + context.Exception.Message);
-                            return Task.FromResult(0);
+            //        Notifications = new OpenIdConnectAuthenticationNotifications()
+            //        {
+            //            // If there is a code in the OpenID Connect response, redeem it for an access token and refresh token, and store those away.
+            //            AuthorizationCodeReceived = async (context) =>
+            //            {
+            //                var code = context.Code;
+            //                ClientCredential credential = new ClientCredential(clientId, appKey);
+            //                string signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //                AuthenticationContext authContext = new AuthenticationContext(Authority, new ADALTokenCache(signedInUserID));
+            //                await authContext.AcquireTokenByAuthorizationCodeAsync(
+            //                    code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, graphResourceId);
+            //                //Hookup the Method to Get UserRolePermission RoleSet.
+            //                RoleHelper.GetUserPermission(context.AuthenticationTicket.Identity.Name, true);
+            //            },
+            //            AuthenticationFailed = context =>
+            //            {
+            //                context.HandleResponse();
+            //                context.Response.Redirect("/Error/message=" + context.Exception.Message);
+            //                return Task.FromResult(0);
 
-                        }
+            //            }
 
-                    }
-                });
+            //        }
+            //    });
+
+            
         }
     }
 

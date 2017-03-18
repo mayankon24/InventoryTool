@@ -57,7 +57,7 @@ namespace InventoryTool.UI.Controllers
             if (!_isValidPermission)
             {
                 string redirectOnSuccess = "";
-                LoginUrl = "/Common/NoAccessPermission";
+                LoginUrl = "/Account/UnAuthorize";
                 if (filterContext.HttpContext.Request.Url != null)
                     redirectOnSuccess = filterContext.HttpContext.Request.Url.AbsolutePath + filterContext.HttpContext.Request.Url.Query;
                 //send them off to the login page
@@ -69,8 +69,8 @@ namespace InventoryTool.UI.Controllers
                 }
                 else
                 {
-                    loginUrl = filterContext.HttpContext.Request.IsAjaxRequest() ? $"/Common/NoAccessPermission"
-                        : "/Common/NoAccessPermission";
+                    loginUrl = filterContext.HttpContext.Request.IsAjaxRequest() ? $"/Account/UnAuthorize"
+                        : "/Account/UnAuthorize";
                 }
                 filterContext.HttpContext.Response.Redirect(loginUrl + redirectUrl, true);
             }

@@ -12,5 +12,10 @@ namespace InventoryTool.UI.Controllers
         {
             return View("Error");
         }
+
+        public ActionResult UnAuthorize()
+        {
+            return View("UnAuthorize");
+        }
     }
 }
