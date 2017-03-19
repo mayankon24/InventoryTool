@@ -16,16 +16,12 @@ namespace InventoryTool.UI.Controllers
 
     [Authorize]
     public class AccountController : Controller
-    {
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+    {       
         public ActionResult Error()
         {
             return View("Error");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult UnAuthorize()
         {
             return View("UnAuthorize");

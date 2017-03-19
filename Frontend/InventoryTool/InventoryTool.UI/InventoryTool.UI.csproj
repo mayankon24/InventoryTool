@@ -676,11 +676,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Account\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Service References\AzureAD\ConnectedService.json" />
-    <Content Include="Views\Shared\UnAuthorize.cshtml" />
+    <Content Include="Views\Account\UnAuthorize.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Product\ProductIndex.cshtml" />
     <Content Include="Views\Product\_ProductList.cshtml" />
