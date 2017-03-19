@@ -1,78 +1,78 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
 using Microsoft.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Google;
 using InventoryTool.UI.Helper;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using InventoryTool.UI.Models;
-using System.IdentityModel.Claims;
 
-/*
-* Modified By : Amrit Upadhyay
-* Modified On : 19-Oct-2016
-* */
 [assembly: OwinStartup(typeof(InventoryTool.UI.Startup))]
 namespace InventoryTool.UI
 {
     public partial class Startup
     {
 
-        private static readonly string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-        private static readonly string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
-        private static readonly string Domain = ConfigurationManager.AppSettings["ida:Domain"];
-        private static readonly string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
-        private static readonly string appKey = ConfigurationManager.AppSettings["ida:AppKey"];
-        readonly string graphResourceId = ConfigurationManager.AppSettings["ida:GraphUrl"];
-        private static readonly string Authority = String.Format(CultureInfo.InvariantCulture, (aadInstance + Domain));
-
-
+        //private static readonly string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+        //private static readonly string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
+        //private static readonly string Domain = ConfigurationManager.AppSettings["ida:Domain"];
+        //private static readonly string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
+        //private static readonly string appKey = ConfigurationManager.AppSettings["ida:AppKey"];
+        //readonly string graphResourceId = ConfigurationManager.AppSettings["ida:GraphUrl"];
+        //private static readonly string Authority = String.Format(CultureInfo.InvariantCulture, (aadInstance + Domain));
+        
 
         public void ConfigureAuth(IAppBuilder app)
         {
-            //app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            // Enable the application to use a cookie to store information for the signed in user
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Account/Login")
+            });
+            // Use a cookie to temporarily store information about a user logging in with a third party login provider
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            //app.UseOpenIdConnectAuthentication(
-            //    new OpenIdConnectAuthenticationOptions
-            //    {
+            // Uncomment the following lines to enable logging in with third party login providers
+            //app.UseMicrosoftAccountAuthentication(
+            //    clientId: "",
+            //    clientSecret: "");
 
-            //        ClientId = clientId,
-            //        Authority = Authority,
-            //        PostLogoutRedirectUri = postLogoutRedirectUri,
+            //app.UseTwitterAuthentication(
+            //   consumerKey: "",
+            //   consumerSecret: "");
 
-            //        Notifications = new OpenIdConnectAuthenticationNotifications()
-            //        {
-            //            // If there is a code in the OpenID Connect response, redeem it for an access token and refresh token, and store those away.
-            //            AuthorizationCodeReceived = async (context) =>
-            //            {
-            //                var code = context.Code;
-            //                ClientCredential credential = new ClientCredential(clientId, appKey);
-            //                string signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //                AuthenticationContext authContext = new AuthenticationContext(Authority, new ADALTokenCache(signedInUserID));
-            //                await authContext.AcquireTokenByAuthorizationCodeAsync(
-            //                    code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, graphResourceId);
-            //                //Hookup the Method to Get UserRolePermission RoleSet.
-            //                RoleHelper.GetUserPermission(context.AuthenticationTicket.Identity.Name, true);
-            //            },
-            //            AuthenticationFailed = context =>
-            //            {
-            //                context.HandleResponse();
-            //                context.Response.Redirect("/Error/message=" + context.Exception.Message);
-            //                return Task.FromResult(0);
+            //app.UseFacebookAuthentication(
+            //   appId: "",
+            //   appSecret: "");
 
-            //            }
+            var options = new GoogleOAuth2AuthenticationOptions
+            {
+                ClientId = ConfigExtension.ClientId,
+                ClientSecret = ConfigExtension.ClientSecret,
+                Provider = new GoogleOAuth2AuthenticationProvider
+                {
+                    OnAuthenticated = async context =>
+                    {
+                        // Retrieve the OAuth access token to store for subsequent API calls
+                        string accessToken = context.AccessToken;
 
-            //        }
-            //    });
+                        // Retrieve the name of the user in Google
+                        string googleName = context.Name;
 
-            
+                        // Retrieve the user's email address
+                        string googleEmailAddress = context.Email;
+
+                        // You can even retrieve the full JSON-serialized user
+                        var serializedUser = context.User;
+
+                    }
+                }
+            };
+            app.UseGoogleAuthentication(options);
+
         }
     }
 

@@ -11,8 +11,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryDataTable")
-    @Scripts.Render("~/bundles/common")
-    
+    @Scripts.Render("~/bundles/common")   
+     
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,8 +22,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Inventory Tool", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </button> 
+                <label class="navbar-brand" style="margin-left:0px; font-size:xx-large; color:darkcyan;">Inventory Tool</label>            
             </div>
 
             <div class="navbar-collapse collapse">
@@ -33,17 +33,17 @@
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Product", "ProductIndex", "Product")</li>
                             <li>@Html.ActionLink("Part", "PartIndex", "Part")</li>
-                            @*<li>@Html.ActionLink("Customer", "CustomerIndex", "Customer")</li>
-                            <li>@Html.ActionLink("Supplier", "SupplierIndex", "Supplier")</li>*@
+                            <li>@Html.ActionLink("Customer", "CustomerIndex", "Customer")</li>
+                            <li>@Html.ActionLink("Supplier", "SupplierIndex", "Supplier")</li>
                         </ul>
                     </li>                   
                     <li>@Html.ActionLink("Stock", "PartStockIndex", "PartStock")</li>
-                    @*<li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Min Balance", "MinBalanceReport", "Report")</li>                            
                         </ul>
-                    </li>*@   
+                    </li>   
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
