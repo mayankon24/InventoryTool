@@ -9,6 +9,7 @@ using InventoryTool.UI.Helper;
 
 namespace InventoryTool.UI.Controllers
 {
+    [Authorize]
     public class SupplierController : Controller
     {
         // GET: Supplier

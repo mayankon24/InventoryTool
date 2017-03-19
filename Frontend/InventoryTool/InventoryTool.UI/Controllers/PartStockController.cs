@@ -11,6 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace InventoryTool.UI.Controllers
 {
+    [Authorize]
     public class PartStockController : Controller
     {
         // GET: PartStock

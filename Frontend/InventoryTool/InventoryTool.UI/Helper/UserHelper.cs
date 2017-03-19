@@ -11,14 +11,8 @@ namespace InventoryTool.UI.Helper
         public static string GetFullName(this IPrincipal user)
         {
             var prinicpal = (ClaimsPrincipal)Thread.CurrentPrincipal;
-            //var name = prinicpal.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
-            /*
-             Note : Here ClaimTypes value give as static "name" because it's not avaliable in ClaimTypes Property/
-             */
             var FullName = prinicpal.Claims.Where(c => c.Type == "name").Select(c => c.Value).SingleOrDefault();
-            FullName = "mayank";
             return FullName;
-
         }
 
         public static string GetCurrentUserName()
@@ -27,10 +21,7 @@ namespace InventoryTool.UI.Helper
             {
                 var prinicpal = (ClaimsPrincipal)Thread.CurrentPrincipal;
 
-                HttpContext.Current.Session["CurrentUserName"] = ((ClaimsIdentity)prinicpal.Identity).Name;
-
-                HttpContext.Current.Session["CurrentUserName"] = "mayank_aggarwal";
-
+                HttpContext.Current.Session["CurrentUserName"] = ((ClaimsIdentity)prinicpal.Identity).Name;             
             }
             return HttpContext.Current.Session["CurrentUserName"].ToString();
         }

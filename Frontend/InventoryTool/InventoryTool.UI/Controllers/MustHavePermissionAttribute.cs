@@ -7,6 +7,7 @@ using InventoryTool.UI.Helper;
  */
 namespace InventoryTool.UI.Controllers
 {
+    [Authorize]
     public class MustHavePermissionAttribute : ActionFilterAttribute
     {
         private readonly PermissionOfRoles  _PermissionOfRoles;
