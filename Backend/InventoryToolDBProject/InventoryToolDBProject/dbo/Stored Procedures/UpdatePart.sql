@@ -91,6 +91,7 @@ BEGIN TRANSACTION
 								,[Material_Id] = @Material_Id
 								,Criticality_Id= @Criticality_Id
 							    ,Min_Quantity = @Min_Quantity
+								,LastModifiedBy = @ModifiedBy
 							WHERE Part_Id = @Part_Id
 
 
