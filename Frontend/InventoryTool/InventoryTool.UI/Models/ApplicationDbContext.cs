@@ -7,7 +7,7 @@ namespace InventoryTool.UI.Models
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("InventoryToolDB")
         {
         }
 
