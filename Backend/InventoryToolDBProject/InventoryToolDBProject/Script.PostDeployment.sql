@@ -128,7 +128,7 @@ INSERT [dbo].[LK_Part_Type] ([Part_Type_Id], [Part_Type], [IsActive]) VALUES (2,
 GO
 INSERT [dbo].[LK_Part_Type] ([Part_Type_Id], [Part_Type], [IsActive]) VALUES (3, N'Assembly', 1)
 GO
-INSERT [dbo].[LK_Part_Type] ([Part_Type_Id], [Part_Type], [IsActive]) VALUES (4, N'Row Material', 1)
+INSERT [dbo].[LK_Part_Type] ([Part_Type_Id], [Part_Type], [IsActive]) VALUES (4, N'Raw Material', 1)
 GO
 INSERT [dbo].[LK_Part_Type] ([Part_Type_Id], [Part_Type], [IsActive]) VALUES (5, N'Service', 1)
 GO

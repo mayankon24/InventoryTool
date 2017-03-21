@@ -126,6 +126,12 @@
     <Build Include="dbo\Stored Procedures\GetStockPartDetailReport.sql" />
     <Build Include="dbo\Functions\GetUserRoleId.sql" />
     <Build Include="dbo\Stored Procedures\GetUserPermission.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InventortCompare_Azure.scmp" />
