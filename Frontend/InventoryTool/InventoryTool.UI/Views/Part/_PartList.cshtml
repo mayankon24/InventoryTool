@@ -11,6 +11,7 @@
             <th style="text-align:left">Criticality</th> 
             <th style="text-align:left">Min Quantity</th> 
             <th style="text-align:left">Unit</th>
+            <th style="text-align:left">Image</th>
             <th class="action-col"></th>  
         </tr>
     </thead>
@@ -50,7 +51,12 @@
                     </td>  
                     <td title="@data.Unit_Name" style="width:90%">
                         @data.Unit_Name
-                    </td>                    
+                    </td> 
+                    <td class="clsAction" style="width:2%">
+                        <a href="#" title="Image" class="clsImagePart">
+                            <span class="glyphicon glyphicon-picture" style="padding-left:10px"></span>
+                        </a>
+                    </td>                   
                     <td class="clsAction" style="width:10%">
                         <a href="javascript:void(0);" title="Edit" class="clsEditPart">
                             <span class="glyphicon glyphicon-pencil"></span>
@@ -65,7 +71,3 @@
 
     </tbody>
 </table>
-
-
-
-

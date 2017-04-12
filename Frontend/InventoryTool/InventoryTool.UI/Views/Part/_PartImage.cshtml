@@ -1,0 +1,6 @@
+﻿@if (Model != null)
+{
+    Layout = null;
+    var imgPath = @Url.Content("~/PartImage/" + Model + ".jpeg");
+    <img src="@imgPath" />
+}

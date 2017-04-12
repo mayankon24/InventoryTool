@@ -50,7 +50,12 @@
                             </td> 
                             <td>
                                 @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
-                            </td>                            
+                            </td>  
+                            <td class="clsAction" style="width:2%">
+                                <a href="#" title="Image" class="clsImagePart">
+                                    <span class="glyphicon glyphicon-picture" style="padding-left:10px"></span>
+                                </a>
+                            </td>                             
                             <td>
                                 <a href="javascript:void(0);" title="Save" class="clsAddUpdatePart">  Save</a>
                                 <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
@@ -86,7 +91,12 @@
                             </td> 
                             <td>
                                 @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
-                            </td>          
+                            </td> 
+                            <td class="clsAction" style="width:2%">
+                                <a href="#" title="Image" class="clsImagePart">
+                                    <span class="glyphicon glyphicon-picture" style="padding-left:10px"></span>
+                                </a>
+                            </td>            
                             <td>
                                 <a href="javascript:void(0);" title="Update" class="clsAddUpdatePart">Update</a>
                                 <a href="javascript:void(0);" title="Cancel" class="clsCancelPartUpdate">Cancel</a>
@@ -102,6 +112,7 @@
             </div>
         </div>
     </div>
+    <div id="dialog1" title="Dialog Title"></div>
 </div>
 
 <script type="text/javascript">
@@ -117,6 +128,47 @@
                 //  var obj = Partjs;
                 //initial load the Datatable setting.
                 Partjs.ReinitiateDataTable('tblPartList');
+                
+                //$("#Part").find("#dialog1").dialog({
+                //    autoOpen: false
+                //});
+
+                //show Image popup
+                $("#Part").find("#dvPartList").on("click", ".clsImagePart", function () {
+                    var data, Part_Id, urlPath;
+                    debugger;
+                    data = $(this).parents('tr');
+                    Part_Id = $(data).attr('data-Part_id');
+                    urlPath = "/Part/GetPartImagePartial";
+                    if (Part_Id != '') {
+                        $.ajax({
+                            type: "Get",
+                            cache: false,
+                            url: urlPath,
+                            data: {
+                                Part_Id: Part_Id
+                            },
+                            beforeSend: function () {
+                                Common.showDialog.show('Please wait....', {
+                                    dialogSize: 'sm',
+                                    progressType: 'warning'
+                                });
+                            },
+                            complete: function () {
+                                Common.showDialog.hide();
+                            },
+                            success: function (result) {
+                                $("#dialog1").html(result);
+                                $("#Part").find("#dialog1").dialog('open');
+                                
+                            },
+                            error: function (ex) {
+                                alert(ex.responseText);
+                            }
+                        });
+                    }
+                });
+
 
                 $("#Part").find("#dvPartList").on("click", ".clsDeletePart", function () {                   
                     var data, Part_Id, urlPath;
