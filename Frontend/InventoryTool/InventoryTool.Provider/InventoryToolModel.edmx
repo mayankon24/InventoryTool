@@ -522,6 +522,7 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Property Type="Int32" Name="Criticality_Id" Nullable="true" />
           <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Min_Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Image_Id" Nullable="true" />
           </ComplexType>
         <EntityType Name="M_Product">
           <Key>
@@ -589,6 +590,7 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Property Type="Int32" Name="Criticality_Id" Nullable="true" />
           <Property Type="String" Name="Criticality_Name" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Balance_Quantity" Nullable="false" />
+          <Property Type="Int32" Name="Image_Id" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetAllSupplier_Result">
           <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
@@ -705,6 +707,7 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
           <Property Type="Int32" Name="StoreTransferType_Id" Nullable="false" />
           <Property Type="String" Name="StoreTransferType_Name" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Image_Id" Nullable="true" />
         </ComplexType>
         <EntityType Name="TX_Part_Stock">
           <Key>
@@ -831,6 +834,7 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
                 <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
                 <ScalarProperty Name="Criticality_Name" ColumnName="Criticality_Name" />
                 <ScalarProperty Name="Min_Quantity" ColumnName="Min_Quantity" />
+                <ScalarProperty Name="Image_Id" ColumnName="Image_Id" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -937,6 +941,7 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
                 <ScalarProperty Name="Criticality_Id" ColumnName="Criticality_Id" />
                 <ScalarProperty Name="Criticality_Name" ColumnName="Criticality_Name" />
                 <ScalarProperty Name="Balance_Quantity" ColumnName="Balance_Quantity" />
+                <ScalarProperty Name="Image_Id" ColumnName="Image_Id" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1070,6 +1075,7 @@ warning 6002: The table/view 'InventoryToolDB.dbo.vw_MinimumBalance' does not ha
                 <ScalarProperty Name="StoreTransferType_Id" ColumnName="StoreTransferType_Id" />
                 <ScalarProperty Name="StoreTransferType_Name" ColumnName="StoreTransferType_Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image_Id" ColumnName="Image_Id" />                
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

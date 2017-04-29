@@ -25,5 +25,6 @@ namespace InventoryTool.Model
         public int StoreTransferType_Id { get; set; }
         public string StoreTransferType_Name { get; set; }
         public string Description { get; set; }
+        public Nullable<int> Image_Id { get; set; }        
     }
 }

@@ -67,8 +67,9 @@ namespace InventoryTool.API.Controllers
                     StoreTransferType_Id = s.StoreTransferType_Id,
                     StoreTransferType_Name = s.StoreTransferType_Name,
                     Store_Id = s.Store_Id,
-                    Store_Name = s.Store_Name
-                }).ToList();
+                    Store_Name = s.Store_Name,
+                   Image_Id = s.Image_Id
+               }).ToList();
                 return RetVal;
             }
         }

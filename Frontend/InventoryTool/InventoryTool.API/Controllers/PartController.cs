@@ -74,7 +74,8 @@ namespace InventoryTool.API.Controllers
                     Unit_Name = s.Unit_Name,
                     Criticality_Id = s.Criticality_Id,
                     Criticality_Name = s.Criticality_Name,
-                    Min_Quantity = s.Min_Quantity
+                    Min_Quantity = s.Min_Quantity,
+                    Image_Id = s.Image_Id
 
                 }).ToList();
                 return RetVal;
