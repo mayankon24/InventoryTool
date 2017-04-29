@@ -7,6 +7,7 @@ using InventoryTool.Model;
 using InventoryTool.UI.Helper;
 using InventoryTool.UI.Proxy;
 using InventoryTool.UI;
+using System.IO;
 
 namespace InventoryTool.UI.Controllers
 {
@@ -115,16 +116,60 @@ namespace InventoryTool.UI.Controllers
             return PartialView("_PartList", Part);
         }
 
-        public ActionResult GetPartImagePartial(int Part_Id)
+        public ActionResult GetPartImagePartial(int Part_Id, int Image_Id)
         {
-            return PartialView("_PartImage", Part_Id);
+            List<GetImage_Result> RetVal = CommonProxy.Instance.GetImage(ConfigExtension.GetWebApiUri,
+                "api/Common/GetImage" + "?Image_Id=" + Image_Id);
+
+            VMImage PartImage = new VMImage();
+            PartImage.Parent_Id = Part_Id;
+            PartImage.Image.Image_Data = RetVal[0].Image_Data;
+
+            return PartialView("_PartImage", PartImage);
         }
 
         [HttpPost]
-        public ActionResult UploadImage(string Part_Id)
-        {
-            HttpPostedFileBase file = Request.Files["ImageData"];
-            return Json("cghkk", JsonRequestBehavior.AllowGet);
+        public ActionResult UploadImage(int Part_Id)
+        {            
+            VMImage PartImage = new VMImage();
+            PartImage.Parent_Id = Part_Id;
+            PartImage.Image.LastModifiedBy = UserHelper.GetCurrentUserName();
+           
+            using (var binaryReader = new BinaryReader(Request.Files[0].InputStream))
+            {
+                PartImage.Image.Image_Data = binaryReader.ReadBytes(Request.Files["ImageData"].ContentLength);
+            }
+
+            UserResultModel resultdata = new UserResultModel();
+            try
+            {
+                int OperationStatus = PartProxy.Instance.UpdatePartImage(ConfigExtension.GetWebApiUri,
+                    "api/Part/UpdatePartImage", PartImage);
+
+                if (OperationStatus == (int)operation_status.Insert)
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Insert;//message when inserted.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgInsert");
+
+                }
+                else if (OperationStatus == (int)operation_status.Update)
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Update;//message when Update.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgUpdate");
+                }
+                else
+                {
+                    resultdata.operationstatuscode = (int)operation_status.Error;//message when duplicate record.
+                    resultdata.messagedata = UserMessage.ResourceManager.GetString("msgError");
+                }
+            }
+            catch (Exception ex)
+            {
+                resultdata.operationstatuscode = (int)operation_status.Error;//message when duplicate record.
+                resultdata.messagedata = UserMessage.ResourceManager.GetString("msgError");
+                resultdata.message = ex.Message;
+            }
+            return Json(resultdata, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetPartByPartId(int Part_Id)
         {

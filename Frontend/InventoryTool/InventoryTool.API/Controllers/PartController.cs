@@ -24,7 +24,19 @@ namespace InventoryTool.API.Controllers
                 return Ok(return_Status.Value);
             }
         }
-        
+
+        [Route("UpdatePartImage")]
+        [HttpPost]
+        public IHttpActionResult UpdatePartImage(VMImage PartImage)
+        {
+            var return_Status = new ObjectParameter("return_Status", typeof(int));
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                entity.UpdatePartImage(PartImage.Parent_Id, PartImage.Image.Image_Data, PartImage.Image.LastModifiedBy, return_Status);
+                return Ok(return_Status.Value);
+            }
+        }
+
         [Route("DeletePart/{Part_Id:int?}/{LastModifiedBy?}")]
         [HttpPost]
         public int DeletePart(int Part_Id, string LastModifiedBy)

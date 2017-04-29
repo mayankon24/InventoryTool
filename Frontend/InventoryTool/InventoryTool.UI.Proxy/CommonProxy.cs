@@ -42,5 +42,11 @@ namespace InventoryTool.UI.Proxy
             return JsonConvert.DeserializeObject<List<GetUserPermission_Result>>(result);
         }
 
+        public List<GetImage_Result> GetImage(string apiUri, string requestUri)        
+        {
+            var result = ProxyHelper.GetResponseFromApi(apiUri, requestUri);
+            return JsonConvert.DeserializeObject<List<GetImage_Result>>(result);
+        }
+
     }
 }

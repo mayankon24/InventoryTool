@@ -38,5 +38,23 @@ namespace InventoryTool.API.Controllers
             }
 
         }
+
+        [Route("GetImage/{Image_Id?}")]
+        [HttpGet]
+        public List<GetImage_Result> GetImage(int Image_Id)
+        {
+            using (InventoryToolDBEntities entity = new InventoryToolDBEntities())
+            {
+                var RetVal = entity.GetImage(Image_Id).ToList().Select(s => new GetImage_Result
+                {
+                   Image_Data = s.Image_Data,
+                   Image_Id = s.Image_Id
+
+                }).ToList();
+                return RetVal;
+            }
+
+        }
+
     }
 }

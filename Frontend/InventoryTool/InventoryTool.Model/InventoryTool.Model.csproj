@@ -76,6 +76,9 @@
     <Compile Include="GetAllUnit_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetImage_Result.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetPartByFilter_Result.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
@@ -117,6 +120,9 @@
     <Compile Include="M_Customer.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="M_Image.cs">
+      <DependentUpon>InventoryToolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="M_Part.cs">
       <DependentUpon>InventoryToolModel.tt</DependentUpon>
     </Compile>
@@ -133,6 +139,7 @@
     <Compile Include="udt_PartQuantity.cs" />
     <Compile Include="UserResultModel.cs" />
     <Compile Include="UpdatePartStock.cs" />
+    <Compile Include="VMImage.cs" />
     <Compile Include="VMPartStock.cs" />
     <Compile Include="VMPart.cs" />
     <Compile Include="vw_MinimumBalance.cs">

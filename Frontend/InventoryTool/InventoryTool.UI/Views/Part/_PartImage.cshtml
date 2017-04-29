@@ -1,11 +1,17 @@
-﻿@if (Model != null)
-{
-    Layout = null;
-    var imgPath = @Url.Content("~/PartImage/" + Model + ".jpeg");
-    <img src="@imgPath" />
+﻿@model InventoryTool.Model.VMImage
+@if (Model != null)
+{  
+    var base64 = Convert.ToBase64String(Model.Image.Image_Data);
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+    <img src="@imgSrc" />
 }
 
-
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="file" name="ImageData" id="FileUploader" onchange="uploadImage(this, @Model.Parent_Id);" />
+    </div>
+</div> 
 <script type="text/javascript">
     function uploadImage(obj, Part_Id) {
         var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
@@ -26,30 +32,30 @@
             processData: false,
             contentType: false,
             data: data,
-            success: function (response) {
-                //code after success
+            beforeSend: function () {
+                Common.showDialog.show('Please wait....', {
+                    dialogSize: 'sm',
+                    progressType: 'warning'
+                });
+            },
+            complete: function () {
+                Common.showDialog.hide();
+            },
+            success: function (result) {
+                debugger;
+                if (result.operationstatuscode == 1 || result.operationstatuscode == 2) {
+                    fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-success');
+                }
+                else {
+                    fn_ShowHideUserMessageDivWithCssClass_common('divDisplayPartMessages', result.messagedata, true, 'alert alert-danger');
+                }
 
             },
-            error: function (er) {
-                alert(er);
+            error: function (ex) {
+                alert(ex.responseText);
             }
 
         });
     }
 </script>
-
-
-<div class="form-group">
-    <div class="col-md-10">
-        <input type="file" name="ImageData" id="FileUploader" onchange="uploadImage(this, @Model);" />
-    </div>
-</div>  
-@*<div>
-    <input id ="Part_Id"type="hidden" value=@Model>
-</div>*@
-@*<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Create" class="btn btn-default" />
-    </div>
-</div>*@
 

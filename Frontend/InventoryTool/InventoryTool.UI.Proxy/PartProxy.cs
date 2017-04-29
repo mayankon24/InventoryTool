@@ -35,6 +35,11 @@ namespace InventoryTool.UI.Proxy
             }
         }
 
+        public int UpdatePartImage(string apiUri, string requestUri, VMImage PartImage)
+        {
+            var result = ProxyHelper.PostRequestToApi(apiUri, requestUri, PartImage);
+            return JsonConvert.DeserializeObject<int>(result);
+        }
 
         public int AddUpdatePart(string apiUri, string requestUri, M_Part Part)
         {

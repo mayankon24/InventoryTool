@@ -34,6 +34,7 @@ namespace InventoryTool.Provider
         public virtual DbSet<M_Supplier> M_Supplier { get; set; }
         public virtual DbSet<vw_MinimumBalance> vw_MinimumBalance { get; set; }
         public virtual DbSet<TX_Part_Stock> TX_Part_Stock { get; set; }
+        public virtual DbSet<M_Image> M_Image { get; set; }
     
         public virtual int DeleteProduct(Nullable<int> product_Id, string lastModifiedBy, ObjectParameter return_Status)
         {
@@ -458,6 +459,32 @@ namespace InventoryTool.Provider
                 new ObjectParameter("User_Name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserPermission_Result>("GetUserPermission", user_NameParameter);
+        }
+    
+        public virtual int UpdatePartImage(Nullable<int> part_Id, byte[] image_Data, string modifiedBy, ObjectParameter return_Status)
+        {
+            var part_IdParameter = part_Id.HasValue ?
+                new ObjectParameter("Part_Id", part_Id) :
+                new ObjectParameter("Part_Id", typeof(int));
+    
+            var image_DataParameter = image_Data != null ?
+                new ObjectParameter("Image_Data", image_Data) :
+                new ObjectParameter("Image_Data", typeof(byte[]));
+    
+            var modifiedByParameter = modifiedBy != null ?
+                new ObjectParameter("ModifiedBy", modifiedBy) :
+                new ObjectParameter("ModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePartImage", part_IdParameter, image_DataParameter, modifiedByParameter, return_Status);
+        }
+    
+        public virtual ObjectResult<GetImage_Result> GetImage(Nullable<int> image_Id)
+        {
+            var image_IdParameter = image_Id.HasValue ?
+                new ObjectParameter("Image_Id", image_Id) :
+                new ObjectParameter("Image_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetImage_Result>("GetImage", image_IdParameter);
         }
     }
 }
