@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[M_Part] (
     [Part_Id]             INT            IDENTITY (1, 1) NOT NULL,
+    [Image_Id]            INT            NULL,
     [Part_Type_Id]        INT            NULL,
     [Outsource_Type_Id]   INT            NULL,
     [Part_Code]           NVARCHAR (100) NULL,
@@ -24,6 +25,8 @@
     CONSTRAINT [FK_M_Part_LK_Part_Type] FOREIGN KEY ([Part_Type_Id]) REFERENCES [dbo].[LK_Part_Type] ([Part_Type_Id]),
     CONSTRAINT [FK_M_Part_LK_Unit] FOREIGN KEY ([Unit_Id]) REFERENCES [dbo].[LK_Unit] ([Unit_Id])
 );
+
+
 
 
 

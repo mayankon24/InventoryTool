@@ -9,6 +9,7 @@ as
 SELECT [Part_Stock_Id]
       ,P.Part_Id
 	  ,P.Part_Name
+	  ,isnull(P.Image_Id ,0) as Image_Id
 	  ,S.Store_Id
 	  ,S.Store_Name
 	  ,[Date]

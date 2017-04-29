@@ -24,6 +24,7 @@ from dbo.f_split(@Part_Code, ',')
 
 
 SELECT [Part_Id]
+      ,isnull(Image_Id,0) as Image_Id
       ,P.Part_Type_Id
 	  ,P.Part_Type
       ,O.Outsource_Type_Id

@@ -3,6 +3,7 @@ CREATE procedure [dbo].[GetAllPart]
 
 as 
 SELECT [Part_Id]
+      ,isnull(Image_Id, 0) as Image_Id
       ,P.Part_Type_Id
 	  ,P.Part_Type
       ,O.Outsource_Type_Id

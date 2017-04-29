@@ -132,6 +132,10 @@
     <Build Include="dbo\Tables\AspNetUserClaims.sql" />
     <Build Include="dbo\Tables\AspNetRoles.sql" />
     <Build Include="dbo\Tables\__MigrationHistory.sql" />
+    <Build Include="dbo\Tables\M_Image.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePartImage.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateImage.sql" />
+    <Build Include="dbo\Stored Procedures\GetImage.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InventortCompare_Azure.scmp" />
