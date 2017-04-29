@@ -119,6 +119,13 @@ namespace InventoryTool.UI.Controllers
         {
             return PartialView("_PartImage", Part_Id);
         }
+
+        [HttpPost]
+        public ActionResult UploadImage(string Part_Id)
+        {
+            HttpPostedFileBase file = Request.Files["ImageData"];
+            return Json("cghkk", JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetPartByPartId(int Part_Id)
         {
             List<GetAllPart_Result> Part = PartProxy.Instance.GetAllPart(ConfigExtension.GetWebApiUri, "api/Part/AllPart");           
@@ -135,4 +142,5 @@ namespace InventoryTool.UI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
+
 }

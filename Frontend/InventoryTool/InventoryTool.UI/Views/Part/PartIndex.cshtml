@@ -136,7 +136,7 @@
                 //show Image popup
                 $("#Part").find("#dvPartList").on("click", ".clsImagePart", function () {
                     var data, Part_Id, urlPath;
-                    debugger;
+                   
                     data = $(this).parents('tr');
                     Part_Id = $(data).attr('data-Part_id');
                     urlPath = "/Part/GetPartImagePartial";
@@ -159,7 +159,7 @@
                             },
                             success: function (result) {
                                 $("#dialog1").html(result);
-                                $("#Part").find("#dialog1").dialog('open');
+                                //$("#Part").find("#dialog1").dialog('open');
                                 
                             },
                             error: function (ex) {
@@ -168,7 +168,7 @@
                         });
                     }
                 });
-
+             
 
                 $("#Part").find("#dvPartList").on("click", ".clsDeletePart", function () {                   
                     var data, Part_Id, urlPath;
@@ -427,7 +427,7 @@
                 }
                   );
             }
-
+            
         }
         Partjs.init();
     });
