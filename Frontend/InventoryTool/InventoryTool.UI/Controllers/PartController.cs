@@ -123,7 +123,11 @@ namespace InventoryTool.UI.Controllers
 
             VMImage PartImage = new VMImage();
             PartImage.Parent_Id = Part_Id;
-            PartImage.Image.Image_Data = RetVal[0].Image_Data;
+            if (RetVal != null && RetVal.Count() > 0)
+            {
+                PartImage.Image.Image_Data = RetVal[0].Image_Data;
+            }
+            
 
             return PartialView("_PartImage", PartImage);
         }

@@ -21,7 +21,7 @@
             foreach (var data in Model)
             {
                 //Display mode row start here
-                <tr data-Part_Id="@data.Part_Id" class="display-mode">
+                <tr data-Part_Id="@data.Part_Id"  data-Image_Id="@data.Image_Id" class="display-mode">
                     <td title="@data.Part_Code" style="width:90%">
                         @data.Part_Code
                     </td>

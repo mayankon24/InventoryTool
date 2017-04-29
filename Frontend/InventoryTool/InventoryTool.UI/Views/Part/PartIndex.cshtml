@@ -20,7 +20,7 @@
                     </div>
                     @* This row will use in clone*@
                     <table id="tblMasterPart" style="display:none">
-                        <tr data-Part_Id="-1" id="MasterRow_Part">
+                        <tr data-Part_Id="-1"  data-Image_Id="-1" id="MasterRow_Part">
                             <td>
                                 @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
                             </td>
@@ -61,7 +61,7 @@
                                 <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
                             </td>
                         </tr>
-                        <tr data-Part_Id="" class="edit-mode" id="MasterRowEdit_Part">
+                        <tr data-Part_Id="" data-Image_Id="" class="edit-mode" id="MasterRowEdit_Part">
                             <td>
                                 @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
                             </td>
@@ -135,10 +135,11 @@
 
                 //show Image popup
                 $("#Part").find("#dvPartList").on("click", ".clsImagePart", function () {
-                    var data, Part_Id, urlPath;
+                    var data, Part_Id, urlPath, Image_Id;
                    
                     data = $(this).parents('tr');
                     Part_Id = $(data).attr('data-Part_id');
+                    Image_Id = $(data).attr('data-Image_Id');
                     urlPath = "/Part/GetPartImagePartial";
                     if (Part_Id != '') {
                         $.ajax({
@@ -147,7 +148,7 @@
                             url: urlPath,
                             data: {
                                 Part_Id: Part_Id,
-                                Image_Id: 2
+                                Image_Id: Image_Id
                             },
                             beforeSend: function () {
                                 Common.showDialog.show('Please wait....', {
@@ -217,9 +218,10 @@
                 ///Get Row Data in Edit Mode
                 $("#Part").find("#dvPartList").on("click", ".clsEditPart", function () {
 
-                    var Part_Id, data, urlPath;
+                    var Part_Id, Image_Id, data, urlPath;
                     data = $(this).parents('tr');
                     Part_Id = $(data).attr('data-Part_id');
+                    Image_Id = $(data).attr('data-Image_Id');
                     urlPath = "/Part/GetPartByPartId";
                     if (Part_Id != '') {
                         $('.clsEditPart ,.clsDeletePart').css('display', 'none');
@@ -255,6 +257,7 @@
                                 $(row).find('.clsUnit_Id').val(result.Unit_Id);
                                 $(row).removeAttr("style");
                                 $(row).attr("data-Part_Id", Part_Id);
+                                $(row).attr("data-Image_Id", Image_Id);
                                 $(data).after(row);
                             },
                             error: function (ex) {
@@ -286,13 +289,14 @@
                 });
                 ///Handle the Add/update functionality
                 $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {                  
-                    var Part_Id, Part_Name, Part_Type_Id, Outsource_Type_Id
+                    var Part_Id, Image_Id, Part_Name, Part_Type_Id, Outsource_Type_Id
                      ,Category_Id, Color_Id, Material_Id, Criticality_Id, Unit_Id, data, urlPath;
                     var strValidationMsglists = "";
 
                     data = $(this).parents('tr');
                     Part_Id = $(data).attr('data-Part_Id');
-                    
+                    Image_Id = $(data).attr('data-Image_Id');
+
                     Part_Name = $(data).find(".clsPart_Name").val();
                     Part_Code = $(data).find(".clsPart_Code").val();
                     Part_Type_Id = $(data).find('.clsPart_Type_Id').val();

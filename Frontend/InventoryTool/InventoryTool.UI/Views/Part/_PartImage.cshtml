@@ -1,6 +1,7 @@
 ﻿@model InventoryTool.Model.VMImage
-@if (Model != null)
-{  
+@if (Model != null && Model.Image != null && Model.Image.Image_Data != null)
+{
+
     var base64 = Convert.ToBase64String(Model.Image.Image_Data);
     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
