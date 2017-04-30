@@ -7,128 +7,124 @@
 <link href="~/Content/custom-css/custome.css" rel="stylesheet" />
 <link href="~/Content/custom-css/shared.css" rel="stylesheet" />
 <div role="tabpanel" class="tab-pane active" id="Part">
-    <div class="container">
-        <div style="margin-top:23px">
-            <div class="panel panel-default" style="margin-bottom:25px">
-                <div style="margin-top:1%">
-                    <label style="margin-left:30px">Part</label><br />
-                    <a href="javascript:void(0)" id="lnkAddNewPart" style="color:#01A4EF;text-decoration:underline;margin-left:30px; ">
-                        <span class="glyphicon glyphicon-plus-sign"></span>
-                        Add New Item
-                    </a>
-                    <div id="divDisplayPartMessages">
-                    </div>
-                    @* This row will use in clone*@
-                    <table id="tblMasterPart" style="display:none">
-                        <tr data-Part_Id="-1"  data-Image_Id="-1" id="MasterRow_Part">
-                            <td>
-                                @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlPart_Type", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "Select Part Type", new { @class = "clsPart_Type_Id form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlOutsource_Type", (new SelectList(Model.OutsourceTypeList, "Outsource_Type_Id", "Outsource_Type")), "Select Outsource Type", new { @class = "clsOutsource_Type_Id form-control" })                               
-                            </td> 
-                            <td>
-                                @Html.DropDownList("ddlCategory", (new SelectList(Model.CategoryList, "Category_Id", "Category_Name")), "Select Category", new { @class = "clsCategory_Id form-control" })                                
-                            </td> 
-                            <td>
-                                @Html.DropDownList("ddlColor", (new SelectList(Model.ColorList, "Color_Id", "Color_Name")), "Select Color", new { @class = "clsColor_Id form-control" })                                
-                            </td>  
-                            <td>
-                                @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })                                
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
-                            </td>                             
-                            <td>                                
-                                @Html.TextBox("Min_Quantity", "", new { @class = "clsMin_Quantity form-control" })
-                            </td> 
-                            <td>
-                                @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
-                            </td>  
-                            <td class="clsAction" style="width:2%">
-                                <a href="#" title="Image" class="clsImagePart">
-                                    <span class="glyphicon glyphicon-picture" style="padding-left:10px"></span>
-                                </a>
-                            </td>                             
-                            <td>
-                                <a href="javascript:void(0);" title="Save" class="clsAddUpdatePart">  Save</a>
-                                <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
-                            </td>
-                        </tr>
-                        <tr data-Part_Id="" data-Image_Id="" class="edit-mode" id="MasterRowEdit_Part">
-                            <td>
-                                @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
-                            </td>
-                            <td>
-                                @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlPart_Type", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "Select Part Type", new { @class = "clsPart_Type_Id form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlOutsource_Type", (new SelectList(Model.OutsourceTypeList, "Outsource_Type_Id", "Outsource_Type")), "Select Outsource Type", new { @class = "clsOutsource_Type_Id form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlCategory", (new SelectList(Model.CategoryList, "Category_Id", "Category_Name")), "Select Category", new { @class = "clsCategory_Id form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlColor", (new SelectList(Model.ColorList, "Color_Id", "Color_Name")), "Select Color", new { @class = "clsColor_Id form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
-                            </td> 
-                            <td>
-                                @Html.TextBox("Min_Quantity", "", new { @class = "clsMin_Quantity form-control" })
-                            </td> 
-                            <td>
-                                @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
-                            </td> 
-                            <td class="clsAction" style="width:2%">
-                                <a href="#" title="Image" class="clsImagePart">
-                                    <span class="glyphicon glyphicon-picture" style="padding-left:10px"></span>
-                                </a>
-                            </td>            
-                            <td>
-                                <a href="javascript:void(0);" title="Update" class="clsAddUpdatePart">Update</a>
-                                <a href="javascript:void(0);" title="Cancel" class="clsCancelPartUpdate">Cancel</a>
-                            </td>
-                        </tr>
-                    </table>
-                    <!--End of Master Row* -->
-
-                    <div id="dvPartList">
-                        @Html.Partial("_PartList", Model.PartList)
-                    </div>
-                </div>
-            </div>
+    <div class="container panel panel-default" style="margin-top:23px">
+       
+        <label style="margin-left:30px">Part</label><br />
+        <a href="javascript:void(0)" id="lnkAddNewPart" style="color:#01A4EF;text-decoration:underline;margin-left:30px; ">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            Add New Item
+        </a>
+        <div id="divDisplayPartMessages">
         </div>
+        @* This row will use in clone*@
+        <table id="tblMasterPart" style="display:none">
+            <tr data-Part_Id="-1"  data-Image_Id="-1" id="MasterRow_Part">
+                <td>
+                    @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
+                </td>
+                <td>
+                    @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlPart_Type", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "Select Part Type", new { @class = "clsPart_Type_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlOutsource_Type", (new SelectList(Model.OutsourceTypeList, "Outsource_Type_Id", "Outsource_Type")), "Select Outsource Type", new { @class = "clsOutsource_Type_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlCategory", (new SelectList(Model.CategoryList, "Category_Id", "Category_Name")), "Select Category", new { @class = "clsCategory_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlColor", (new SelectList(Model.ColorList, "Color_Id", "Color_Name")), "Select Color", new { @class = "clsColor_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
+                </td>
+                <td>
+                    @Html.TextBox("Min_Quantity", "", new { @class = "clsMin_Quantity form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
+                </td>
+                <td class="clsAction" style="width:2%">
+                    <a href="#" title="Image" class="clsImagePart">
+                        <span class="glyphicon glyphicon-picture" style="padding-left:10px"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:void(0);" title="Save" class="clsAddUpdatePart">  Save</a>
+                    <a href="javascript:void(0);" title="Cancel" onclick="fn_RemoveRow(this)">Cancel</a>
+                </td>
+            </tr>
+            <tr data-Part_Id="" data-Image_Id="" class="edit-mode" id="MasterRowEdit_Part">
+                <td>
+                    @Html.TextBox("Part_Code", "", new { @class = "clsPart_Code form-control" })
+                </td>
+                <td>
+                    @Html.TextBox("Part_Name", "", new { @class = "clsPart_Name form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlPart_Type", (new SelectList(Model.PartTypeList, "Part_Type_Id", "Part_Type")), "Select Part Type", new { @class = "clsPart_Type_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlOutsource_Type", (new SelectList(Model.OutsourceTypeList, "Outsource_Type_Id", "Outsource_Type")), "Select Outsource Type", new { @class = "clsOutsource_Type_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlCategory", (new SelectList(Model.CategoryList, "Category_Id", "Category_Name")), "Select Category", new { @class = "clsCategory_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlColor", (new SelectList(Model.ColorList, "Color_Id", "Color_Name")), "Select Color", new { @class = "clsColor_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlMaterial", (new SelectList(Model.MaterialList, "Material_Id", "Material_Name")), "Select Material", new { @class = "clsMaterial_Id form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlCriticality", (new SelectList(Model.CriticalityList, "Criticality_Id", "Criticality_Name")), "Select Criticality", new { @class = "clsCriticality_Id form-control" })
+                </td>
+                <td>
+                    @Html.TextBox("Min_Quantity", "", new { @class = "clsMin_Quantity form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlUnit", (new SelectList(Model.UnitList, "Unit_Id", "Unit_Name")), "Select Unit", new { @class = "clsUnit_Id form-control" })
+                </td>
+                <td class="clsAction" style="width:2%">
+                    <a href="#" title="Image" class="clsImagePart">
+                        <span class="glyphicon glyphicon-picture" style="padding-left:10px"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:void(0);" title="Update" class="clsAddUpdatePart">Update</a>
+                    <a href="javascript:void(0);" title="Cancel" class="clsCancelPartUpdate">Cancel</a>
+                </td>
+            </tr>
+        </table>
+        <!--End of Master Row* -->
+
+        <div id="dvPartList">
+            @Html.Partial("_PartList", Model.PartList)
+        </div>
+
     </div>
     <div id="dialog1" title="Dialog Title"></div>
 </div>
 
 <script type="text/javascript">
-   
+
     $(document).ready(function () {
         var Partjs = {
             init: function () {
-                var obj = Partjs;                
+                var obj = Partjs;
                 obj.LoadPart();
                 Common.setAttributeList(obj);
             },
-            LoadPart: function () {              
+            LoadPart: function () {
                 //  var obj = Partjs;
                 //initial load the Datatable setting.
                 Partjs.ReinitiateDataTable('tblPartList');
-                
+
                 //$("#Part").find("#dialog1").dialog({
                 //    autoOpen: false
                 //});
@@ -136,7 +132,7 @@
                 //show Image popup
                 $("#Part").find("#dvPartList").on("click", ".clsImagePart", function () {
                     var data, Part_Id, urlPath, Image_Id;
-                   
+
                     data = $(this).parents('tr');
                     Part_Id = $(data).attr('data-Part_id');
                     Image_Id = $(data).attr('data-Image_Id');
@@ -162,7 +158,7 @@
                             success: function (result) {
                                 $("#dialog1").html(result);
                                 //$("#Part").find("#dialog1").dialog('open');
-                                
+
                             },
                             error: function (ex) {
                                 alert(ex.responseText);
@@ -170,9 +166,9 @@
                         });
                     }
                 });
-             
 
-                $("#Part").find("#dvPartList").on("click", ".clsDeletePart", function () {                   
+
+                $("#Part").find("#dvPartList").on("click", ".clsDeletePart", function () {
                     var data, Part_Id, urlPath;
                     var promptdelete = confirm('Are you sure you want to delete this record? There could be dependent budget requests which may get impacted based on this action');
                     if (promptdelete) {
@@ -243,7 +239,7 @@
                             },
                             success: function (result) {
                                 $(data).hide();
-                               
+
                                 var row = $("#MasterRowEdit_Part").clone();
                                 $(row).find('.clsPart_Code').val(result.Part_Code);
                                 $(row).find('.clsPart_Name').val(result.Part_Name);
@@ -275,7 +271,7 @@
                     $(row).removeAttr("style");
                     $(row).find('.clsPart_Code').val('');
                     $(row).find('.clsPart_Name').val('');
-                    $(row).find('.clsMin_Quantity').val('');                    
+                    $(row).find('.clsMin_Quantity').val('');
                     $("#tblPartList >tbody").prepend(row);// now will append the clone row to table.
                 });
                 ///Handle the Cancel update functionality
@@ -288,9 +284,9 @@
                     $('.clsEditPart,.clsDeletePart').removeAttr('style');
                 });
                 ///Handle the Add/update functionality
-                $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {                  
+                $("#Part").find("#dvPartList").on("click", ".clsAddUpdatePart", function () {
                     var Part_Id, Image_Id, Part_Name, Part_Type_Id, Outsource_Type_Id
-                     ,Category_Id, Color_Id, Material_Id, Criticality_Id, Unit_Id, data, urlPath;
+                        ,Category_Id, Color_Id, Material_Id, Criticality_Id, Unit_Id, data, urlPath;
                     var strValidationMsglists = "";
 
                     data = $(this).parents('tr');
@@ -326,13 +322,13 @@
                     }
                     if (Color_Id < 1) {
                         strValidationMsglists = strValidationMsglists + "<li>Select a valid colr or N/A.</li>";
-                    }                   
+                    }
                     if (Material_Id < 1) {
                         strValidationMsglists = strValidationMsglists + "<li>Select a valid Material or N/A.</li>";
                     }
                     if (Criticality_Id < 1) {
                         strValidationMsglists = strValidationMsglists + "<li>Select a valid Criticality or N/A.</li>";
-                    }                   
+                    }
                     if (Unit_Id < 1) {
                         strValidationMsglists = strValidationMsglists + "<li>Select a valid Unit.</li>";
                     }
@@ -349,12 +345,12 @@
                             url: urlPath,
                             data: {
                                 Part_Id: Part_Id,
-                                Part_Code: Part_Code, 
+                                Part_Code: Part_Code,
                                 Part_Name: Part_Name,
                                 Part_Type_Id: Part_Type_Id,
                                 Outsource_Type_Id: Outsource_Type_Id,
-                                Category_Id:Category_Id,
-                                Color_Id:Color_Id,
+                                Category_Id: Category_Id,
+                                Color_Id: Color_Id,
                                 Material_Id: Material_Id,
                                 Criticality_Id: Criticality_Id,
                                 Min_Quantity: Min_Quantity,
@@ -425,14 +421,14 @@
                 {
                     bFilter: false, bInfo: false, bLengthChange: false, "order": [0, 'asc'],
                     "aoColumnDefs": [
-                     {
-                         'bSortable': false,
-                         'aTargets': ['action-col', 'text-holder']
-                     }]
+                        {
+                            'bSortable': false,
+                            'aTargets': ['action-col', 'text-holder']
+                        }]
                 }
-                  );
+                    );
             }
-            
+
         }
         Partjs.init();
     });
