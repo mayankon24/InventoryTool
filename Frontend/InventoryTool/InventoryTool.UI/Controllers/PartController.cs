@@ -134,7 +134,15 @@ namespace InventoryTool.UI.Controllers
 
         [HttpPost]
         public ActionResult UploadImage(int Part_Id)
-        {            
+        {
+            UserResultModel resultdata = new UserResultModel();
+            if (Request.Files[0].ContentLength > 1 * 1024 * 1024)
+            {
+                resultdata.operationstatuscode = (int)operation_status.Error;//Size is greter then limit.
+                resultdata.messagedata = "Please select a PNG image smaller than 1MB";
+                return Json(resultdata, JsonRequestBehavior.AllowGet);
+            }          
+
             VMImage PartImage = new VMImage();
             PartImage.Parent_Id = Part_Id;
             PartImage.Image.LastModifiedBy = UserHelper.GetCurrentUserName();
@@ -143,8 +151,7 @@ namespace InventoryTool.UI.Controllers
             {
                 PartImage.Image.Image_Data = binaryReader.ReadBytes(Request.Files["ImageData"].ContentLength);
             }
-
-            UserResultModel resultdata = new UserResultModel();
+                        
             try
             {
                 int OperationStatus = PartProxy.Instance.UpdatePartImage(ConfigExtension.GetWebApiUri,
