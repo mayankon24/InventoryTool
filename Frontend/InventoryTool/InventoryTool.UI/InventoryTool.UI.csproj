@@ -549,7 +549,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\BudgetUI.pubxml" />
     <Content Include="PartImage\2007.jpeg" />
     <Content Include="Scripts\ajaxfileupload.css" />
     <Content Include="Scripts\ajaxfileupload.js" />
@@ -630,7 +629,6 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
-    <None Include="Properties\PublishProfiles\inventorytoolui - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\inventorytoolui - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\highchecktree.js" />
