@@ -124,10 +124,10 @@
                 //  var obj = Partjs;
                 //initial load the Datatable setting.
                 Partjs.ReinitiateDataTable('tblPartList');
-
-                //$("#Part").find("#dialog1").dialog({
-                //    autoOpen: false
-                //});
+              
+                $("#dialog1").dialog({
+                    autoOpen: false
+                });
 
                 //show Image popup
                 $("#Part").find("#dvPartList").on("click", ".clsImagePart", function () {
@@ -156,9 +156,11 @@
                                 Common.showDialog.hide();
                             },
                             success: function (result) {
+                                debugger;
+                                $("#dialog1").dialog('open');
+                                $("#dialog1").html('');
                                 $("#dialog1").html(result);
-                                //$("#Part").find("#dialog1").dialog('open');
-
+                                
                             },
                             error: function (ex) {
                                 alert(ex.responseText);
