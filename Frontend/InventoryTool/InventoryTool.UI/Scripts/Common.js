@@ -3,7 +3,7 @@
 /*global $, jQuery, alert*/
 var Common = {
     init: function () {
-        
+
     },
     setAttributeList: function (instance) {
 
@@ -19,18 +19,18 @@ var Common = {
         }
     },
     initTable: function (selector) {
-         $(selector).DataTable();
+        $(selector).DataTable();
     },
     showDialog: (function () {
-      var $dialog = $(
-                '<div class="modal fade" data-backdrop="static" data-keyboard="false"' +
-                    'tabindex="-1" role="dialog" aria-hidden="true"' +
-                    'style="padding-top:15%; overflow-y:visible;">' +
-                    '<div class="modal-dialog modal-m">' +
-                    '<div class="modal-body">' +
-                      '<img src="/Content/Images/loading.gif" alt="Loading" style="position:absolute; top:50%; left:35%; z-index:99999;width:120px;height:120px" />' +
-                    '</div>' + '</div></div>'
-            );
+        var $dialog = $(
+                  '<div class="modal fade" data-backdrop="static" data-keyboard="false"' +
+                      'tabindex="-1" role="dialog" aria-hidden="true"' +
+                      'style="padding-top:15%; overflow-y:visible;">' +
+                      '<div class="modal-dialog modal-m">' +
+                      '<div class="modal-body">' +
+                        '<img src="/Content/Images/loading.gif" alt="Loading" style="position:absolute; top:50%; left:35%; z-index:99999;width:120px;height:120px" />' +
+                      '</div>' + '</div></div>'
+              );
 
 
         return {
@@ -44,7 +44,7 @@ var Common = {
                     message = 'Loading';
                 }
                 if (typeof options === 'undefined') {
-                    options = {};
+                    //options = {};
                 }
                 // Configuring dialog
                 $dialog.find('.modal-dialog').attr('class', 'modal-dialog')
@@ -62,7 +62,7 @@ var Common = {
                 $dialog.modal('hide');
             }
         }
-    })(),
+    })()
 };
 
 ///This will Delete the Row.
@@ -78,7 +78,7 @@ function fn_RemoveRow(obj) {
 //strClassName=will be string and will be 'message error','message warning','message success'
 function fn_ShowHideUserMessageDivWithCssClass_common(divId, strDisplayMsg, IsShowHideFlag, strClassName) {
     var objdivId = $("#" + divId);
-    objdivId.html("<a href='#' class='close' onclick='fn_closeMe(this)' aria-label='close'>&times;</a>"+ strDisplayMsg);
+    objdivId.html("<a href='#' class='close' onclick='fn_closeMe(this)' aria-label='close'>&times;</a>" + strDisplayMsg);
     if (IsShowHideFlag == true)//show / hide the div
     {
         objdivId.show();
