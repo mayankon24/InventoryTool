@@ -1,4 +1,10 @@
 ﻿@model InventoryTool.Model.VMImage
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="file" name="ImageData" id="FileUploader" onchange="uploadImage(this, @Model.Parent_Id);" />
+    </div>
+</div>
+<br />
 @if (Model != null && Model.Image != null && Model.Image.Image_Data != null)
 {
 
@@ -8,11 +14,7 @@
     <img src="@imgSrc" />
 }
 
-<div class="form-group">
-    <div class="col-md-10">
-        <input type="file" name="ImageData" id="FileUploader" onchange="uploadImage(this, @Model.Parent_Id);" />
-    </div>
-</div> 
+ 
 <script type="text/javascript">
     function uploadImage(obj, Part_Id) {
         var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];

@@ -108,7 +108,7 @@
         </div>
 
     </div>
-    <div id="dialog1" title="Dialog Title"></div>
+    <div id="dialog1" title="Part Image"></div>
 </div>
 
 <script type="text/javascript">
@@ -155,8 +155,7 @@
                             complete: function () {
                                 Common.showDialog.hide();
                             },
-                            success: function (result) {
-                                debugger;
+                            success: function (result) {                             
                                 $("#dialog1").dialog('open');
                                 $("#dialog1").html('');
                                 $("#dialog1").html(result);
