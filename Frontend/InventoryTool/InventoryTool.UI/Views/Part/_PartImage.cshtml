@@ -12,10 +12,14 @@
     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
     <img src="@imgSrc" />
+        <a href="@imgSrc" download="@Model.Parent_Id.ToString()_@Model.Image.Image_Id.ToString() image.png">
+           Download Image
+        </a>
+    
 }
 
  
-<script type="text/javascript">
+<script type="text/javascript">   
     function uploadImage(obj, Part_Id) {
         var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
         if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {

@@ -126,6 +126,7 @@ namespace InventoryTool.UI.Controllers
             if (RetVal != null && RetVal.Count() > 0)
             {
                 PartImage.Image.Image_Data = RetVal[0].Image_Data;
+                PartImage.Image.Image_Id = RetVal[0].Image_Id;
             }
             
 
