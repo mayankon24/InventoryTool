@@ -54,12 +54,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - SpeedWay Machines Delhi,India</p>
-        </footer>
     </div>
-
+    <footer>
+        <p>&copy; @DateTime.Now.Year - SpeedWay Machines Delhi,India</p>
+    </footer>
     @RenderSection("scripts", required: false)
 </body>
 </html>
